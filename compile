@@ -1,1 +1,4 @@
-jar cfm Connect4Game.jar src/manifest src/*.java
+#!/bin/sh 
+
+mkdir -p bin
+javac -d bin src/*.java
