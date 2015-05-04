@@ -10,11 +10,16 @@ public class GameState {
     
     public GameState() {
         // initialise the board to null
+        resetBoard();
+
+        players = new ArrayList<Player>();
+    }
+    
+    public void resetBoard() {
+        // initialise the board to null
         for(int i = 0; i < COL_MAX; i++)
             for(int j = 0; j < ROW_MAX; j++)
                 board[i][j] = null;
-
-        players = new ArrayList<Player>();
     }
     
     public Player checkBoard(int col, int row){
