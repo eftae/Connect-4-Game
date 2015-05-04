@@ -1,7 +1,7 @@
 /**
  * Class for the AI. Mode: 0. Fully randomized
  * 
- * @version v0.1
+ * @version 0.11
  */
 
 import java.util.Random;
@@ -36,7 +36,7 @@ public class AI implements Player {
 	public int modeRandom(GameState currState) {
 		Random rand = new Random();
 		int nextMove = rand.nextInt(7);
-		while (!currState.isColFull(nextMove, currState)) {
+		while (!currState.isMoveValid(nextMove)) {
 			nextMove = rand.nextInt(7);
 		}
 		return nextMove;

@@ -1,8 +1,9 @@
 /**
  * Handle user input
  * v0.1: allows for command line input only.
+ * v0.11: minor bug fixed, problem with Scanner.close
  * 
- * @version v0.1
+ * @version v0.11
  */
 
 import java.util.Scanner;
@@ -22,12 +23,11 @@ public class User implements Player {
 	public int modeCommandLineInput(GameState currState) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Next move (1-7): ");
-		int nextMove = sc.nextInt();
-		while (currState.isColFull(nextMove)) {
+		int nextMove = sc.nextInt() - 1;
+		while (!currState.isMoveValid(nextMove)) {
 			System.out.print("Invalid move, try again (1-7): ");
-			nextMove = sc.nextInt();
+			nextMove = sc.nextInt() - 1;
 		}
-		sc.close();
-		return nextMove - 1;
+		return nextMove;
 	}
 }
