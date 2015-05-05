@@ -24,7 +24,7 @@ public class User implements Player {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Next move (1-7): ");
 		int nextMove = sc.nextInt() - 1;
-		while (!currState.isMoveValid(nextMove)) {
+		while (!currState.isValidMove(nextMove)) {
 			System.out.print("Invalid move, try again (1-7): ");
 			nextMove = sc.nextInt() - 1;
 		}

@@ -36,7 +36,7 @@ public class AI implements Player {
 	public int modeRandom(GameState currState) {
 		Random rand = new Random();
 		int nextMove = rand.nextInt(7);
-		while (!currState.isMoveValid(nextMove)) {
+		while (!currState.isValidMove(nextMove)) {
 			nextMove = rand.nextInt(7);
 		}
 		return nextMove;

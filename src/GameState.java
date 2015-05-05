@@ -28,7 +28,7 @@ public class GameState {
 	 * @return true if dropped, false otherwise
 	 */
 	public boolean runNextMove(Disc discDrop, int col) {
-		if (discDrop == null || !isMoveValid(col)) {
+		if (discDrop == null || !isValidMove(col)) {
 			return false;
 		}
 
@@ -106,11 +106,9 @@ public class GameState {
 	 * @return player of affiliation
 	 */
 	public Player checkBoard(int col, int row) {
-		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX) {
-			if (board[col][row] != null) {
+		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX)
+			if (board[col][row] != null)
 				return board[col][row].getAffiliation();
-			}
-		}
 		return null;
 	}
 
@@ -132,7 +130,7 @@ public class GameState {
 	 * @param col
 	 * @return true if valid to use with runNextMove(), false otherwise
 	 */
-	public boolean isMoveValid(int col) {
+	public boolean isValidMove(int col) {
 		if (col >= 0 && col < COL_MAX && board[col][5] == null)
 			return true;
 		return false;
