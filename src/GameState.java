@@ -4,6 +4,21 @@
  * @version v0.1
  */
 
+
+// our board representation
+//     
+//            7 columns
+//          0 1 2 3 4 5 6
+//        5 | | | | | | | |
+//        4 | | | | | | | |
+// 6 rows 3 | | | | | | | |
+//        2 | | | | | | | |
+//        1 | | | | | | | |
+//        0 | | | | | | | |
+
+
+
+
 public class GameState {
 	private final int COL_MAX = 7;
 	private final int ROW_MAX = 6;
@@ -70,8 +85,8 @@ public class GameState {
 			}
 		}
 	    // check diagonals: /
-	    for(int c = 0; c < COL_MAX-2; c++){
-	        for(int r = 3; r < ROW_MAX; r++){
+	    for(int c = 0; c < COL_MAX-3; c++){
+	        for(int r = 0; r < ROW_MAX-3; r++){
 	            Disc curr = board[c][r];
 	            if(curr != null && curr.equals(board[c+1][r+1]) &&
 	               curr.equals(board[c+2][r+2]) && curr.equals(board[c+3][r+3]))
@@ -79,11 +94,11 @@ public class GameState {
 	        }
 	    }
 	    // check diagonals: \
-	    for(int c = 0; c < COL_MAX-2; c++){
-	        for(int r = 0; r < ROW_MAX-2; r++){
+	    for(int c = 0; c < COL_MAX-3; c++){
+	        for(int r = 3; r < ROW_MAX; r++){
 	            Disc curr = board[c][r];
-	            if(curr != null && curr.equals(board[c+1][r+1]) &&
-	               curr.equals(board[c+2][r+2]) && curr.equals(board[c+3][r+3]))
+	            if(curr != null && curr.equals(board[c-1][r-1]) &&
+	               curr.equals(board[c-2][r-2]) && curr.equals(board[c-3][r-3]))
 	                return curr.getAffiliation();
 	        }
 	    }
