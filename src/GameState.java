@@ -17,8 +17,6 @@
 //        0 | | | | | | | |
 
 
-
-
 public class GameState {
 	private final int COL_MAX = 7;
 	private final int ROW_MAX = 6;
@@ -97,8 +95,8 @@ public class GameState {
 	    for(int c = 0; c < COL_MAX-3; c++){
 	        for(int r = 3; r < ROW_MAX; r++){
 	            Disc curr = board[c][r];
-	            if(curr != null && curr.equals(board[c-1][r-1]) &&
-	               curr.equals(board[c-2][r-2]) && curr.equals(board[c-3][r-3]))
+	            if(curr != null && curr.equals(board[c+1][r-1]) &&
+	               curr.equals(board[c+2][r-2]) && curr.equals(board[c+3][r-3]))
 	                return curr.getAffiliation();
 	        }
 	    }
