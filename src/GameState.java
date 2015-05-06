@@ -21,40 +21,26 @@ public class GameState {
 	private final int COL_MAX = 7;
 	private final int ROW_MAX = 6;
 
-	private Disc[][] board;
-	private Player lastMovePlayer;
+	private Player[][] board;
+    private Player currPlayer;
 	private Player winner;
 	private int nTurn;
 
-	public GameState() {
-		board = new Disc[COL_MAX][ROW_MAX];
+	public GameState(Player firstPlayer) {
+		board = new Player[COL_MAX][ROW_MAX];
+        this.currPlayer = firstPlayer;
+        winner = null;
 		nTurn = 0;
 	}
 
-	/**
-	 * Drop a disc for next player.
-	 * 
-	 * @param discDrop
-	 *            the disc to be drop
-	 * @param col
-	 *            position of the disc to be drop
-	 * @return true if dropped, false otherwise
-	 */
-	public void runNextMove(Disc discDrop) {
-		if (discDrop == null) return;
+	public void runNextMove(int col) {
+		if (col < 0 || col >= COL_MAX) return;
         
-        int col = discDrop.getCol();
 		// drop the disc to the column
 		for (int r = 0; r < ROW_MAX; r++)
 			if (board[col][r] == null){
-			    board[col][r] = discDrop;
-                discDrop.setRow(r);
-                break;
+			    board[col][r] = currPlayer; break;
 			}
-				
-		nTurn++;
-        // update winner if needed
-        winner = checkWinner();
 	}
 
 	/**
@@ -62,88 +48,44 @@ public class GameState {
 	 * 
 	 * @return the player connects 4 discs, winner
 	 */
-	public Player checkWinner() {
+	public void checkGameEnd() {
 		// check horizontal
 		for (int c = 0; c < COL_MAX - 3; c++) {
 			for (int r = 0; r < ROW_MAX; r++) {
-	            Disc curr = board[c][r];
+	            Player curr = board[c][r];
 				if (curr != null && curr.equals(board[c+1][r]) &&
 	                curr.equals(board[c+2][r]) && curr.equals(board[c+3][r]))
-					return curr.getAffiliation();
+					winner = curr;
 			}
 		}
 		// check vertical
 		for (int c = 0; c < COL_MAX; c++) {
 			for (int r = 0; r < ROW_MAX - 3; r++) {
-	            Disc curr = board[c][r];
+				Player curr = board[c][r];
 				if (curr != null && curr.equals(board[c][r+1]) &&
 	                curr.equals(board[c][r+2]) && curr.equals(board[c][r+3]))
-					return curr.getAffiliation();
+					winner = curr;
 			}
 		}
 	    // check diagonals: /
 	    for(int c = 0; c < COL_MAX-3; c++){
 	        for(int r = 0; r < ROW_MAX-3; r++){
-	            Disc curr = board[c][r];
+	        	Player curr = board[c][r];
 	            if(curr != null && curr.equals(board[c+1][r+1]) &&
 	               curr.equals(board[c+2][r+2]) && curr.equals(board[c+3][r+3]))
-	                return curr.getAffiliation();
+	                winner = curr;
 	        }
 	    }
 	    // check diagonals: \
 	    for(int c = 0; c < COL_MAX-3; c++){
 	        for(int r = 3; r < ROW_MAX; r++){
-	            Disc curr = board[c][r];
+	        	Player curr = board[c][r];
 	            if(curr != null && curr.equals(board[c+1][r-1]) &&
 	               curr.equals(board[c+2][r-2]) && curr.equals(board[c+3][r-3]))
-	                return curr.getAffiliation();
+	                winner = curr;
 	        }
 	    }
-//		// check row of 4
-//		for (int c = 0; c < COL_MAX - 3; c++) {
-//			for (int r = 0; r < ROW_MAX; r++) {
-//				if (board[c][r] != null && board[c][r] == board[c + 1][r]
-//						&& board[c][r] == board[c + 2][r]
-//						&& board[c][r] == board[c + 3][r]) {
-//					return board[c][r].getAffiliation();
-//				}
-//			}
-//		}
-//		// check column of 4
-//		for (int c = 0; c < COL_MAX; c++) {
-//			for (int r = 0; r < ROW_MAX - 3; r++) {
-//				if (board[c][r] != null && board[c][r] == board[c][r + 1]
-//						&& board[c][r] == board[c][r + 2]
-//						&& board[c][r] == board[c][r + 3]) {
-//					return board[c][r].getAffiliation();
-//				}
-//			}
-//		}
-//		// check diagonals of 4
-//		for (int c = 0; c < COL_MAX; c++) {
-//			for (int r = 0; r < ROW_MAX; r++) {
-//				// direction: /
-//				if (c + 3 < COL_MAX && r + 3 < ROW_MAX) {
-//					if (board[c][r] != null
-//							&& board[c][r] == board[c + 1][r + 1]
-//							&& board[c][r] == board[c + 2][r + 2]
-//							&& board[c][r] == board[c + 3][r + 3]) {
-//						return board[c][r].getAffiliation();
-//					}
-//				}
-//				// direction: \
-//				if (c - 3 >= 0 && r + 3 < ROW_MAX) {
-//					if (board[c][r] != null
-//							&& board[c][r] == board[c - 1][r + 1]
-//							&& board[c][r] == board[c - 2][r + 2]
-//							&& board[c][r] == board[c - 3][r + 3]) {
-//						return board[c][r].getAffiliation();
-//					}
-//				}
-//			}
-//		}
-		// no winner
-		return null;
+        winner = null;
 	}
 
 	/**
@@ -153,24 +95,32 @@ public class GameState {
 	 * @param row
 	 * @return player of affiliation
 	 */
-	public Player checkBoard(int col, int row) {
+	public Player getLocation(int col, int row) {
 		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX)
 			if (board[col][row] != null)
-				return board[col][row].getAffiliation();
+				return board[col][row];
 		return null;
-	}
-
-	public Player getLastMovePlayer() {
-		return lastMovePlayer;
 	}
 
 	public Player getWinner() {
 		return winner;
 	}
+    
+    public void setCurrPlayer(Player p){
+        currPlayer = p;
+    }
+    
+    public Player getCurrPlayer(){
+        return currPlayer;
+    }
 
 	public int getTurn() {
 		return nTurn;
 	}
+    
+    public void nTurnPlusPlus(){
+        nTurn++;
+    }
 
 	/**
 	 * Check if the input column is a valid move.

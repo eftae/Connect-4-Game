@@ -11,13 +11,11 @@ public class Game {
 	GameState currState;
 	Player player1;
 	Player player2;
-	Player currPlayer;
 
 	public Game(Player player1, Player player2) {
-		currState = new GameState();
+		currState = new GameState(player1);
 		this.player1 = player1;
 		this.player2 = player2;
-		currPlayer = player1;
 	}
 
 	/**
@@ -28,11 +26,10 @@ public class Game {
 		// run game if winner if not defined
 		while (currState.getTurn() < MAX_TURN) {
 			// get player next move
-			int nextMove = currPlayer.decideMove(currState);
+			int nextMove = currState.getCurrPlayer().decideMove(currState);
 
             if(currState.isValidMove(nextMove)){
-                Disc d = new Disc(currPlayer,nextMove);
-                currState.runNextMove(d);
+                currState.runNextMove(nextMove);
             }
 
 			// check nextMove valid, otherwise ask the move again
@@ -45,15 +42,17 @@ public class Game {
 			displayBoard();
 
 			// swap player turn
-			if (currPlayer == player1)
-				currPlayer = player2;
+			if (currState.getCurrPlayer() == player1)
+				currState.setCurrPlayer(player2);
 			else
-				currPlayer = player1;
+                currState.setCurrPlayer(player1);
+            
+            // update the game state
+            currState.nTurnPlusPlus();
+            currState.checkGameEnd();
 			
-			
-
 			// check winner
-			Player winner = currState.checkWinner();
+			Player winner = currState.getWinner();
 			if (winner == player1) {
 				System.out.println("Player1 won.");
 				return;
@@ -75,7 +74,7 @@ public class Game {
 		for (int r = 5; r >= 0; r--) {
 			System.out.print("| ");
 			for (int c = 0; c < 7; c++) {
-				Player p = currState.checkBoard(c, r);
+				Player p = currState.getLocation(c,r);
 				if (p == player1) {
 					System.out.print("O ");
 				} else if (p == player2) {
