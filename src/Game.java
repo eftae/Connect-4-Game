@@ -6,6 +6,8 @@
  */
 
 public class Game {
+	private final int MAX_TURN = 42;
+	
 	GameState currState;
 	Player player1;
 	Player player2;
@@ -30,7 +32,7 @@ public class Game {
 	public void runGame() {
 		displayBoard();
 		// run game if winner if not defined
-		while (currState.getTurn() < 42) {
+		while (currState.getTurn() < MAX_TURN) {
 			// get player next move
 			int nextMove = currPlayer.decideMove(currState);
 
@@ -62,7 +64,7 @@ public class Game {
 			}
 		}
 		// no winner
-		System.out.println("Board Full.");
+		System.out.println("Board Full, Game Over");
 	}
 
 	/**
