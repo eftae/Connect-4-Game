@@ -24,11 +24,11 @@ public class GameState {
 	private Disc[][] board;
 	private Player lastMovePlayer;
 	private Player winner;
-	private int turn;
+	private int nTurn;
 
 	public GameState() {
 		board = new Disc[COL_MAX][ROW_MAX];
-		turn = 0;
+		nTurn = 0;
 	}
 
 	/**
@@ -40,22 +40,21 @@ public class GameState {
 	 *            position of the disc to be drop
 	 * @return true if dropped, false otherwise
 	 */
-	public boolean runNextMove(Disc discDrop, int col) {
-		if (discDrop == null || !isValidMove(col)) {
-			return false;
-		}
-
+	public void runNextMove(Disc discDrop) {
+		if (discDrop == null) return;
+        
+        int col = discDrop.getCol();
 		// drop the disc to the column
-		for (int r = 0; r < ROW_MAX; r++) {
-			if (board[col][r] == null) {
-				board[col][r] = discDrop;
-				turn++;
-				winner = checkWinner();
-				return true;
+		for (int r = 0; r < ROW_MAX; r++)
+			if (board[col][r] == null){
+			    board[col][r] = discDrop;
+                discDrop.setRow(r);
+                break;
 			}
-		}
-
-		return false;
+				
+		nTurn++;
+        // update winner if needed
+        winner = checkWinner();
 	}
 
 	/**
@@ -170,7 +169,7 @@ public class GameState {
 	}
 
 	public int getTurn() {
-		return turn;
+		return nTurn;
 	}
 
 	/**

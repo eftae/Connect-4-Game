@@ -12,18 +12,12 @@ public class Game {
 	Player player1;
 	Player player2;
 	Player currPlayer;
-	Disc disc1;
-	Disc disc2;
-	Disc currDisc;
 
 	public Game(Player player1, Player player2) {
 		currState = new GameState();
 		this.player1 = player1;
 		this.player2 = player2;
 		currPlayer = player1;
-		disc1 = new Disc(player1);
-		disc2 = new Disc(player2);
-		currDisc = disc1;
 	}
 
 	/**
@@ -36,22 +30,25 @@ public class Game {
 			// get player next move
 			int nextMove = currPlayer.decideMove(currState);
 
+            if(currState.isValidMove(nextMove)){
+                Disc d = new Disc(currPlayer,nextMove);
+                currState.runNextMove(d);
+            }
+
 			// check nextMove valid, otherwise ask the move again
-			while (!currState.runNextMove(currDisc, nextMove)) {
-				nextMove = currPlayer.decideMove(currState);
-			}
+            // while (!currState.runNextMove(currDisc, nextMove)) {
+            //     nextMove = currPlayer.decideMove(currState);
+            // }
+            // ^ if the player enter an invalid move, we will just skip the turn
 
 			// Display board
 			displayBoard();
 
 			// swap player turn
-			if (currPlayer == player1) {
+			if (currPlayer == player1)
 				currPlayer = player2;
-				currDisc = disc2;
-			} else {
+			else
 				currPlayer = player1;
-				currDisc = disc1;
-			}
 
 			// check winner
 			Player winner = currState.getWinner();

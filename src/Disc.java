@@ -6,11 +6,12 @@
 
 public class Disc {
 	private Player currPlayer;
-	private int x;
-	private int y;
+	private int col;
+	private int row;
 	
-	public Disc(Player p) {
+	public Disc(Player p, int col) {
 		currPlayer = p;
+        this.col = col;
 	}
 	
 	public void setPlayer(Player p) {
@@ -21,16 +22,20 @@ public class Disc {
 		return this.currPlayer;
 	}
 	
-	public int getHoriz() {
-		return this.x;
+	public int getCol() {
+		return col;
 	}
 	
-	public int getVert() {
-		return this.y;
+	public int getRpw() {
+		return row;
 	}
 	
+    public void setRow(int r){
+        row = r;
+    }
+    
 	public void setLocation(int c, int r) {
-		this.x = c;
-		this.y = r;
+		col = c;
+		row = r;
 	}
 }
