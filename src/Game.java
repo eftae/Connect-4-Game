@@ -24,7 +24,7 @@ public class Game {
 	public void runGame() {
 		displayBoard();
 		// run game if winner if not defined
-		while (currState.getTurn() < MAX_TURN) {
+		while (currState.getTurn() <= MAX_TURN) {
 			// get player next move
 			int nextMove = currState.getCurrPlayer().decideMove(currState);
 

@@ -30,7 +30,7 @@ public class GameState {
 		board = new Player[COL_MAX][ROW_MAX];
         this.currPlayer = firstPlayer;
         winner = null;
-		nTurn = 0;
+		nTurn = 1;
 	}
 
 	public void runNextMove(int col) {
