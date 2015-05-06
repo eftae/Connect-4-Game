@@ -49,9 +49,11 @@ public class Game {
 				currPlayer = player2;
 			else
 				currPlayer = player1;
+			
+			
 
 			// check winner
-			Player winner = currState.getWinner();
+			Player winner = currState.checkWinner();
 			if (winner == player1) {
 				System.out.println("Player1 won.");
 				return;

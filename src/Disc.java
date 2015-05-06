@@ -38,4 +38,14 @@ public class Disc {
 		col = c;
 		row = r;
 	}
+	
+    public boolean equals(Object o){
+    	if(o instanceof Disc){
+    		Disc d = (Disc) o;
+    		if(currPlayer.equals(d.currPlayer))
+    			return true;
+    		else return false;
+    	} else 
+    		return false;
+    }
 }
