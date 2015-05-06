@@ -85,7 +85,6 @@ public class GameState {
 	                winner = curr;
 	        }
 	    }
-        winner = null;
 	}
 
 	/**
