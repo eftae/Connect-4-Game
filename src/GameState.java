@@ -85,7 +85,6 @@ public class GameState {
 	                winner = curr;
 	        }
 	    }
-        winner = null;
 	}
 
 	/**
@@ -97,8 +96,7 @@ public class GameState {
 	 */
 	public Player getLocation(int col, int row) {
 		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX)
-			if (board[col][row] != null)
-				return board[col][row];
+			return board[col][row];
 		return null;
 	}
     
