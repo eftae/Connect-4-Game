@@ -115,6 +115,7 @@ public class GameState {
 		for (int r = 0; r < ROW_MAX; r++)
 			if (board[col][r] == null)
 			    return r;
+        System.out.println("error");
 		return -1;
     }
 

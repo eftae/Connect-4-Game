@@ -7,6 +7,10 @@
 import java.util.Random;
 
 public class AI implements Player {
+    
+	private final int COL_MAX = 7;
+	private final int ROW_MAX = 6;    
+    
 	private int mode;
 
 	/**
@@ -20,10 +24,11 @@ public class AI implements Player {
 
 	public int decideMove(GameState currState) {
 
-		switch (mode) {
-		default:
-			return modeRandom(currState);
-		}
+        return blockAction(currState);
+		// switch (mode) {
+//         default:
+//             return modeRandom(currState);
+//         }
 
 	}
 
@@ -44,52 +49,44 @@ public class AI implements Player {
     
     public int blockAction(GameState s){
         Player[][] board = s.getBoard();
+        int targetCol = 0;
         
         // check horizontal
 		for (int c = 0; c < COL_MAX - 3; c++) {
 			for (int r = 0; r < ROW_MAX; r++) {
-                for(int i = 0; i < 4; i++){
-                    int count = 0;
-    	            Player curr = board[c+i][r];
-                    if (curr == null) continue;
-                    if(i != 0 && curr.equals(board[c][r])) count++;
-                    if(i != 1 && curr.equals(board[c+1][r])) count++;
-                    if(i != 2 && curr.equals(board[c+2][r])) count++;
-                    if(i != 3 && curr.equals(board[c+3][r])) count++;
-                    if(count == 3)
+                int count = 0;
+                int targetRow = 0;
+                int i;
+                for(i = 0; i < 4; i++){
+                    Player enemy = s.getOtherPlayer();
+                    if (enemy == null) continue;
+                    if(enemy.equals(board[c+i][r])){
+                        count++;
+                    } else if(board[c+i][r] == null){ 
+                        targetCol = c+i;
+                    }
                 }
-	            
+	            if(count == 3 && s.getAvailableRow(targetCol) == r)
+                    return targetCol;
 			}
 		}
 		// check vertical
 		for (int c = 0; c < COL_MAX; c++) {
 			for (int r = 0; r < ROW_MAX - 3; r++) {
-				Player curr = board[c][r];
-				if (curr != null && curr.equals(board[c][r+1]) &&
-	                curr.equals(board[c][r+2]) && curr.equals(board[c][r+3]))
-					winner = curr;
+				int count = 0;
+                for(int i = 0; i < 3; i++){
+                    Player enemy = s.getOtherPlayer();
+                    if (enemy == null) continue;
+                    if(enemy.equals(board[c][r+i]))
+                        count++;
+                    if(board[c][r+3] == null && count == 3)
+                        targetCol = c;
+                }
+                if(count == 3 && s.getAvailableRow(c) == (r+3))
+                    return targetCol;
 			}
 		}
-	    // check diagonals: /
-	    for(int c = 0; c < COL_MAX-3; c++){
-	        for(int r = 0; r < ROW_MAX-3; r++){
-	        	Player curr = board[c][r];
-	            if(curr != null && curr.equals(board[c+1][r+1]) &&
-	               curr.equals(board[c+2][r+2]) && curr.equals(board[c+3][r+3]))
-	                winner = curr;
-	        }
-	    }
-	    // check diagonals: \
-	    for(int c = 0; c < COL_MAX-3; c++){
-	        for(int r = 3; r < ROW_MAX; r++){
-	        	Player curr = board[c][r];
-	            if(curr != null && curr.equals(board[c+1][r-1]) &&
-	               curr.equals(board[c+2][r-2]) && curr.equals(board[c+3][r-3]))
-	                winner = curr;
-	        }
-	    }
-        
-        
+		return modeRandom(s);
     }
 
 }
