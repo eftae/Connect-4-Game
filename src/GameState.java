@@ -150,4 +150,15 @@ public class GameState {
 			return true;
 		return false;
 	}
+
+	@Override
+	public GameState clone() {
+		Player[][] cloneBoard = new Player[COL_MAX][];
+		for(int i = 0; i < COL_MAX; i++)
+			cloneBoard[i] = board[i].clone();
+
+		//Todo
+		GameState c = new GameState(cloneBoard, currPlayer, winner, nTurn);
+		return c;
+	}
 }
