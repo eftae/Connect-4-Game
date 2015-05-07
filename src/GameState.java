@@ -1,7 +1,8 @@
 /**
  * Handle the state of a game
+ * v0.11 added clone()
  * 
- * @version v0.1
+ * @version v0.11
  */
 
 
@@ -16,31 +17,43 @@
 //        1 | | | | | | | |
 //        0 | | | | | | | |
 
-
 public class GameState {
 	private final int COL_MAX = 7;
 	private final int ROW_MAX = 6;
 
 	private Player[][] board;
-    private Player[] players;
-    private Player currPlayer;
+	private Player[] players;
+	private Player currPlayer;
 	private Player winner;
 	private int nTurn;
 
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
 		players = new Player[2];
-        players[0] = firstPlayer;
-        players[1] = secondPlayer;
-        this.currPlayer = firstPlayer;
-        winner = null;
+		players[0] = firstPlayer;
+		players[1] = secondPlayer;
+		this.currPlayer = firstPlayer;
+		winner = null;
 		nTurn = 1;
 	}
 
+	/**
+	 * Constructor for cloning.
+	 */
+	public GameState(Player[][] board, Player[] players, Player currPlayer,
+			Player winner, int nTurn) {
+		this.board = board;
+		this.players = players;
+		this.currPlayer = currPlayer;
+		this.winner = winner;
+		this.nTurn = nTurn;
+	}
+
 	public void runNextMove(int col) {
-		if (col < 0 || col >= COL_MAX) return;
+		if (col < 0 || col >= COL_MAX)
+			return;
 		// drop the disc to the column
-	    board[col][getAvailableRow(col)] = currPlayer;
+		board[col][getAvailableRow(col)] = currPlayer;
 	}
 
 	/**
@@ -52,9 +65,10 @@ public class GameState {
 		// check horizontal
 		for (int c = 0; c < COL_MAX - 3; c++) {
 			for (int r = 0; r < ROW_MAX; r++) {
-	            Player curr = board[c][r];
-				if (curr != null && curr.equals(board[c+1][r]) &&
-	                curr.equals(board[c+2][r]) && curr.equals(board[c+3][r]))
+				Player curr = board[c][r];
+				if (curr != null && curr.equals(board[c + 1][r])
+						&& curr.equals(board[c + 2][r])
+						&& curr.equals(board[c + 3][r]))
 					winner = curr;
 			}
 		}
@@ -62,29 +76,32 @@ public class GameState {
 		for (int c = 0; c < COL_MAX; c++) {
 			for (int r = 0; r < ROW_MAX - 3; r++) {
 				Player curr = board[c][r];
-				if (curr != null && curr.equals(board[c][r+1]) &&
-	                curr.equals(board[c][r+2]) && curr.equals(board[c][r+3]))
+				if (curr != null && curr.equals(board[c][r + 1])
+						&& curr.equals(board[c][r + 2])
+						&& curr.equals(board[c][r + 3]))
 					winner = curr;
 			}
 		}
-	    // check diagonals: /
-	    for(int c = 0; c < COL_MAX-3; c++){
-	        for(int r = 0; r < ROW_MAX-3; r++){
-	        	Player curr = board[c][r];
-	            if(curr != null && curr.equals(board[c+1][r+1]) &&
-	               curr.equals(board[c+2][r+2]) && curr.equals(board[c+3][r+3]))
-	                winner = curr;
-	        }
-	    }
-	    // check diagonals: \
-	    for(int c = 0; c < COL_MAX-3; c++){
-	        for(int r = 3; r < ROW_MAX; r++){
-	        	Player curr = board[c][r];
-	            if(curr != null && curr.equals(board[c+1][r-1]) &&
-	               curr.equals(board[c+2][r-2]) && curr.equals(board[c+3][r-3]))
-	                winner = curr;
-	        }
-	    }
+		// check diagonals: /
+		for (int c = 0; c < COL_MAX - 3; c++) {
+			for (int r = 0; r < ROW_MAX - 3; r++) {
+				Player curr = board[c][r];
+				if (curr != null && curr.equals(board[c + 1][r + 1])
+						&& curr.equals(board[c + 2][r + 2])
+						&& curr.equals(board[c + 3][r + 3]))
+					winner = curr;
+			}
+		}
+		// check diagonals: \
+		for (int c = 0; c < COL_MAX - 3; c++) {
+			for (int r = 3; r < ROW_MAX; r++) {
+				Player curr = board[c][r];
+				if (curr != null && curr.equals(board[c + 1][r - 1])
+						&& curr.equals(board[c + 2][r - 2])
+						&& curr.equals(board[c + 3][r - 3]))
+					winner = curr;
+			}
+		}
 	}
 
 	/**
@@ -99,45 +116,45 @@ public class GameState {
 			return board[col][row];
 		return null;
 	}
-    
-    public Player[][] getBoard(){
-        return board;
-    }
-    
-    public Player getOtherPlayer(){
-        if(currPlayer.equals(players[0]))
-            return players[1];
-        else
-            return players[0];
-    }
-    
-    public int getAvailableRow(int col){
+
+	public Player[][] getBoard() {
+		return board;
+	}
+
+	public Player getOtherPlayer() {
+		if (currPlayer.equals(players[0]))
+			return players[1];
+		else
+			return players[0];
+	}
+
+	public int getAvailableRow(int col) {
 		for (int r = 0; r < ROW_MAX; r++)
 			if (board[col][r] == null)
-			    return r;
-        System.out.println("error");
+				return r;
+		System.out.println("error");
 		return -1;
-    }
+	}
 
 	public Player getWinner() {
 		return winner;
 	}
-    
-    public void setCurrPlayer(Player p){
-        currPlayer = p;
-    }
-    
-    public Player getCurrPlayer(){
-        return currPlayer;
-    }
+
+	public void setCurrPlayer(Player p) {
+		currPlayer = p;
+	}
+
+	public Player getCurrPlayer() {
+		return currPlayer;
+	}
 
 	public int getTurn() {
 		return nTurn;
 	}
-    
-    public void nTurnPlusPlus(){
-        nTurn++;
-    }
+
+	public void nTurnPlusPlus() {
+		nTurn++;
+	}
 
 	/**
 	 * Check if the input column is a valid move.
@@ -154,11 +171,11 @@ public class GameState {
 	@Override
 	public GameState clone() {
 		Player[][] cloneBoard = new Player[COL_MAX][];
-		for(int i = 0; i < COL_MAX; i++)
+		for (int i = 0; i < COL_MAX; i++)
 			cloneBoard[i] = board[i].clone();
 
-		//Todo
-		GameState c = new GameState(cloneBoard, currPlayer, winner, nTurn);
+		GameState c = new GameState(cloneBoard, players, currPlayer, winner,
+				nTurn);
 		return c;
 	}
 }
