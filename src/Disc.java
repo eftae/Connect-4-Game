@@ -1,5 +1,5 @@
 /**
- * Class for a disc.
+ * Class for a disc. Include interface details.
  * 
  * @version v0.2
  */
