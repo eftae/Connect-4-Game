@@ -13,7 +13,7 @@ public class Game {
 	Player player2;
 
 	public Game(Player player1, Player player2) {
-		currState = new GameState(player1);
+		currState = new GameState(player1,player2);
 		this.player1 = player1;
 		this.player2 = player2;
 	}

@@ -22,12 +22,16 @@ public class GameState {
 	private final int ROW_MAX = 6;
 
 	private Player[][] board;
+    private Player[] players;
     private Player currPlayer;
 	private Player winner;
 	private int nTurn;
 
-	public GameState(Player firstPlayer) {
+	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
+		players = new Player[2];
+        players[0] = firstPlayer;
+        players[1] = secondPlayer;
         this.currPlayer = firstPlayer;
         winner = null;
 		nTurn = 1;
@@ -35,12 +39,8 @@ public class GameState {
 
 	public void runNextMove(int col) {
 		if (col < 0 || col >= COL_MAX) return;
-        
 		// drop the disc to the column
-		for (int r = 0; r < ROW_MAX; r++)
-			if (board[col][r] == null){
-			    board[col][r] = currPlayer; break;
-			}
+	    board[col][getAvailableRow(col)] = currPlayer;
 	}
 
 	/**
@@ -101,6 +101,24 @@ public class GameState {
 				return board[col][row];
 		return null;
 	}
+    
+    public Player[][] getBoard(){
+        return board;
+    }
+    
+    public Player getOtherPlayer(){
+        if(currPlayer.equals(players[0]))
+            return players[1];
+        else
+            return players[0];
+    }
+    
+    public int getAvailableRow(int col){
+		for (int r = 0; r < ROW_MAX; r++)
+			if (board[col][r] == null)
+			    return r;
+		return -1;
+    }
 
 	public Player getWinner() {
 		return winner;
