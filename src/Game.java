@@ -25,8 +25,10 @@ public class Game {
 		displayBoard();
 		// run game if winner if not defined
 		while (currState.getTurn() <= MAX_TURN) {
-			// get player next move
-			int nextMove = currState.getCurrPlayer().decideMove(currState);
+			Player currPlayer = currState.getCurrPlayer();
+			
+			// get player next move			
+			int nextMove = currPlayer.decideMove(currState.clone());
 
             if(currState.isValidMove(nextMove)){
                 currState.runNextMove(nextMove);
@@ -42,7 +44,7 @@ public class Game {
 			displayBoard();
 
 			// swap player turn
-			if (currState.getCurrPlayer() == player1)
+			if (currPlayer == player1)
 				currState.setCurrPlayer(player2);
 			else
                 currState.setCurrPlayer(player1);
