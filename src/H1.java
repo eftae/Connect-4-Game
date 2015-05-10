@@ -1,95 +1,77 @@
 /**
- * Heuristic for alphabeta search.
- * Considering number of empty slot connects to 2/3 consecutive discs.
- *
+ * Heuristic for alphabeta search. Considering number of empty slot connects to
+ * 3 consecutive discs.
+ * 
  */
+
 public class H1 implements HeuristicAlgorithm {
 
-	@Override
 	public int h(GameState state) {
 
 		int h = 0;
 		Player curr = state.getCurrPlayer();
-		Player oppo = state.getOtherPlayer();
+		// Player oppo = state.getOtherPlayer();
 
 		// calculate how many empty slot connecting to sequence of 3
 		int count = 0;
 		for (int c = 0; c < 7; c++) {
 			for (int r = 0; r < 6; r++) {
 				if (state.getLocation(c, r) == null) {
-					// left
-					if (c - 3 >= 0
-							&& state.getLocation(c - 1, r) == curr
-							&& state.getLocation(c - 1, r) == state
-									.getLocation(c - 2, r)
-							&& state.getLocation(c - 1, r) == state
-									.getLocation(c - 3, r)) {
+					// bottom
+					if (r - 3 >= 0 && isThreeSame(state, curr, c, r, 0, -1)) {
 						count++;
 					}
-					// right
-					if (c + 3 < 7
-							&& state.getLocation(c + 1, r) == curr
-							&& state.getLocation(c + 1, r) == state
-									.getLocation(c + 2, r)
-							&& state.getLocation(c + 1, r) == state
-									.getLocation(c + 3, r)) {
-						count++;
+
+					if (c - 3 >= 0) {
+						// left
+						if (isThreeSame(state, curr, c, r, -1, 0)) {
+							count++;
+						}
+						// bottom-left
+						if (r - 3 >= 0
+								&& isThreeSame(state, curr, c, r, -1, -1)) {
+							count++;
+						}
+						// top-left
+						if (r + 3 < 6 && isThreeSame(state, curr, c, r, -1, 1)) {
+							count++;
+						}
 					}
-					// right
-					if (r - 3 >= 0
-							&& state.getLocation(c, r - 1) == curr
-							&& state.getLocation(c, r - 1) == state
-									.getLocation(c, r - 2)
-							&& state.getLocation(c, r - 1) == state
-									.getLocation(c, r - 3)) {
-						count++;
+
+					if (c + 3 < 7) {
+						// right
+						if (isThreeSame(state, curr, c, r, 1, 0)) {
+							count++;
+						}
+						// bottom-right
+						if (r - 3 >= 0 && isThreeSame(state, curr, c, r, 1, -1)) {
+							count++;
+						}
+						// top-right
+						if (r + 3 < 6 && isThreeSame(state, curr, c, r, 1, 1)) {
+							count++;
+						}
 					}
-					// bottom-right
-					if (r - 3 >= 0
-							&& c - 3 >= 0
-							&& state.getLocation(c - 1, r - 1) == curr
-							&& state.getLocation(c - 1, r - 1) == state
-									.getLocation(c - 2, r - 2)
-							&& state.getLocation(c - 1, r - 1) == state
-									.getLocation(c - 3, r - 3)) {
-						count++;
-					}
-					// bottom-left
-					if (r - 3 >= 0
-							&& c + 3 < 7
-							&& state.getLocation(c + 1, r - 1) == curr
-							&& state.getLocation(c + 1, r - 1) == state
-									.getLocation(c + 2, r - 2)
-							&& state.getLocation(c + 1, r - 1) == state
-									.getLocation(c + 3, r - 3)) {
-						count++;
-					}
-					// top-left
-					if (r + 3 < 6
-							&& c - 3 >= 0
-							&& state.getLocation(c - 1, r + 1) == curr
-							&& state.getLocation(c - 1, r + 1) == state
-									.getLocation(c - 2, r + 2)
-							&& state.getLocation(c - 1, r + 1) == state
-									.getLocation(c - 3, r + 3)) {
-						count++;
-					}
-					// top-right
-					if (r + 3 < 6
-							&& c + 3 < 7
-							&& state.getLocation(c + 1, r + 1) == curr
-							&& state.getLocation(c + 1, r + 1) == state
-									.getLocation(c + 2, r + 2)
-							&& state.getLocation(c + 1, r + 1) == state
-									.getLocation(c + 3, r + 3)) {
-						count++;
-					}
+
 				}
 			}
 		}
 
-		h = (count << 3);
+		h = count;
 
 		return h;
 	}
+
+	private boolean isThreeSame(GameState state, Player p, int c, int r,
+			int dc, int dr) {
+
+		if (state.getLocation(c + dc, r + dr) == p
+				&& state.getLocation(c + dc * 2, r + dr * 2) == p
+				&& state.getLocation(c + dc * 3, r + dr * 3) == p) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
