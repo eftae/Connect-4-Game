@@ -1,7 +1,7 @@
 /**
  * Heuristic node for AI.
  * 
- * @version v0.1
+ * @version v0.11
  *
  */
 
@@ -27,8 +27,7 @@ public class HNode {
 	}
 
 	public void setMove(int move) {
-		if (move >= 0 && move < 7)
-			this.move = move;
+		this.move = move;
 	}
 
 }
