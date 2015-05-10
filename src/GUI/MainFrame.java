@@ -12,9 +12,7 @@ import javax.swing.JTextArea;
 
 public class MainFrame extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private DetailsPanel detailsPanel;
@@ -24,12 +22,10 @@ public class MainFrame extends JFrame {
 		setSize(900,700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		add(new JLabel(new ImageIcon("/Users/jiangkanpan/Desktop/pic.png")));
-	
-		DetailsPanel panel =new DetailsPanel();
+		add(new JLabel(new ImageIcon("pic.png")));
+		DetailsPanel mainPanel =new DetailsPanel();
 		
-		add(panel,BorderLayout.WEST);
-	
+		add(mainPanel,BorderLayout.WEST);
 	}
 	
 	// setMusic 

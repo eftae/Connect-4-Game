@@ -36,9 +36,10 @@ public class DetailsPanel extends JPanel {
 
 		gc.gridx = 0;
 		gc.gridy = 0;
-		JButton button1 = new JButton ("Singer Player");
-		button1.setFont(new Font("Arial", Font.PLAIN, 20));
-		
+		ImageIcon buttonIcon1 = new ImageIcon("single.png");
+		JButton button1 = new JButton (" Singer Player",buttonIcon1);
+		button1.setToolTipText("Enter a Singer player game VS AI");
+		button1.setFont(new Font("Arial", Font.PLAIN, 20));		
 		add(button1,gc);
 		button1.addActionListener(new ActionListener () {
 
@@ -55,7 +56,9 @@ public class DetailsPanel extends JPanel {
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
-		JButton button2 = new JButton ("Co-op Player");
+		ImageIcon buttonIcon2 = new ImageIcon("Group-50.png");
+		JButton button2 = new JButton ("Co-op Player",buttonIcon2);
+		button2.setToolTipText("Enter a mutiplayer VS Your Friend");
 		button2.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(button2, gc);
 		button2.addActionListener(new ActionListener () {
@@ -70,7 +73,9 @@ public class DetailsPanel extends JPanel {
 		
 		gc.gridx = 0;
 		gc.gridy = 3;
-		JButton button3 = new JButton("Check High Score");
+		ImageIcon buttonIcon3 = new ImageIcon("Trophy-50.png");
+		JButton button3 = new JButton(" High Score",buttonIcon3);
+		button3.setToolTipText("Check High Scored Record");
 		button3.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(button3, gc);
 		button3.addActionListener(new ActionListener () {
@@ -85,7 +90,9 @@ public class DetailsPanel extends JPanel {
 		
 		gc.gridx = 0;
 		gc.gridy = 4;
-		JButton button4 = new JButton("Quit Game");
+		ImageIcon buttonIcon4 = new ImageIcon("Exit-50.png");
+		JButton button4 = new JButton("Quit Game",buttonIcon4);
+		button4.setToolTipText("Exit the Game");
 		button4.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(button4,gc);
 		button4.addActionListener(new ActionListener () {
@@ -93,14 +100,16 @@ public class DetailsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "You exited Game");
-				 mainFrame.dispose ();
+				System.exit(0);
 			}
 			
 		});
 		
 		gc.gridx = 0;
 		gc.gridy = 5;
-		JButton button5 = new JButton("Credits");
+		ImageIcon buttonIcon5 = new ImageIcon("Gorilla-50.png");
+		JButton button5 = new JButton("  Credits",buttonIcon5);
+		button5.setToolTipText("View the Development Team");
 		button5.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(button5,gc);
 		button5.addActionListener(new ActionListener () {
