@@ -49,6 +49,7 @@ public class DetailsPanel extends JPanel {
 				SinglePlayerWindow spw = new SinglePlayerWindow ();
 				
 				JOptionPane.showMessageDialog(null, "Game Start!");
+			
 			}
 			
 		});
