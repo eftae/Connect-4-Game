@@ -5,14 +5,14 @@
  * @version v0.11
  */
 
-public class Game {
+public class GameEngine {
 	private final int MAX_TURN = 42;
 	
 	GameState currState;
 	Player player1;
 	Player player2;
 
-	public Game(Player player1, Player player2) {
+	public GameEngine(Player player1, Player player2) {
 		currState = new GameState(player1,player2);
 		this.player1 = player1;
 		this.player2 = player2;

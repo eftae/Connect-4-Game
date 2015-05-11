@@ -1,32 +1,69 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
 public class Connect4 {
 
-	public static void main(String[] args) {
-		// Game for command line
-		
-		// increase the argument for harder AI
-		Player p1 = new AIAlphaBeta(2);
-		Player p2 = new AIAlphaBeta(3);
+	private JFrame mainFrame;
+	private MenuPanel menuPanel;
+	private GameBoardPanel gameBoardPanel;
 
-		//Player p1 = new User();
-		//Player p2 = new AI(0);
-		Game game = new Game(p1, p2);
-		System.out.println("Game Start.");
-		
-		
+	public Connect4() {
+		mainFrame = new JFrame("Connect 4");
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension d = new Dimension(900, 700);
+		mainFrame.setPreferredSize(d);
+		// mainFrame.setSize(900,700);
+		mainFrame.setLocationRelativeTo(null);
+
+		// create default panels
+		menuPanel = new MenuPanel(this);
+		gameBoardPanel = new GameBoardPanel(2);
+	}
+
+	public static void main(String[] args) {
+		final Connect4 mainWindow = new Connect4();
 		EventQueue.invokeLater(new Runnable() {
-			@Override
 			public void run() {
-				JFrame mainFrame = new MainFrame();
-		        mainFrame.setVisible(true);
+				mainWindow.display();
 			}
 		});
-		
-		
-//		game.runGame();
-		System.out.println("Game finsihed.");
+	}
+
+	/**
+	 * Method to display the main window
+	 */
+	private void display() {
+		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
+		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.EAST);
+		mainFrame.pack();
+		mainFrame.setResizable(false);
+		mainFrame.setVisible(true);
+	}
+
+	public void runSinglePlayerGame() {
+		// Todo
+		Player p1 = new User();
+		Player p2 = new AIAlphaBeta(1);
+	
+	}
+
+	public void runTwoPlayersGame() {
+		// Todo
+		Player p1 = new User();
+		Player p2 = new User();
+
+		// GameEngine game = new GameEngine(p1, p2);
+		// game.runGame();
+	}
+
+	public void displayStatistic() {
+		// Todo
+	}
+
+	public void displayCredits() {
+		// Todo
 	}
 }

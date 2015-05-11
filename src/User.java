@@ -21,6 +21,7 @@ public class User implements Player {
 	 * @return 0 - 6
 	 */
 	public int modeCommandLineInput(GameState currState) {
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Next move (1-7): ");
 		int nextMove = sc.nextInt() - 1;
