@@ -17,10 +17,12 @@ public class GameStatePanel extends JPanel {
 	
 	DiscButton buttons [] = new DiscButton [42];
 	
+	
 	public GameStatePanel() {
 		
 		setLayout(new GridLayout(6,7));
 		setBorder(new TitledBorder("Single Play Game"));
+		//setBackground(new Color(0, 128, 128));
 	
 		
 		for (int i = 0; i< 42; i++) {

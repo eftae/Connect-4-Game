@@ -11,7 +11,7 @@ public class DiscButton extends JButton implements ActionListener {
 	ImageIcon oldp2 = new ImageIcon("yellowDot.jpeg");
 	ImageIcon p1 = ResizeImage.changeImage ( oldp1, 125, 110);
 	ImageIcon p2 = ResizeImage.changeImage ( oldp2, 125, 110);
-	int value = 1;
+	static int value = 1;
 	
 	public DiscButton() {
 		 
