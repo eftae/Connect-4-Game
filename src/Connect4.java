@@ -13,14 +13,16 @@ public class Connect4 {
 	public Connect4() {
 		mainFrame = new JFrame("Connect 4");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension d = new Dimension(900, 700);
+		Dimension d = new Dimension(1000, 700);
 		mainFrame.setPreferredSize(d);
 		// mainFrame.setSize(900,700);
 		mainFrame.setLocationRelativeTo(null);
 
 		// create default panels
 		menuPanel = new MenuPanel(this);
+		menuPanel.setPreferredSize(new Dimension(250, 700));
 		gameBoardPanel = new GameBoardPanel(2);
+		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 	}
 
 	public static void main(String[] args) {
