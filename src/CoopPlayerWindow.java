@@ -3,6 +3,9 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 public class CoopPlayerWindow extends JFrame {
+	
+	GameStatePanel SPlayPanel;
+	
 	public CoopPlayerWindow() {
 		setSize(900, 700);
 		setVisible(true);
@@ -14,5 +17,8 @@ public class CoopPlayerWindow extends JFrame {
 		
 		GameMenuBar menu = new GameMenuBar ();
 		setJMenuBar(menu);
+		
+		SPlayPanel =  new GameStatePanel (2);
+		add(SPlayPanel);
 	}
 }

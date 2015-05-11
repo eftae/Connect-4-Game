@@ -27,6 +27,6 @@ public class Connect4 {
 		
 		
 //		game.runGame();
-		System.out.println("Game finsihed.");
+		//System.out.println("Game finsihed.");
 	}
 }
