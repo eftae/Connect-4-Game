@@ -22,8 +22,8 @@ public class MainFrame extends JFrame {
 		setSize(900,700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		add(new JLabel(new ImageIcon("pic.png")));
-		DetailsPanel mainPanel =new DetailsPanel();
+		add(new JLabel(new ImageIcon(this.getClass().getResource("pic.png"))));
+		DetailsPanel mainPanel = new DetailsPanel();
 		
 		add(mainPanel,BorderLayout.WEST);
 	}

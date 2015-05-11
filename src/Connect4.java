@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class Connect4 {
 
@@ -8,18 +9,17 @@ public class Connect4 {
 		// Game for command line
 		
 		// increase the argument for harder AI
-		Player p1 = new AIAlphaBeta(2);
-		Player p2 = new AIAlphaBeta(3);
+//		Player p1 = new AIAlphaBeta(2);
+//		Player p2 = new AIAlphaBeta(3);
 
 		//Player p1 = new User();
 		//Player p2 = new AI(0);
-		Game game = new Game(p1, p2);
-		System.out.println("Game Start.");
+//		Game game = new Game(p1, p2);
+//		System.out.println("Game Start.");
 		
 		
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run() {
 				JFrame mainFrame = new MainFrame();
 		        mainFrame.setVisible(true);
 			}

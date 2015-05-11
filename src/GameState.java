@@ -54,11 +54,13 @@ public class GameState {
 	 * 
 	 * @param col
 	 */
-	public void runNextMove(int col) {
+	public int runNextMove(int col) {
 		if (col >= 0 & col < COL_MAX) {
 			int row = getAvailableRow(col);
 			board[col][row] = currPlayer;
+			return row;
 		}
+		return -1;
 	}
 
 	/**
@@ -140,6 +142,11 @@ public class GameState {
 			return players[1];
 		else
 			return players[0];
+	}
+	
+	public void swapPlayer(){
+		if (currPlayer.equals(players[0])) currPlayer = players[1];
+		else currPlayer = players[0];
 	}
 
 	public int getAvailableRow(int col) {
