@@ -32,17 +32,10 @@ public class DiscButton extends JButton implements ActionListener {
 		case 1:
 			setIcon (p2);
 			break;
-		}
-		
-		
-		
-		
+		}	
 	}
 	
 	public int generateCol () {
-		
 		return buttonID % 7;
 	}
-	
-	
 }
