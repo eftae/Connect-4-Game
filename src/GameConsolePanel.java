@@ -56,7 +56,6 @@ public class GameConsolePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				mainGame.runTwoPlayersGame();
 			}
-
 		});
 
 		// Button for Statistic
@@ -73,9 +72,7 @@ public class GameConsolePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				mainGame.displayStatistic();
 			}
-
 		});
-
 
 		// Button for Quit
 		gc.gridx = 0;
@@ -90,8 +87,6 @@ public class GameConsolePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
-
 		});
-
 	}
 }

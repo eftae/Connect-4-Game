@@ -126,14 +126,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				System.exit(0);
 			}
 		}
-		// no winner
-		// System.out.println("Board Full, Game Over");
 	}
-
-	// @Override
-	// public int decideMove(GameState currState) {
-	// return nextMove;
-	// }
 
 	private int colRowToBtnId(int col, int row) {
 		return (5 - row) * 7 + col;
