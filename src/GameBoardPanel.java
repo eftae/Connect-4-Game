@@ -13,6 +13,8 @@ import javax.swing.border.TitledBorder;
 public class GameBoardPanel extends JPanel implements ActionListener {
 
 	private final int MAX_TURN = 42;
+	private PlayerWindow playerWindow;
+	private Connect4 mainGame;
 
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
@@ -28,9 +30,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	// for GUI player
 	int nextMove;
 
-	public GameBoardPanel(int nHumans) {
+	public GameBoardPanel(int nHumans,PlayerWindow playerWindow,Connect4 mainGame) {
 		gameMode = nHumans;
-
+		this.playerWindow = playerWindow;
+		this.mainGame = mainGame;
 		// setup the game panel
 		setLayout(new GridLayout(6, 7));
 		setBorder(new TitledBorder("Single Player Game"));
@@ -63,7 +66,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			p1 = new AIAlphaBeta(0);
 			p2 = new AIAlphaBeta(0);
 			gameMode = MAX_TURN;
-			runGame();
+			runGame(playerWindow, mainGame);
 		}
 
 		g = new GameState(p1, p2);
@@ -77,7 +80,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		JButton pressed = (JButton) e.getSource();
 		nextMove = buttons.indexOf(pressed) % 7;
 
-		runGame();
+		runGame(playerWindow, mainGame);
 	}
 
 	public void setButton(int btnId, int colorId) {
@@ -88,7 +91,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			b.setIcon(icn2);
 	}
 
-	public void runGame() {
+	public void runGame(PlayerWindow playWindow, Connect4 mainGame) {
 		// run game if winner if not defined
 		for (int i = 0; i < gameMode; i++) {
 			if (g.getTurn() > MAX_TURN)
@@ -118,10 +121,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			Player me = g.getWinner();
 			if (me == p1) {
 				JOptionPane.showMessageDialog(null, "Player 1 win");
-				System.exit(0);
+				playerWindow.dispose();
+				mainGame.setVisity(true);
 			} else if (me == p2) {
 				JOptionPane.showMessageDialog(null, "Player 2 (AI) win");
-				System.exit(0);
+				playerWindow.dispose ();
+				mainGame.setVisity(true);
 			}
 		}
 		// no winner

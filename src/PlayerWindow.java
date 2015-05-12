@@ -21,7 +21,7 @@ public class PlayerWindow extends JFrame {
 		//add(new JLabel(new ImageIcon("src/pics/pic.png")));
 		setLocationRelativeTo(null);
 		setResizable(false);
-		gameBoardPanel = new GameBoardPanel(playMode);
+		gameBoardPanel = new GameBoardPanel(playMode,this,mainGame);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.WEST);
 		

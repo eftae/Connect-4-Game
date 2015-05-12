@@ -24,8 +24,8 @@ public class Connect4 {
 		// create default panels
 		menuPanel = new MenuPanel(this);
 		menuPanel.setPreferredSize(new Dimension(250, 700));
-		gameBoardPanel = new GameBoardPanel(2);
-		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
+		//gameBoardPanel = new GameBoardPanel(2);
+		//gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 	}
 
 	public static void main(String[] args) {
