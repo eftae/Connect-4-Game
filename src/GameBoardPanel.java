@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +33,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		gameMode = nHumans;
 
 		// setup the game panel
+		setPreferredSize(new Dimension(750, 700));
 		setLayout(new GridLayout(6, 7));
 		setBorder(new TitledBorder("Single Player Game"));
 		// setBackground(new Color(0, 128, 128));

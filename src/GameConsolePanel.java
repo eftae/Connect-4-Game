@@ -1,6 +1,3 @@
-/**
- * Class for menu. Calling corresponding function in the main.
- */
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,16 +11,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public class MenuPanel extends JPanel {
-
+public class GameConsolePanel extends JPanel {
 	private Connect4 mainGame;
 
-	public MenuPanel(Connect4 mainGame) {
+	public GameConsolePanel(Connect4 mainGame) {
 		this.mainGame = mainGame;
-		
+
 		setPreferredSize(new Dimension(250, 700));
 		setLayout(new GridBagLayout());
-		setBorder(new TitledBorder("Menu"));
+		setBorder(new TitledBorder("Consoles"));
 
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0.5;
@@ -80,24 +76,10 @@ public class MenuPanel extends JPanel {
 
 		});
 
-		// Button for Credits
-		gc.gridx = 0;
-		gc.gridy = 3;
-		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
-		JButton creditsButton = new JButton("  Credits", creditsButtonIcon);
-		creditsButton.setToolTipText("View the Development Team");
-		creditsButton.setFont(new Font("Arial", Font.PLAIN, 20));
-		add(creditsButton, gc);
-		creditsButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainGame.displayCredits();
-			}
-		});
 
 		// Button for Quit
 		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 3;
 		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
 		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
 		quitButton.setToolTipText("Exit the Game");

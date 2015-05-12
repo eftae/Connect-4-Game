@@ -3,12 +3,13 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Connect4 {
 
 	private JFrame mainFrame;
-	private MenuPanel menuPanel;
-	private GameBoardPanel gameBoardPanel;
+	private JPanel menuPanel;
+	private JPanel gameBoardPanel;
 
 	public Connect4() {
 		mainFrame = new JFrame("Connect 4");
@@ -20,9 +21,8 @@ public class Connect4 {
 
 		// create default panels
 		menuPanel = new MenuPanel(this);
-		menuPanel.setPreferredSize(new Dimension(250, 700));
 		gameBoardPanel = new GameBoardPanel(2);
-		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
+
 	}
 
 	public static void main(String[] args) {
@@ -38,6 +38,7 @@ public class Connect4 {
 	 * Method to display the main window
 	 */
 	private void display() {
+		mainFrame.getContentPane().removeAll();
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.WEST);
 		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.EAST);
 		mainFrame.pack();
@@ -49,7 +50,11 @@ public class Connect4 {
 		// Todo
 		Player p1 = new User();
 		Player p2 = new AIAlphaBeta(1);
-	
+
+		menuPanel = new GameConsolePanel(this);
+		gameBoardPanel = new GameBoardPanel(1);
+		display();
+
 	}
 
 	public void runTwoPlayersGame() {
@@ -59,6 +64,9 @@ public class Connect4 {
 
 		// GameEngine game = new GameEngine(p1, p2);
 		// game.runGame();
+		menuPanel = new GameConsolePanel(this);
+		gameBoardPanel = new GameBoardPanel(2);
+		display();
 	}
 
 	public void displayStatistic() {
