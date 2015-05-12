@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 public class PlayerWindow extends JFrame {
@@ -12,6 +13,8 @@ public class PlayerWindow extends JFrame {
 	private GameBoardPanel gameBoardPanel;
 	private GameStaticsPanel gameStatPanel;
 	private Connect4 mainGame;
+	
+	private JTextField msg;
 	
 	public  PlayerWindow(Connect4 mainGame, int playMode, String player){
 		super(player);
@@ -32,9 +35,14 @@ public class PlayerWindow extends JFrame {
 		GameMenuBar menu = new GameMenuBar (mainGame,this);
 		setJMenuBar(menu);
 		
-			
+		msg = new JTextField();
+		msg.setEditable(false);
+		getContentPane().add(msg,BorderLayout.SOUTH);
 	}
 	
-
+    public void setMsg(String s){
+    	msg.setText(s);
+    }
+        
 
 }

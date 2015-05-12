@@ -60,6 +60,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			p1 = new User();
 			p2 = new User();
 			gameMode = 1;
+			JOptionPane.showMessageDialog(null, "Player 1 goes first");
 			break;
 		default:
 			// setup for two AI
@@ -92,11 +93,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	public void runGame(PlayerWindow playWindow, Connect4 mainGame) {
+		Player currPlayer = g.getCurrPlayer();
+		
 		// run game if winner if not defined
 		for (int i = 0; i < gameMode; i++) {
 			if (g.getTurn() > MAX_TURN)
 				return;
-			Player currPlayer = g.getCurrPlayer();
+			currPlayer = g.getCurrPlayer();
 
 			// get player next move
 			if (currPlayer instanceof AI || currPlayer instanceof AIAlphaBeta)
@@ -129,8 +132,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				mainGame.setVisity(true);
 			}
 		}
-		// no winner
-		// System.out.println("Board Full, Game Over");
+		if(currPlayer.equals(p2))
+		    playerWindow.setMsg("Player 1 Turn");
+		else
+			playerWindow.setMsg("Player 2 Turn");
 	}
 
 	// @Override
