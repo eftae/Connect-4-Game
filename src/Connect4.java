@@ -1,4 +1,7 @@
 import java.awt.BorderLayout;
+import sun.audio.*;
+
+import java.io.*;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -11,6 +14,7 @@ public class Connect4 {
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
 	private GameBoardPanel gameBoardPanel;
+	//public BackgroundMusic backMusic = new BackgroundMusic();
 
 	public Connect4() {
 		mainFrame = new JFrame("Connect 4");
@@ -33,6 +37,7 @@ public class Connect4 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				mainWindow.display();
+				BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 			}
 		});
 	}

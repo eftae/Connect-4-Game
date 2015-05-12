@@ -92,6 +92,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// System.out.println(buttons.indexOf(e.getSource()));
+		ButtonSound.music("src/sound/button.wav"); 
 		if (!buttons.contains(e.getSource()))
 			return;
 		JButton pressed = (JButton) e.getSource();

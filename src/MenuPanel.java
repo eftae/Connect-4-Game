@@ -40,12 +40,15 @@ public class MenuPanel extends JPanel {
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
+				ButtonSound.music("src/sound/button.wav");
 				PlayerWindow singlePlayerWindow = new PlayerWindow(mainGame,1,"Single Player Game");
 				singlePlayerWindow.setVisible(true);
 				mainGame.setVisity(false);
 				
 				mainGame.runSinglePlayerGame();
+				BackgroundMusic.stopMusic();
+				BackgroundMusic.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
 			}
 		});
 
@@ -62,12 +65,14 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				ButtonSound.music("src/sound/button.wav");
 				PlayerWindow twoPlayerWindow = new PlayerWindow(mainGame,2,"Mutiple Player Game");
 				twoPlayerWindow.setVisible(true);
 				mainGame.setVisity(false);
-				
-				
+						
 				mainGame.runTwoPlayersGame();
+				BackgroundMusic.stopMusic();
+				BackgroundMusic.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
 			}
 
 		});
@@ -84,6 +89,7 @@ public class MenuPanel extends JPanel {
 		statisticButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ButtonSound.music("src/sound/button.wav");
 				mainGame.displayStatistic();
 			}
 
@@ -100,6 +106,7 @@ public class MenuPanel extends JPanel {
 		creditsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ButtonSound.music("src/sound/button.wav");
 				mainGame.displayCredits();
 			}
 		});
@@ -115,6 +122,7 @@ public class MenuPanel extends JPanel {
 		quitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ButtonSound.music("src/sound/button.wav");
 				System.exit(0);
 			}
 
