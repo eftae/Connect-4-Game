@@ -55,7 +55,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		case 1:
 			// setup for one player
 			p1 = new User();
-			p2 = new AI(1);
+			p2 = new AI(2);
 			gameMode = 2;
 			do {
 				name1 = JOptionPane.showInputDialog("Please enter your name: ");

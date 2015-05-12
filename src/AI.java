@@ -2,8 +2,9 @@
  * Class for the ALPHA BETA AI.
  * v0.2 many bugs fixed
  * v0.21 fixed the bug of turn number
+ * v0.22 set game modes
  * 
- * @version 0.2
+ * @version 0.22
  */
 
 import java.util.ArrayList;
@@ -25,12 +26,24 @@ public class AI implements Player {
 	}
 
 	public int decideMove(GameState currState) {
+		// setting difficulty
+		int depth = mode * 4 + 3;
+		switch (mode) {
+		case 0:
+			hAlgo = new H0();
+			break;
+		case 1:
+			hAlgo = new H1();
+			break;
+		case 2:
+			hAlgo = new H2();
+			break;
+		default:
+			hAlgo = new H0();
+		}
 
 		opponent = currState.getOtherPlayer();
-		hAlgo = new H1();
-
 		int nextMove = -1;
-		int depth = mode * 4 + 3;
 		HNode alpha = new HNode(Integer.MIN_VALUE, nextMove);
 		HNode beta = new HNode(Integer.MAX_VALUE, nextMove);
 
@@ -54,15 +67,15 @@ public class AI implements Player {
 	private HNode alphabeta(GameState state, int depth, HNode alpha, HNode beta) {
 		// check win/lose
 		if (state.getTurn() > 42) {
-			alpha.setValue(-30);
+			alpha.setValue(0);
 			return alpha;
 		}
 		if (state.getWinner() == this) {
-			alpha.setValue(100 << depth);
+			alpha.setValue(1000 << depth);
 			return alpha;
 		}
 		if (state.getWinner() == opponent) {
-			alpha.setValue(-100 << depth);
+			alpha.setValue(-1000 << depth);
 			return alpha;
 		}
 
