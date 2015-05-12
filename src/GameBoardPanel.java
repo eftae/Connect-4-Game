@@ -26,6 +26,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	Player p1;
 	Player p2;
 	int gameMode;
+	String name1;
+	String name2;
 
 	// for GUI player
 	int nextMove;
@@ -54,22 +56,36 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			p1 = new User();
 			p2 = new AIAlphaBeta(0);
 			gameMode = 2;
+			do{
+			    name1 = JOptionPane.showInputDialog("Please enter your name: ");
+			} while(name1.length() == 0);
+			JOptionPane.showMessageDialog(null,"Welcome to the Connect 4, "+name1);
+			name2 = "Alpha Beta AI";
 			break;
 		case 2:
 			// setup for two player
 			p1 = new User();
 			p2 = new User();
 			gameMode = 1;
-			JOptionPane.showMessageDialog(null, "Player 1 goes first");
+			do{
+			    name1 = JOptionPane.showInputDialog("Please enter your name for player 1");
+			} while(name1.length() == 0);
+			do{
+			    name2 = JOptionPane.showInputDialog("Please enter your name for player 2");
+			} while(name2.length() == 0);
+			JOptionPane.showMessageDialog(null,"Welcome to the Connect 4, "+name1+" and "+ name2);
 			break;
 		default:
 			// setup for two AI
 			p1 = new AIAlphaBeta(0);
 			p2 = new AIAlphaBeta(0);
 			gameMode = MAX_TURN;
+			name1 = "Alpha Beta AI 1";
+			name2 = "Alpha Beta AI 2";
 			runGame(playerWindow, mainGame);
 		}
-
+		if(nHumans == 2)
+			JOptionPane.showMessageDialog(null,name1+" goes first");
 		g = new GameState(p1, p2);
 	}
 
@@ -97,8 +113,11 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		
 		// run game if winner if not defined
 		for (int i = 0; i < gameMode; i++) {
-			if (g.getTurn() > MAX_TURN)
-				return;
+			if (g.getTurn() > MAX_TURN){
+				JOptionPane.showMessageDialog(null, "Game Over");
+				playerWindow.dispose ();
+				mainGame.setVisity(true);
+			}
 			currPlayer = g.getCurrPlayer();
 
 			// get player next move
@@ -123,19 +142,21 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			// check winner
 			Player me = g.getWinner();
 			if (me == p1) {
-				JOptionPane.showMessageDialog(null, "Player 1 win");
+				JOptionPane.showMessageDialog(null, name1+" win");
 				playerWindow.dispose();
 				mainGame.setVisity(true);
 			} else if (me == p2) {
-				JOptionPane.showMessageDialog(null, "Player 2 (AI) win");
+				JOptionPane.showMessageDialog(null, name2+" win");
 				playerWindow.dispose ();
 				mainGame.setVisity(true);
 			}
 		}
-		if(currPlayer.equals(p2))
-		    playerWindow.setMsg("Player 1 Turn");
-		else
-			playerWindow.setMsg("Player 2 Turn");
+		if(gameMode == 1){
+			if(currPlayer.equals(p2))
+			    playerWindow.setMsg(name1 + "'s Turn");
+			else
+				playerWindow.setMsg(name2 + "'s Turn");
+		}
 	}
 
 	// @Override
