@@ -143,10 +143,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			Player me = g.getWinner();
 			if (me == p1) {
 				JOptionPane.showMessageDialog(null, name1+" win");
+				playerWindow.setVisible(false);
 				playerWindow.dispose();
 				mainGame.setVisity(true);
 			} else if (me == p2) {
 				JOptionPane.showMessageDialog(null, name2+" win");
+				playerWindow.setVisible(false);
 				playerWindow.dispose ();
 				mainGame.setVisity(true);
 			}
