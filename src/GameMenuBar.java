@@ -14,9 +14,9 @@ import javax.swing.JMenuItem;
 public class GameMenuBar extends JMenuBar {
 	
 	private Connect4 mainGame;
-	private SinglePlayerWindow psw;
+	private PlayerWindow psw;
 	
-	public GameMenuBar(final Connect4 mainGame, final SinglePlayerWindow psw) {
+	public GameMenuBar(final Connect4 mainGame, final PlayerWindow psw) {
 		
 			this.mainGame = mainGame;
 			this.psw = psw;

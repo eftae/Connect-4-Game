@@ -7,22 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-public class SinglePlayerWindow extends JFrame {
+public class PlayerWindow extends JFrame {
 	
 	private GameBoardPanel gameBoardPanel;
 	private GameStaticsPanel gameStatPanel;
 	private Connect4 mainGame;
 	
-	public SinglePlayerWindow(Connect4 mainGame) {
-		
-		super ("Single Player Game");
+	public  PlayerWindow(Connect4 mainGame, int playMode, String player){
+		super(player);
 		this.mainGame = mainGame;		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(900, 700);	
 		//add(new JLabel(new ImageIcon("src/pics/pic.png")));
 		setLocationRelativeTo(null);
 		setResizable(false);
-		gameBoardPanel = new GameBoardPanel(2);
+		gameBoardPanel = new GameBoardPanel(playMode);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.WEST);
 		

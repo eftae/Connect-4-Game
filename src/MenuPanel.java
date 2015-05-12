@@ -40,8 +40,8 @@ public class MenuPanel extends JPanel {
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				SinglePlayerWindow singlePlayerWindow = new SinglePlayerWindow(mainGame);
+
+				PlayerWindow singlePlayerWindow = new PlayerWindow(mainGame,1,"Single Player Game");
 				singlePlayerWindow.setVisible(true);
 				mainGame.setVisity(false);
 				
@@ -61,6 +61,12 @@ public class MenuPanel extends JPanel {
 		twoPlayersButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				PlayerWindow twoPlayerWindow = new PlayerWindow(mainGame,2,"Mutiple Player Game");
+				twoPlayerWindow.setVisible(true);
+				mainGame.setVisity(false);
+				
+				
 				mainGame.runTwoPlayersGame();
 			}
 
