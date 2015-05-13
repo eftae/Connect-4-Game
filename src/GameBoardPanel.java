@@ -18,9 +18,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/blueDot.jpeg"), 100, 100);
+			"src/pics/blueDot.png"), 100, 100);
 	ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/yellowDot.jpeg"), 100, 100);
+			"src/pics/yellowDot.png"), 100, 100);
 
 	GameState g;
 	Player p1;
