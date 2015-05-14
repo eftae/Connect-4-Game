@@ -21,28 +21,26 @@ public class GameState {
 	private final int ROW_MAX = 6;
 
 	private Player[][] board;
-	private Player[] players;
 	private Player currPlayer;
+	private Player nextPlayer;
 	private Player winner;
 	private int turn;
 
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
-		players = new Player[2];
-		players[0] = firstPlayer;
-		players[1] = secondPlayer;
 		currPlayer = firstPlayer;
+		nextPlayer = secondPlayer;
 		turn = 1;
 	}
 
 	/**
 	 * Constructor for cloning.
 	 */
-	public GameState(Player[][] board, Player[] players, Player currPlayer,
+	public GameState(Player[][] board, Player currPlayer, Player nextPlayer,
 			Player winner, int turn) {
 		this.board = board;
-		this.players = players;
 		this.currPlayer = currPlayer;
+		this.nextPlayer = nextPlayer;
 		this.winner = winner;
 		this.turn = turn;
 	}
@@ -144,10 +142,7 @@ public class GameState {
 	}
 
 	public Player getOtherPlayer() {
-		if (currPlayer.equals(players[0]))
-			return players[1];
-		else
-			return players[0];
+		return nextPlayer;
 	}
 
 	public int getAvailableRow(int col) {
@@ -162,7 +157,9 @@ public class GameState {
 	}
 
 	public void setCurrPlayer(Player p) {
+		Player temp = currPlayer;
 		currPlayer = p;
+		nextPlayer = temp;
 	}
 
 	public Player getCurrPlayer() {
@@ -191,8 +188,8 @@ public class GameState {
 
 	@Override
 	public GameState clone() {
-		GameState cloneState = new GameState(getBoard(), players, currPlayer,
-				winner, turn);
+		GameState cloneState = new GameState(getBoard(), currPlayer,
+				nextPlayer, winner, turn);
 		return cloneState;
 	}
 }

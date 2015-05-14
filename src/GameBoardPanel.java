@@ -37,6 +37,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public GameBoardPanel(int playMode, PlayerWindow playerWindow,
 			Connect4 mainFrame) {
+		gameEngine = mainFrame.getGameEngine();
+		gameEngine.suspendGame();
+
 		this.playMode = playMode;
 		this.playerWindow = playerWindow;
 		this.mainFrame = mainFrame;
@@ -61,7 +64,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		// setup new game
-		gameEngine = mainFrame.getGameEngine();
 
 		String name1 = null;
 		String name2 = null;
@@ -99,8 +101,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			break;
 		default:
 			setBorder(new TitledBorder("Simulation"));
-			player1 = new AI("BOT A", 2);
-			player2 = new AI("BOT B", 2);
+			player1 = new AI("BOT A", 1);
+			player2 = new AI("BOT B", 1);
 		}
 
 		gameEngine.startNewGame(player1, player2, this); // Initialize engine
@@ -111,7 +113,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		JButton pressed = (JButton) e.getSource();
 		Player currPlayer = gameEngine.getCurrPlayer();
 
-		if (currPlayer instanceof User && buttons.contains(pressed)) {
+		if (currPlayer instanceof User && buttons.contains(e.getSource())) {
 			User currUser = (User) currPlayer;
 			if (!currUser.isReady()) {
 				int nextMove = buttons.indexOf(pressed) % 7;
@@ -135,21 +137,24 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	public void displayEndGame(Player winner) {
+		if (playMode == 0)
+			return;
 		if (winner != null) {
 			JOptionPane.showMessageDialog(null, winner.getName() + " win");
 		} else {
 			JOptionPane.showMessageDialog(null, "Board Full, Game Over");
 		}
 
-		playerWindow.setVisible(false);
-		playerWindow.dispose();
-		mainFrame.setVisity(true);
+		// Todo: use restart button or return home button instead
 
-		player1 = new AI("BOT A", 2);
-		player2 = new AI("BOT B", 2);
+		// playerWindow.setVisible(false);
+		// playerWindow.dispose();
+		// mainFrame.setVisity(true);
 
-		gameEngine
-				.startNewGame(player1, player2, mainFrame.getGameBoardPanel());
+		// player1 = new AI("BOT A", 2);
+		// player2 = new AI("BOT B", 2);
+		// gameEngine.startNewGame(player1, player2,
+		// mainFrame.getGameBoardPanel());
 	}
 
 }

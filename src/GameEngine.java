@@ -27,7 +27,7 @@ public class GameEngine implements Runnable {
 		// delay thread to wait game started
 		while (true) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
@@ -39,27 +39,32 @@ public class GameEngine implements Runnable {
 				// get next move of current player
 				int nextMove = currPlayer.decideMove(currState.clone());
 
-				if (currState.isValidMove(nextMove)) {
+				//check isInGame to avoid AI delay while screen jumping
+				if (isInGame && currState.isValidMove(nextMove)) {
 					int row = currState.runNextMove(nextMove);
 					// increment turn
 					currState.incTurn();
 					if (currPlayer == player1) {
 						currState.setCurrPlayer(player2);
-						// diaplay disc dropped
+						// display disc dropped
 						gameBoardPanel.displayDisc(nextMove, row, 0);
 					} else {
 						currState.setCurrPlayer(player1);
 						gameBoardPanel.displayDisc(nextMove, row, 1);
 					}
-				}
 
-				// check game end and winner
-				if (currState.checkGameEnd()) {
-					// isInGame = false;
-					gameBoardPanel.displayEndGame(currState.getWinner());
+					// check game end and winner
+					if (currState.checkGameEnd()) {
+						isInGame = false;
+						gameBoardPanel.displayEndGame(currState.getWinner());
+					}
 				}
 			}
 		}
+	}
+
+	public void suspendGame() {
+		isInGame = false;
 	}
 
 	public GameState getCurrState() {
