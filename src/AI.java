@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class AI implements Player {
+	private String name;
 	private int mode;
 	private Player opponent;
 	private HeuristicAlgorithm hAlgo;
@@ -21,7 +22,8 @@ public class AI implements Player {
 	 * @param mode
 	 *            three difficulty
 	 */
-	public AI(int mode) {
+	public AI(String name, int mode) {
+		this.name = name;
 		this.mode = mode;
 	}
 
@@ -188,5 +190,9 @@ public class AI implements Player {
 			nextMove = rand.nextInt(7);
 		}
 		return nextMove;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

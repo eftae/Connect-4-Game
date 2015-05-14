@@ -6,5 +6,6 @@
  */
 
 public interface Player {
+	public String getName();
 	public int decideMove(GameState currState);
 }

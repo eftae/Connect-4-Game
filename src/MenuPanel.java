@@ -15,10 +15,10 @@ import javax.swing.border.TitledBorder;
 
 public class MenuPanel extends JPanel {
 
-	private Connect4 mainGame;
+	private Connect4 mainFrame;
 
 	public MenuPanel(Connect4 mainFrame) {
-		this.mainGame = mainFrame;
+		this.mainFrame = mainFrame;
 
 		setLayout(new GridBagLayout());
 		setBorder(new TitledBorder("New Game"));
@@ -40,15 +40,16 @@ public class MenuPanel extends JPanel {
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ButtonSound.music("src/sound/button.wav");
-				PlayerWindow singlePlayerWindow = new PlayerWindow(mainGame,1,"Single Player Game");
+				PlayerWindow singlePlayerWindow = new PlayerWindow(mainFrame,
+						1, "Single Player Game");
 				singlePlayerWindow.setVisible(true);
-				mainGame.setVisity(false);
-				
-				mainGame.runSinglePlayerGame();
+				mainFrame.setVisity(false);
+
 				BackgroundMusic.stopMusic();
-				BackgroundMusic.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
+				BackgroundMusic
+						.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
 			}
 		});
 
@@ -64,13 +65,13 @@ public class MenuPanel extends JPanel {
 		twoPlayersButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ButtonSound.music("src/sound/button.wav");
-				PlayerWindow twoPlayerWindow = new PlayerWindow(mainGame,2,"Mutiple Player Game");
+				PlayerWindow twoPlayerWindow = new PlayerWindow(mainFrame, 2,
+						"Mutiple Player Game");
 				twoPlayerWindow.setVisible(true);
-				mainGame.setVisity(false);
-						
-				mainGame.runTwoPlayersGame();
+				mainFrame.setVisity(false);
+
 				BackgroundMusic.stopMusic();
 				BackgroundMusic.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
 			}
@@ -90,7 +91,7 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonSound.music("src/sound/button.wav");
-				mainGame.displayStatistic();
+				mainFrame.displayStatistic();
 			}
 
 		});
@@ -107,7 +108,7 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonSound.music("src/sound/button.wav");
-				mainGame.displayCredits();
+				mainFrame.displayCredits();
 			}
 		});
 
