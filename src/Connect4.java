@@ -30,8 +30,8 @@ public class Connect4 implements Runnable {
 		menuPanel.setPreferredSize(new Dimension(250, 700));
 
 		// game board panel
-		// gameBoardPanel = new GameBoardPanel(0, null, this);
-		// gameBoardPanel.setPreferredSize(new Dimension(750, 700));
+		gameBoardPanel = new GameBoardPanel(0, null, this);
+		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 
 	}
 
@@ -54,7 +54,7 @@ public class Connect4 implements Runnable {
 	 */
 	private void display() {
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST); // better?
-		// mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.EAST);
+		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.WEST);
 		mainFrame.pack();
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
@@ -74,6 +74,10 @@ public class Connect4 implements Runnable {
 
 	public GameEngine getGameEngine() {
 		return gameEngine;
+	}
+
+	public GameBoardPanel getGameBoardPanel() {
+		return gameBoardPanel;
 	}
 
 	@Override

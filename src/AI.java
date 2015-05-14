@@ -17,7 +17,7 @@ public class AI implements Player {
 	private HeuristicAlgorithm hAlgo;
 
 	/**
-	 * Three modes suggested, 0:Basic 1: Medium, 2: Difficult, 3: Extreme.
+	 * Three modes suggested, 0:Basic 1: Medium, 2: Difficult.
 	 * 
 	 * @param mode
 	 *            three difficulty
@@ -25,6 +25,10 @@ public class AI implements Player {
 	public AI(String name, int mode) {
 		this.name = name;
 		this.mode = mode;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public int decideMove(GameState currState) {
@@ -155,7 +159,7 @@ public class AI implements Player {
 		} else {
 			state.setCurrPlayer(this);
 		}
-		state.nTurnPlusPlus();
+		state.incTurn();
 		state.checkGameEnd();
 	}
 
@@ -183,7 +187,7 @@ public class AI implements Player {
 	 * @param currState
 	 * @return next column move
 	 */
-	public int modeRandom(GameState currState) {
+	private int modeRandom(GameState currState) {
 		Random rand = new Random();
 		int nextMove = rand.nextInt(7);
 		while (!currState.isValidMove(nextMove)) {
@@ -192,7 +196,4 @@ public class AI implements Player {
 		return nextMove;
 	}
 
-	public String getName() {
-		return name;
-	}
 }

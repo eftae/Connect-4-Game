@@ -1,24 +1,22 @@
 /**
- * Handle the state of a game
- * v0.11 added clone()
- * v0.12 modified 
+ * Handle the state of a game v0.11 added clone() v0.12 modified
  * 
  * @version v0.12
  */
 
-
 // our board representation
-//     
-//            7 columns
-//           0 1 2 3 4 5 6
-//        5 | | | | | | | |
-//        4 | | | | | | | |
+//
+// 7 columns
+// 0 1 2 3 4 5 6
+// 5 | | | | | | | |
+// 4 | | | | | | | |
 // 6 rows 3 | | | | | | | |
-//        2 | | | | | | | |
-//        1 | | | | | | | |
-//        0 | | | | | | | |
+// 2 | | | | | | | |
+// 1 | | | | | | | |
+// 0 | | | | | | | |
 
 public class GameState {
+	private final int MAX_TURN = 42;
 	private final int COL_MAX = 7;
 	private final int ROW_MAX = 6;
 
@@ -26,7 +24,7 @@ public class GameState {
 	private Player[] players;
 	private Player currPlayer;
 	private Player winner;
-	private int nTurn;
+	private int turn;
 
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
@@ -34,19 +32,19 @@ public class GameState {
 		players[0] = firstPlayer;
 		players[1] = secondPlayer;
 		currPlayer = firstPlayer;
-		nTurn = 1;
+		turn = 1;
 	}
 
 	/**
 	 * Constructor for cloning.
 	 */
 	public GameState(Player[][] board, Player[] players, Player currPlayer,
-			Player winner, int nTurn) {
+			Player winner, int turn) {
 		this.board = board;
 		this.players = players;
 		this.currPlayer = currPlayer;
 		this.winner = winner;
-		this.nTurn = nTurn;
+		this.turn = turn;
 	}
 
 	/**
@@ -68,7 +66,7 @@ public class GameState {
 	 * 
 	 * @return the player connects 4 discs, winner
 	 */
-	public void checkGameEnd() {
+	public boolean checkGameEnd() {
 
 		// check vertical
 		for (int c = 0; c < COL_MAX; c++) {
@@ -78,7 +76,7 @@ public class GameState {
 						&& curr.equals(board[c][r + 2])
 						&& curr.equals(board[c][r + 3])) {
 					winner = curr;
-					return;
+					return true;
 				}
 			}
 		}
@@ -91,7 +89,7 @@ public class GameState {
 						&& curr.equals(board[c + 2][r])
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
-					return;
+					return true;
 				}
 			}
 
@@ -102,7 +100,7 @@ public class GameState {
 						&& curr.equals(board[c + 2][r + 2])
 						&& curr.equals(board[c + 3][r + 3])) {
 					winner = curr;
-					return;
+					return true;
 				}
 
 				// check diagonals: \
@@ -111,10 +109,18 @@ public class GameState {
 						&& curr.equals(board[c + 2][r + 1])
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
-					return;
+					return true;
 				}
 			}
 		}
+
+		// check turn number
+		// check only if no winner on 42
+		if (turn == MAX_TURN + 1) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -143,11 +149,6 @@ public class GameState {
 		else
 			return players[0];
 	}
-	
-	public void swapPlayer(){
-		if (currPlayer.equals(players[0])) currPlayer = players[1];
-		else currPlayer = players[0];
-	}
 
 	public int getAvailableRow(int col) {
 		for (int r = 0; r < ROW_MAX; r++)
@@ -169,11 +170,11 @@ public class GameState {
 	}
 
 	public int getTurn() {
-		return nTurn;
+		return turn;
 	}
 
-	public void nTurnPlusPlus() {
-		nTurn++;
+	public void incTurn() {
+		turn++;
 	}
 
 	/**
@@ -191,7 +192,7 @@ public class GameState {
 	@Override
 	public GameState clone() {
 		GameState cloneState = new GameState(getBoard(), players, currPlayer,
-				winner, nTurn);
+				winner, turn);
 		return cloneState;
 	}
 }

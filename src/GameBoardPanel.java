@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,7 +46,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		setOpaque(true);
 		setBackground(bkgdColor);
 		setLayout(new GridLayout(6, 7));
-		setBorder(new TitledBorder("Single Player Game"));
 
 		// setup discs space
 		for (int i = 0; i < 42; i++) {
@@ -56,40 +56,54 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			b.setIcon(whiteDisc);
 			buttons.add(b);
 			add(b);
-			b.addActionListener(this);
+			if (playMode != 0)
+				b.addActionListener(this);
 		}
 
 		// setup new game
 		gameEngine = mainFrame.getGameEngine();
 
-		String player1Name = null;
-		String player2Name = null;
+		String name1 = null;
+		String name2 = null;
+		Random rand = new Random();
+		int randPlayer = rand.nextInt(2);
 		switch (playMode) {
 		case 1:
-			// setup for one player
-			player1Name = JOptionPane
-					.showInputDialog("Please enter your name: ");
-			player1 = new User(player1Name);
-			player2 = new AI("BOT", 1);
+			setBorder(new TitledBorder("Single Player Game"));
+			name1 = JOptionPane.showInputDialog("Please enter your name: ");
+			if (randPlayer == 0) {
+				player1 = new User(name1);
+				player2 = new AI("BOT", 1);
+			} else {
+				player1 = new AI("BOT", 1);
+				player2 = new User(name1);
+			}
+			JOptionPane.showMessageDialog(null, player1.getName()
+					+ " goes first.");
 			break;
 		case 2:
-			// setup for two player
-			player1Name = JOptionPane
-					.showInputDialog("Please enter your name for player 1");
-			player2Name = JOptionPane
-					.showInputDialog("Please enter your name for player 2");
-			player1 = new User(player1Name);
-			player2 = new User(player2Name);
-			JOptionPane.showMessageDialog(null, player1Name + " goes first");
+			setBorder(new TitledBorder("Double Players Game"));
+			name1 = JOptionPane
+					.showInputDialog("Please enter your name for player 1: ");
+			name2 = JOptionPane
+					.showInputDialog("Please enter your name for player 2: ");
+			if (randPlayer == 0) {
+				player1 = new User(name1);
+				player2 = new User(name2);
+			} else {
+				player1 = new User(name2);
+				player2 = new User(name1);
+			}
+			JOptionPane.showMessageDialog(null, player1.getName()
+					+ " goes first.");
 			break;
 		default:
-			// setup for two AI
-			player1 = new AI("BOT A", 1);
-			player2 = new AI("BOT B", 1);
+			setBorder(new TitledBorder("Simulation"));
+			player1 = new AI("BOT A", 2);
+			player2 = new AI("BOT B", 2);
 		}
 
-		// start new game
-		gameEngine.startNewGame(player1, player2, this);
+		gameEngine.startNewGame(player1, player2, this); // Initialize engine
 	}
 
 	@Override
@@ -100,13 +114,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		if (currPlayer instanceof User && buttons.contains(pressed)) {
 			User currUser = (User) currPlayer;
 			if (!currUser.isReady()) {
-				GameState gameState = gameEngine.getCurrState();
 				int nextMove = buttons.indexOf(pressed) % 7;
-				if (gameState.isValidMove(nextMove)) {
-					int row = gameState.runNextMove(nextMove);
+				if (gameEngine.isValidMove(nextMove)) {
 					currUser.userInputReady(nextMove);
 					ButtonSound.music("src/sound/button.wav");
-					checkEndGame(gameState);
 					return;
 				}
 			}
@@ -114,40 +125,31 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		// Todo: play invalid effect
 	}
 
-	private void checkEndGame(GameState gameState) {
-		gameState.checkGameEnd();
-		Player winner = gameState.getWinner();
+	public void displayDisc(int col, int row, int colorId) {
+		int btnID = (5 - row) * 7 + col;
+		JButton b = buttons.get(btnID);
+		if (colorId == 0)
+			b.setIcon(icn1);
+		else
+			b.setIcon(icn2);
+	}
+
+	public void displayEndGame(Player winner) {
 		if (winner != null) {
 			JOptionPane.showMessageDialog(null, winner.getName() + " win");
-			playerWindow.setVisible(false);
-			playerWindow.dispose();
-			mainFrame.setVisity(true);
-			return;
-		} else if (gameState.getTurn() >= 42) {
+		} else {
 			JOptionPane.showMessageDialog(null, "Board Full, Game Over");
-			playerWindow.setVisible(false);
-			playerWindow.dispose();
-			mainFrame.setVisity(true);
 		}
+
+		playerWindow.setVisible(false);
+		playerWindow.dispose();
+		mainFrame.setVisity(true);
+
+		player1 = new AI("BOT A", 2);
+		player2 = new AI("BOT B", 2);
+
+		gameEngine
+				.startNewGame(player1, player2, mainFrame.getGameBoardPanel());
 	}
 
-	public void setButton(int col, int row, int colorId) {
-		JButton b = buttons.get(colRowToBtnId(col, row));
-		if (colorId == 0)
-			b.setIcon(icn1);
-		else
-			b.setIcon(icn2);
-	}
-
-	private void setButton(int btnId, int colorId) {
-		JButton b = buttons.get(btnId);
-		if (colorId == 0)
-			b.setIcon(icn1);
-		else
-			b.setIcon(icn2);
-	}
-
-	private int colRowToBtnId(int col, int row) {
-		return (5 - row) * 7 + col;
-	}
 }

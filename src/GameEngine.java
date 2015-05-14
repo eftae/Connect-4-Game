@@ -1,22 +1,17 @@
 /**
  * Main game engine. v0.1 basic game with command line in/out. v0.11 added
- * displayBoard(), bugs fixed
+ * displayBoard(), bugs fixed. v0.2 multithreads.
  * 
- * @version v0.11
+ * @version v0.2
  */
 
 public class GameEngine implements Runnable {
-	private final int MAX_TURN = 42;
 
 	private GameState currState;
 	private Player player1;
 	private Player player2;
-	private boolean isInGame;
+	private boolean isInGame; // game is in run
 	private GameBoardPanel gameBoardPanel;
-
-	public GameEngine() {
-		isInGame = false;
-	}
 
 	public void startNewGame(Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
@@ -27,52 +22,42 @@ public class GameEngine implements Runnable {
 		isInGame = true;
 	}
 
-	/**
-	 * Run a game. Should be run once only for one instance.
-	 */
 	@Override
 	public void run() {
-		Player currPlayer;
-		int nextMove;
-
-		// delay thread to wait
-		while (!isInGame) {
-			System.out.println(isInGame);
+		// delay thread to wait game started
+		while (true) {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
-		}
 
-		// start game run
-		while (isInGame) {
-			displayBoard();
+			// start game run
+			while (isInGame) {
+				Player currPlayer = currState.getCurrPlayer();
 
-			currPlayer = currState.getCurrPlayer();
+				// get next move of current player
+				int nextMove = currPlayer.decideMove(currState.clone());
 
-			// get next move of current player
-			nextMove = currPlayer.decideMove(currState.clone());
+				if (currState.isValidMove(nextMove)) {
+					int row = currState.runNextMove(nextMove);
+					// increment turn
+					currState.incTurn();
+					if (currPlayer == player1) {
+						currState.setCurrPlayer(player2);
+						// diaplay disc dropped
+						gameBoardPanel.displayDisc(nextMove, row, 0);
+					} else {
+						currState.setCurrPlayer(player1);
+						gameBoardPanel.displayDisc(nextMove, row, 1);
+					}
+				}
 
-			if (currState.isValidMove(nextMove)) {
-				int row = currState.runNextMove(nextMove);
-				gameBoardPanel
-						.setButton(nextMove, row, currState.getTurn() % 2);
-			}
-
-			// increment turn
-			currState.nTurnPlusPlus();
-			if (currPlayer == player1)
-				currState.setCurrPlayer(player2);
-			else
-				currState.setCurrPlayer(player1);
-
-			// check game end and winner
-			currState.checkGameEnd();
-			Player winner = currState.getWinner();
-			if (winner != null || currState.getTurn() >= MAX_TURN) {
-				displayBoard();
-				isInGame = false;
+				// check game end and winner
+				if (currState.checkGameEnd()) {
+					// isInGame = false;
+					gameBoardPanel.displayEndGame(currState.getWinner());
+				}
 			}
 		}
 	}
@@ -85,28 +70,7 @@ public class GameEngine implements Runnable {
 		return currState.getCurrPlayer();
 	}
 
-	/**
-	 * Display board in command line view.
-	 */
-	private void displayBoard() {
-		System.out.println("    Turn " + currState.getTurn());
-		System.out.println("-----------------");
-		for (int r = 5; r >= 0; r--) {
-			System.out.print("| ");
-			for (int c = 0; c < 7; c++) {
-				Player p = currState.getLocation(c, r);
-				if (p == player1) {
-					System.out.print("O ");
-				} else if (p == player2) {
-					System.out.print("X ");
-				} else {
-					System.out.print("  ");
-				}
-			}
-			System.out.println("|");
-		}
-		System.out.println("-----------------");
-		System.out.println();
+	public boolean isValidMove(int move) {
+		return currState.isValidMove(move);
 	}
-
 }
