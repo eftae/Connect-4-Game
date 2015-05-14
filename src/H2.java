@@ -1,11 +1,11 @@
 /**
  * Heuristic for alpha-beta search. Considering number of empty slot connects to
- * 3 consecutive discs.
+ * 3 consecutive discs and any of those two empty slots connect together.
  * 
- * @version v0.1
  */
 
-public class H1 implements HeuristicAlgorithm {
+public class H2 implements HeuristicAlgorithm {
+	int[] connect3;
 
 	public int h(GameState state) {
 
@@ -13,6 +13,8 @@ public class H1 implements HeuristicAlgorithm {
 
 		// sequence of 3
 		for (int c = 0; c < 7; c++) {
+			connect3 = new int[6];
+
 			for (int r = 0; r < 6; r++) {
 				if (state.getLocation(c, r) == null) {
 					// bottom
@@ -45,9 +47,18 @@ public class H1 implements HeuristicAlgorithm {
 							h += evalThreeSlots(state, c, r, 1, 1);
 						}
 					}
+				}
 
+				if (r > 0) {
+					if (connect3[r] == 1 && connect3[r] == connect3[r - 1]) {
+						h += 1000;
+					} else if (connect3[r] == 2
+							&& connect3[r] == connect3[r - 1]) {
+						h -= 1000;
+					}
 				}
 			}
+
 		}
 
 		return h;
@@ -60,7 +71,8 @@ public class H1 implements HeuristicAlgorithm {
 		if (state.getLocation(c + dc, r + dr) == oppo
 				&& state.getLocation(c + dc * 2, r + dr * 2) == oppo
 				&& state.getLocation(c + dc * 3, r + dr * 3) == oppo) {
-			return -99;
+			connect3[r] = 2;
+			return -10;
 		}
 
 		Player curr = state.getCurrPlayer();
@@ -68,6 +80,7 @@ public class H1 implements HeuristicAlgorithm {
 		if (state.getLocation(c + dc, r + dr) == curr
 				&& state.getLocation(c + dc * 2, r + dr * 2) == curr
 				&& state.getLocation(c + dc * 3, r + dr * 3) == curr) {
+			connect3[r] = 1;
 			return 1;
 		}
 

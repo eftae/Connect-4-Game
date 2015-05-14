@@ -56,7 +56,7 @@ public class Connect4 {
 	public void runSinglePlayerGame() {
 		// Todo
 		Player p1 = new User();
-		Player p2 = new AIAlphaBeta(1);
+		Player p2 = new AI(1);
 	
 	}
 
