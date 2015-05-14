@@ -1,9 +1,13 @@
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -13,20 +17,25 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class GameBoardPanel extends JPanel implements ActionListener {
-
+	private static final Color BACKGROUND      = Color.black;
+    private static final Color BACKGROUND_2    = Color.WHITE;
+	
+	
+	
 	private final int MAX_TURN = 42;
 	private PlayerWindow playerWindow;
 	private Connect4 mainGame;
 
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/blueDot.png"), 100, 100);
+			"src/pics/redDot.png"), 100, 100);
 	ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowDot.png"), 100, 100);
+	ImageIcon whiteDisc = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/whiteDot.png"), 100, 100);
 	
-	Image bkgd = new ImageIcon("/src/pics/bkgd.png").getImage();
 	
-
+	
 	GameState g;
 	Player p1;
 	Player p2;
@@ -39,6 +48,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public GameBoardPanel(int nHumans, PlayerWindow playerWindow,
 			Connect4 mainGame) {
+		Color bkgdColor = new Color(27,120,236);
+		this.setOpaque(true);
+        this.setBackground(bkgdColor);
+		
 		gameMode = nHumans;
 		this.playerWindow = playerWindow;
 		this.mainGame = mainGame;
@@ -49,13 +62,15 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 		// setup every buttons
 		for (int i = 0; i < 42; i++) {
-			buttons.add(new JButton());
-			buttons.get(i).setOpaque(false);
-			buttons.get(i).setContentAreaFilled(false);
-			buttons.get(i).setBorderPainted(false);
-			buttons.get(i).setBackground(Color.WHITE);
-			add(buttons.get(i));
-			buttons.get(i).addActionListener(this);
+			JButton b = new JButton();
+			b.setOpaque(false);
+			b.setContentAreaFilled(false);
+			b.setBorderPainted(false);
+			//buttons.get(i).setBackground(Color.WHITE);
+			b.setIcon(whiteDisc);
+			buttons.add(b);
+			add(b);
+			b.addActionListener(this);
 		}
 
 		// setup the game
@@ -183,12 +198,4 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	private int colRowToBtnId(int col, int row) {
 		return (5 - row) * 7 + col;
 	}
-	
-//	@Override
-//	protected void paintComponent (Graphics g){
-//	      super.paintComponent(g);
-//	      
-//	      g.drawImage(bkgd,0,0,getWidth(),getHeight(),null);
-//	      g.dispose();
-//	}
 }
