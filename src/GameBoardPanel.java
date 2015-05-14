@@ -1,5 +1,7 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			"src/pics/blueDot.png"), 100, 100);
 	ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowDot.png"), 100, 100);
+	
+	Image bkgd = new ImageIcon("/src/pics/bkgd.png").getImage();
+	
 
 	GameState g;
 	Player p1;
@@ -178,4 +183,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	private int colRowToBtnId(int col, int row) {
 		return (5 - row) * 7 + col;
 	}
+	
+//	@Override
+//	protected void paintComponent (Graphics g){
+//	      super.paintComponent(g);
+//	      
+//	      g.drawImage(bkgd,0,0,getWidth(),getHeight(),null);
+//	      g.dispose();
+//	}
 }
