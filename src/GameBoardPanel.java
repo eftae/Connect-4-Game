@@ -1,13 +1,7 @@
 import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -37,8 +31,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public GameBoardPanel(int playMode, PlayerWindow playerWindow,
 			Connect4 mainFrame) {
-		gameEngine = mainFrame.getGameEngine();
-		gameEngine.suspendGame();
 
 		this.playMode = playMode;
 		this.playerWindow = playerWindow;
@@ -60,52 +52,67 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			buttons.add(b);
 			add(b);
 			if (playMode != 0)
-				b.addActionListener(this);
+				b.addActionListener(this);// not for simulation
 		}
 
 		// setup new game
+		gameEngine = mainFrame.getGameEngine();
+		switch (playMode) {
+		case 1:
+			initSinglePlayerGame();
+			break;
+		case 2:
+			initDoublePlayersGame();
+			break;
+		default:
+			initSimulationGame();
+		}
 
+	}
+
+	private void initSinglePlayerGame() {
+		String name1 = null;
+		Random rand = new Random();
+		int randPlayer = rand.nextInt(2);
+		setBorder(new TitledBorder("Single Player Game"));
+		name1 = JOptionPane.showInputDialog("Please enter your name: ");
+		if (randPlayer == 0) {
+			player1 = new User(name1);
+			player2 = new AI("BOT", 1);
+		} else {
+			player1 = new AI("BOT", 1);
+			player2 = new User(name1);
+		}
+		JOptionPane.showMessageDialog(null, player1.getName() + " goes first.");
+		gameEngine.startNewGame(player1, player2, this);
+	}
+
+	private void initDoublePlayersGame() {
 		String name1 = null;
 		String name2 = null;
 		Random rand = new Random();
 		int randPlayer = rand.nextInt(2);
-		switch (playMode) {
-		case 1:
-			setBorder(new TitledBorder("Single Player Game"));
-			name1 = JOptionPane.showInputDialog("Please enter your name: ");
-			if (randPlayer == 0) {
-				player1 = new User(name1);
-				player2 = new AI("BOT", 1);
-			} else {
-				player1 = new AI("BOT", 1);
-				player2 = new User(name1);
-			}
-			JOptionPane.showMessageDialog(null, player1.getName()
-					+ " goes first.");
-			break;
-		case 2:
-			setBorder(new TitledBorder("Double Players Game"));
-			name1 = JOptionPane
-					.showInputDialog("Please enter your name for player 1: ");
-			name2 = JOptionPane
-					.showInputDialog("Please enter your name for player 2: ");
-			if (randPlayer == 0) {
-				player1 = new User(name1);
-				player2 = new User(name2);
-			} else {
-				player1 = new User(name2);
-				player2 = new User(name1);
-			}
-			JOptionPane.showMessageDialog(null, player1.getName()
-					+ " goes first.");
-			break;
-		default:
-			setBorder(new TitledBorder("Simulation"));
-			player1 = new AI("BOT A", 1);
-			player2 = new AI("BOT B", 1);
+		setBorder(new TitledBorder("Double Players Game"));
+		name1 = JOptionPane
+				.showInputDialog("Please enter your name for player 1: ");
+		name2 = JOptionPane
+				.showInputDialog("Please enter your name for player 2: ");
+		if (randPlayer == 0) {
+			player1 = new User(name1);
+			player2 = new User(name2);
+		} else {
+			player1 = new User(name2);
+			player2 = new User(name1);
 		}
+		JOptionPane.showMessageDialog(null, player1.getName() + " goes first.");
+		gameEngine.startNewGame(player1, player2, this);
+	}
 
-		gameEngine.startNewGame(player1, player2, this); // Initialize engine
+	private void initSimulationGame() {
+		setBorder(new TitledBorder("Simulation"));
+		player1 = new AI("BOT A", 1);
+		player2 = new AI("BOT B", 1);
+		gameEngine.startNewGame(player1, player2, this);
 	}
 
 	@Override
@@ -113,7 +120,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		JButton pressed = (JButton) e.getSource();
 		Player currPlayer = gameEngine.getCurrPlayer();
 
-		if (currPlayer instanceof User && buttons.contains(e.getSource())) {
+		if (currPlayer instanceof User) {
 			User currUser = (User) currPlayer;
 			if (!currUser.isReady()) {
 				int nextMove = buttons.indexOf(pressed) % 7;
@@ -146,15 +153,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		// Todo: use restart button or return home button instead
+		// just call the corresponding init function
+		// how to clear the discs?
 
-		// playerWindow.setVisible(false);
-		// playerWindow.dispose();
-		// mainFrame.setVisity(true);
+		playerWindow.setVisible(false);
+		playerWindow.dispose();
+		mainFrame.setVisity(true);
 
-		// player1 = new AI("BOT A", 2);
-		// player2 = new AI("BOT B", 2);
-		// gameEngine.startNewGame(player1, player2,
-		// mainFrame.getGameBoardPanel());
 	}
 
 }

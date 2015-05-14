@@ -39,7 +39,7 @@ public class GameEngine implements Runnable {
 				// get next move of current player
 				int nextMove = currPlayer.decideMove(currState.clone());
 
-				//check isInGame to avoid AI delay while screen jumping
+				// check isInGame to avoid AI delay while screen jumping
 				if (isInGame && currState.isValidMove(nextMove)) {
 					int row = currState.runNextMove(nextMove);
 					// increment turn
@@ -61,10 +61,6 @@ public class GameEngine implements Runnable {
 				}
 			}
 		}
-	}
-
-	public void suspendGame() {
-		isInGame = false;
 	}
 
 	public GameState getCurrState() {
