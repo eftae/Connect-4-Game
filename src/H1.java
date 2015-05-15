@@ -60,7 +60,7 @@ public class H1 implements HeuristicAlgorithm {
 		if (state.getLocation(c + dc, r + dr) == oppo
 				&& state.getLocation(c + dc * 2, r + dr * 2) == oppo
 				&& state.getLocation(c + dc * 3, r + dr * 3) == oppo) {
-			return -99;
+			return -1;
 		}
 
 		Player curr = state.getCurrPlayer();

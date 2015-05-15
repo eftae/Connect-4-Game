@@ -6,17 +6,13 @@
 public class GameEngine implements Runnable {
 
 	private GameState currState;
-	private Player player1;
-	private Player player2;
-	private boolean isInGame; // game is in run
 	private GameBoardPanel gameBoardPanel;
-	private int totalGame;
+	private boolean isInGame; // game is in run
+	private int totalGame; // number of game started
 
 	public void startNewGame(Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
 		currState = new GameState(player1, player2);
-		this.player1 = player1;
-		this.player2 = player2;
 		this.gameBoardPanel = gameBoardPanel;
 		totalGame++;
 		isInGame = true;
@@ -45,16 +41,14 @@ public class GameEngine implements Runnable {
 				if (isInGame && thisGame == totalGame
 						&& currState.isValidMove(nextMove)) {
 					int row = currState.runNextMove(nextMove);
+
 					// increment turn
 					currState.incTurn();
-					if (currPlayer == player1) {
-						currState.setCurrPlayer(player2);
-						// display disc dropped
-						gameBoardPanel.displayDisc(nextMove, row, 0);
-					} else {
-						currState.setCurrPlayer(player1);
-						gameBoardPanel.displayDisc(nextMove, row, 1);
-					}
+					currState.setCurrPlayer(currState.getOtherPlayer());
+
+					// display disc dropped
+					gameBoardPanel.displayDisc(nextMove, row,
+							currState.getTurn() % 2);
 
 					// check game end and winner
 					if (currState.checkGameEnd()) {

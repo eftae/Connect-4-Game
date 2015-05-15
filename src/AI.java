@@ -12,9 +12,10 @@ import java.util.Random;
 
 public class AI implements Player {
 	private String name;
-	private int mode;
-	private Player opponent;
 	private HeuristicAlgorithm hAlgo;
+	private int mode;
+	private int depth;
+	private int nextMove;
 
 	/**
 	 * Three modes suggested, 0:Basic 1: Medium, 2: Difficult and -1:
@@ -36,16 +37,18 @@ public class AI implements Player {
 		long startTime = 0;
 
 		// setting difficulty
-		int depth = mode * 4 + 3;
 		switch (mode) {
 		case 0:
 			hAlgo = new H0();
+			depth = 3;
 			break;
 		case 1:
 			hAlgo = new H1();
+			depth = 7;
 			break;
 		case 2:
-			hAlgo = new H2();
+			hAlgo = new H1();
+			depth = 11;
 			break;
 		default:
 			// simulation
@@ -54,12 +57,7 @@ public class AI implements Player {
 			startTime = System.currentTimeMillis();
 		}
 
-		opponent = currState.getOtherPlayer();
-		int nextMove = -1;
-		HNode alpha = new HNode(Integer.MIN_VALUE, nextMove);
-		HNode beta = new HNode(Integer.MAX_VALUE, nextMove);
-
-		nextMove = alphabeta(currState, depth, alpha, beta).getMove();
+		alphabeta(currState, depth, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 		// delay for simulation
 		if (mode == -1) {
@@ -75,67 +73,51 @@ public class AI implements Player {
 		return nextMove;
 	}
 
-	/**
-	 * Alpha-Beta algorithm.
-	 * 
-	 * @param state
-	 *            current state
-	 * @param depth
-	 *            difficulty
-	 * @param alpha
-	 *            alpha HNode
-	 * @param beta
-	 *            beta HNode
-	 * @return
-	 */
-	private HNode alphabeta(GameState state, int depth, HNode alpha, HNode beta) {
+	private int alphabeta(GameState state, int depth, int alpha, int beta) {
 		// check win/lose
 		if (state.getTurn() > 42) {
-			alpha.setValue(0);
-			return alpha;
+			return state.getTurn() - 42;
 		}
 		if (state.getWinner() == this) {
-			alpha.setValue(1000 << depth);
-			return alpha;
+			return 1000 << depth;
 		}
-		if (state.getWinner() == opponent) {
-			alpha.setValue(-1000 << depth);
-			return alpha;
+		if (state.getWinner() == state.getOtherPlayer()) {
+			return -1000 << depth;
 		}
-
 		// reaches depth limit
 		if (depth == 0) {
-			int h = hAlgo.h(state);
-			alpha.setValue(h);
-			return alpha;
+			return hAlgo.h(state);
 		}
 
 		ArrayList<Integer> moves = getRandomPositions();
 		if (state.getCurrPlayer() == this) {
+			int max = Integer.MIN_VALUE;
 			for (int move : moves) {
 				if (!state.isValidMove(move)) {
 					continue;
 				}
+
 				GameState cloneState = state.clone();
 				doNextMove(cloneState, move);
 
-				HNode newAlpha = new HNode(alpha.getValue(), move);
-				HNode newBeta = new HNode(beta.getValue(), move);
+				int v = alphabeta(cloneState, depth - 1, alpha, beta);
 
-				int v = alphabeta(cloneState, depth - 1, newAlpha, newBeta)
-						.getValue();
-
-				if (alpha.getValue() < v) {
-					alpha.setValue(v);
-					alpha.setMove(move);
-
+				if (v > max) {
+					max = v;
+					if (this.depth == depth) {
+						nextMove = move;
+					}
 				}
-				if (alpha.getValue() >= beta.getValue()) {
+				if (alpha < max) {
+					alpha = max;
+				}
+				if (alpha >= beta) {
 					break;
 				}
 			}
 			return alpha;
 		} else {
+			int min = Integer.MAX_VALUE;
 			for (int move : moves) {
 				if (!state.isValidMove(move)) {
 					continue;
@@ -144,17 +126,15 @@ public class AI implements Player {
 				GameState cloneState = state.clone();
 				doNextMove(cloneState, move);
 
-				HNode newAlpha = new HNode(alpha.getValue(), move);
-				HNode newBeta = new HNode(beta.getValue(), move);
+				int v = alphabeta(cloneState, depth - 1, alpha, beta);
 
-				int v = alphabeta(cloneState, depth - 1, newAlpha, newBeta)
-						.getValue();
-
-				if (beta.getValue() > v) {
-					beta.setValue(v);
-					beta.setMove(move);
+				if (min > v) {
+					min = v;
 				}
-				if (alpha.getValue() >= beta.getValue()) {
+				if (beta > min) {
+					beta = min;
+				}
+				if (alpha >= beta) {
 					break;
 				}
 			}
@@ -172,11 +152,7 @@ public class AI implements Player {
 	 */
 	private void doNextMove(GameState state, int move) {
 		state.runNextMove(move);
-		if (state.getCurrPlayer() == this) {
-			state.setCurrPlayer(opponent);
-		} else {
-			state.setCurrPlayer(this);
-		}
+		state.setCurrPlayer(state.getOtherPlayer());
 		state.incTurn();
 		state.checkGameEnd();
 	}
@@ -197,21 +173,6 @@ public class AI implements Player {
 			randList.add(i);
 		}
 		return randList;
-	}
-
-	/**
-	 * AI mode in fully randomization
-	 * 
-	 * @param currState
-	 * @return next column move
-	 */
-	private int modeRandom(GameState currState) {
-		Random rand = new Random();
-		int nextMove = rand.nextInt(7);
-		while (!currState.isValidMove(nextMove)) {
-			nextMove = rand.nextInt(7);
-		}
-		return nextMove;
 	}
 
 }
