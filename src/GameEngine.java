@@ -1,8 +1,6 @@
 /**
- * Main game engine. v0.1 basic game with command line in/out. v0.11 added
- * displayBoard(), bugs fixed. v0.2 multithreads.
+ * Game engine.
  * 
- * @version v0.2
  */
 
 public class GameEngine implements Runnable {
@@ -12,6 +10,7 @@ public class GameEngine implements Runnable {
 	private Player player2;
 	private boolean isInGame; // game is in run
 	private GameBoardPanel gameBoardPanel;
+	private int totalGame;
 
 	public void startNewGame(Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
@@ -19,6 +18,7 @@ public class GameEngine implements Runnable {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.gameBoardPanel = gameBoardPanel;
+		totalGame++;
 		isInGame = true;
 	}
 
@@ -26,21 +26,24 @@ public class GameEngine implements Runnable {
 	public void run() {
 		// delay thread to wait game started
 		while (true) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException ex) {
-				Thread.currentThread().interrupt();
+			sleep(100);
+
+			// delay before game started
+			if (isInGame && currState.getCurrPlayer() instanceof AI) {
+				sleep(500);
 			}
 
 			// start game run
-			while (isInGame) {
+			int thisGame = totalGame;
+			while (isInGame && thisGame == totalGame) {
 				Player currPlayer = currState.getCurrPlayer();
 
 				// get next move of current player
 				int nextMove = currPlayer.decideMove(currState.clone());
 
 				// check isInGame to avoid AI delay while screen jumping
-				if (isInGame && currState.isValidMove(nextMove)) {
+				if (isInGame && thisGame == totalGame
+						&& currState.isValidMove(nextMove)) {
 					int row = currState.runNextMove(nextMove);
 					// increment turn
 					currState.incTurn();
@@ -60,6 +63,14 @@ public class GameEngine implements Runnable {
 					}
 				}
 			}
+		}
+	}
+
+	private void sleep(int millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
 		}
 	}
 

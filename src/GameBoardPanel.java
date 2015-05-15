@@ -78,9 +78,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		name1 = JOptionPane.showInputDialog("Please enter your name: ");
 		if (randPlayer == 0) {
 			player1 = new User(name1);
-			player2 = new AI("BOT", 1);
+			player2 = new AI("BOT", 2);
 		} else {
-			player1 = new AI("BOT", 1);
+			player1 = new AI("BOT", 2);
 			player2 = new User(name1);
 		}
 		JOptionPane.showMessageDialog(null, player1.getName() + " goes first.");
@@ -110,8 +110,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	private void initSimulationGame() {
 		setBorder(new TitledBorder("Simulation"));
-		player1 = new AI("BOT A", 1);
-		player2 = new AI("BOT B", 1);
+		player1 = new AI("BOT A", -1);
+		player2 = new AI("BOT B", -1);
 		gameEngine.startNewGame(player1, player2, this);
 	}
 

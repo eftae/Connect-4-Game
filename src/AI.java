@@ -17,7 +17,8 @@ public class AI implements Player {
 	private HeuristicAlgorithm hAlgo;
 
 	/**
-	 * Three modes suggested, 0:Basic 1: Medium, 2: Difficult.
+	 * Three modes suggested, 0:Basic 1: Medium, 2: Difficult and -1:
+	 * Simulation.
 	 * 
 	 * @param mode
 	 *            three difficulty
@@ -32,6 +33,8 @@ public class AI implements Player {
 	}
 
 	public int decideMove(GameState currState) {
+		long startTime = 0;
+
 		// setting difficulty
 		int depth = mode * 4 + 3;
 		switch (mode) {
@@ -45,7 +48,10 @@ public class AI implements Player {
 			hAlgo = new H2();
 			break;
 		default:
+			// simulation
 			hAlgo = new H0();
+			depth = 3;
+			startTime = System.currentTimeMillis();
 		}
 
 		opponent = currState.getOtherPlayer();
@@ -54,6 +60,18 @@ public class AI implements Player {
 		HNode beta = new HNode(Integer.MAX_VALUE, nextMove);
 
 		nextMove = alphabeta(currState, depth, alpha, beta).getMove();
+
+		// delay for simulation
+		if (mode == -1) {
+			long endTime = System.currentTimeMillis();
+			long delay = 1000 - (endTime - startTime);
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+		}
+
 		return nextMove;
 	}
 
