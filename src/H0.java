@@ -1,5 +1,5 @@
 /**
- * Zero Heuristic to give a randomize priority.
+ * Zero Heuristic giving a random priority.
  * 
  */
 

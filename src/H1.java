@@ -1,6 +1,6 @@
 /**
- * Heuristic for alpha-beta search. Considering number of empty slot connects to
- * 3 consecutive discs.
+ * Defensive Heuristic Algorithm for alpha-beta search. Considering number of
+ * empty slots connects to 3 consecutive discs.
  * 
  * @version v0.1
  */
@@ -17,32 +17,32 @@ public class H1 implements HeuristicAlgorithm {
 				if (state.getLocation(c, r) == null) {
 					// bottom
 					if (r - 3 >= 0) {
-						h += evalThreeSlots(state, c, r, 0, -1);
+						h += evalEmptySlot(state, c, r, 0, -1);
 					}
 
 					if (c - 3 >= 0) {
 						// left
-						h += evalThreeSlots(state, c, r, -1, 0);
+						h += evalEmptySlot(state, c, r, -1, 0);
 						// bottom-left
 						if (r - 3 >= 0) {
-							h += evalThreeSlots(state, c, r, -1, -1);
+							h += evalEmptySlot(state, c, r, -1, -1);
 						}
 						// top-left
 						if (r + 3 < 6) {
-							h += evalThreeSlots(state, c, r, -1, -1);
+							h += evalEmptySlot(state, c, r, -1, -1);
 						}
 					}
 
 					if (c + 3 < 7) {
 						// right
-						h += evalThreeSlots(state, c, r, 1, 0);
+						h += evalEmptySlot(state, c, r, 1, 0);
 						// bottom-right
 						if (r - 3 >= 0) {
-							h += evalThreeSlots(state, c, r, 1, -1);
+							h += evalEmptySlot(state, c, r, 1, -1);
 						}
 						// top-right
 						if (r + 3 < 6) {
-							h += evalThreeSlots(state, c, r, 1, 1);
+							h += evalEmptySlot(state, c, r, 1, 1);
 						}
 					}
 
@@ -53,14 +53,14 @@ public class H1 implements HeuristicAlgorithm {
 		return h;
 	}
 
-	private int evalThreeSlots(GameState state, int c, int r, int dc, int dr) {
+	private int evalEmptySlot(GameState state, int c, int r, int dc, int dr) {
 
 		Player oppo = state.getOtherPlayer();
 		// opponent
 		if (state.getLocation(c + dc, r + dr) == oppo
 				&& state.getLocation(c + dc * 2, r + dr * 2) == oppo
 				&& state.getLocation(c + dc * 3, r + dr * 3) == oppo) {
-			return -1;
+			return -10;
 		}
 
 		Player curr = state.getCurrPlayer();

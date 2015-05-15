@@ -3,8 +3,9 @@
  * v0.2 many bugs fixed
  * v0.21 fixed the bug of turn number
  * v0.22 set game modes
+ * v0.3 refined alpha-beta and modes
  * 
- * @version 0.22
+ * @version 0.3
  */
 
 import java.util.ArrayList;
@@ -18,19 +19,15 @@ public class AI implements Player {
 	private int nextMove;
 
 	/**
-	 * Three modes suggested, 0:Basic 1: Medium, 2: Difficult and -1:
-	 * Simulation.
 	 * 
+	 * @param name
+	 *            AI name
 	 * @param mode
-	 *            three difficulty
+	 *            AI mode, three levels from 0 to 1 in increasing difficulty.
 	 */
 	public AI(String name, int mode) {
 		this.name = name;
 		this.mode = mode;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public int decideMove(GameState currState) {
@@ -40,15 +37,15 @@ public class AI implements Player {
 		switch (mode) {
 		case 0:
 			hAlgo = new H0();
-			depth = 3;
+			depth = 5;
 			break;
 		case 1:
 			hAlgo = new H1();
 			depth = 7;
 			break;
 		case 2:
-			hAlgo = new H1();
-			depth = 11;
+			hAlgo = new H2();
+			depth = 9;
 			break;
 		default:
 			// simulation
@@ -59,7 +56,7 @@ public class AI implements Player {
 
 		alphabeta(currState, depth, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
-		// delay for simulation
+		// delay for simulation moves
 		if (mode == -1) {
 			long endTime = System.currentTimeMillis();
 			long delay = 1000 - (endTime - startTime);
@@ -73,6 +70,15 @@ public class AI implements Player {
 		return nextMove;
 	}
 
+	/**
+	 * Alpha Beta Algorithm
+	 * 
+	 * @param state
+	 * @param depth
+	 * @param alpha
+	 * @param beta
+	 * @return
+	 */
 	private int alphabeta(GameState state, int depth, int alpha, int beta) {
 		// check win/lose
 		if (state.getTurn() > 42) {
@@ -158,9 +164,9 @@ public class AI implements Player {
 	}
 
 	/**
-	 * Generate a random list from 0 to 6.
+	 * Use for generate successors of a state.
 	 * 
-	 * @return a list of 7 distinct value, 0 - 6
+	 * @return a random ArrayList of 0 to 6
 	 */
 	private ArrayList<Integer> getRandomPositions() {
 		ArrayList<Integer> randList = new ArrayList<Integer>();
@@ -175,4 +181,10 @@ public class AI implements Player {
 		return randList;
 	}
 
+	/**
+	 * Getter: name
+	 */
+	public String getName() {
+		return name;
+	}
 }

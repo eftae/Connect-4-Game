@@ -146,9 +146,10 @@ public class GameState {
 	}
 
 	public int getAvailableRow(int col) {
-		for (int r = 0; r < ROW_MAX; r++)
-			if (board[col][r] == null)
-				return r;
+		if (col >= 0 && col < COL_MAX)
+			for (int r = 0; r < ROW_MAX; r++)
+				if (board[col][r] == null)
+					return r;
 		return -1;
 	}
 
