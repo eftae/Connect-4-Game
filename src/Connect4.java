@@ -39,9 +39,9 @@ public class Connect4 implements Runnable {
 		// game engine thread
 		Runnable mainGameEngine = new GameEngine();
 		Thread threadGE = new Thread(mainGameEngine);
-
+		GameEngine gameEngine = (GameEngine) mainGameEngine;
 		// GUI thread
-		Runnable mainWindow = new Connect4((GameEngine) mainGameEngine);
+		Runnable mainWindow = new Connect4(gameEngine);
 		Thread threadGUI = new Thread(mainWindow);
 
 		// start all threads
@@ -84,6 +84,19 @@ public class Connect4 implements Runnable {
 	public void run() {
 		display();
 		BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
+
+		while (true) {
+			// delay waiting
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+			// start new simulation if game is not on
+			if (!gameEngine.isGameOn()) {
+				gameBoardPanel.startNewGame(0);
+			}
+		}
 	}
 
 }

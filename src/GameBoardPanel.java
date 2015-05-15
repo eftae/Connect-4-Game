@@ -162,4 +162,22 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	}
 
+	public void startNewGame(int playMode) {
+		// clear buttons icons
+		for (JButton b : buttons) {
+			b.setIcon(whiteDisc);
+		}
+
+		switch (playMode) {
+		case 1:
+			initSinglePlayerGame();
+			break;
+		case 2:
+			initDoublePlayersGame();
+			break;
+		default:
+			initSimulationGame();
+		}
+	}
+
 }

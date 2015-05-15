@@ -59,12 +59,13 @@ public class AI implements Player {
 		// delay for simulation moves
 		if (mode == -1) {
 			long endTime = System.currentTimeMillis();
-			long delay = 1000 - (endTime - startTime);
-			try {
-				Thread.sleep(delay);
-			} catch (InterruptedException ex) {
-				Thread.currentThread().interrupt();
-			}
+			long delay = 500 - (endTime - startTime);
+			if (delay > 0)
+				try {
+					Thread.sleep(delay);
+				} catch (InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
 		}
 
 		return nextMove;

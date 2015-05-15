@@ -79,4 +79,9 @@ public class GameEngine implements Runnable {
 	public boolean isValidMove(int move) {
 		return currState.isValidMove(move);
 	}
+
+	public boolean isGameOn() {
+		return isInGame;
+	}
+	
 }
