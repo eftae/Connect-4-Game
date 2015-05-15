@@ -28,6 +28,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			"src/pics/yellowDot.png"), 100, 100);
 	ImageIcon whiteDisc = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 100, 100);
+	ImageIcon arrow1 = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/redarrow.png"), 100, 100);
+	ImageIcon arrow2 = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/yellowarrow.png"), 100, 100);
 
 	public GameBoardPanel(int playMode, PlayerWindow playerWindow,
 			Connect4 mainFrame) {
@@ -49,10 +53,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			b.setContentAreaFilled(false);
 			b.setBorderPainted(false);
 			b.setIcon(whiteDisc);
+			b.setPressedIcon(whiteDisc);
 			buttons.add(b);
 			add(b);
-			if (playMode != 0)
-				b.addActionListener(this);// not for simulation
+			if (playMode != 0) {// not for simulation
+				b.setRolloverIcon(arrow2);
+				b.addActionListener(this);
+			}
 		}
 
 		// setup new game
@@ -137,10 +144,30 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	public void displayDisc(int col, int row, int colorId) {
 		int btnID = (5 - row) * 7 + col;
 		JButton b = buttons.get(btnID);
-		if (colorId == 0)
-			b.setIcon(icn1);
-		else
-			b.setIcon(icn2);
+		ImageIcon icn = null;
+		ImageIcon arrow = null;
+		if (colorId == 0) {
+			icn = icn1;
+			arrow = arrow2;
+		} else {
+			icn = icn2;
+			arrow = arrow1;
+		}
+
+		// change rollover icon
+		if (b.getRolloverIcon() != null)
+			for (JButton btn : buttons) {
+				if (btn.getIcon() == whiteDisc) {
+					btn.setRolloverIcon(arrow);
+					btn.setPressedIcon(arrow);
+				}
+			}
+
+		// pressed button settings
+		b.setIcon(icn);
+		b.setPressedIcon(icn);
+		b.removeActionListener(this);
+		b.setRolloverIcon(null);
 	}
 
 	public void displayEndGame(Player winner) {
@@ -166,6 +193,11 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		// clear buttons icons
 		for (JButton b : buttons) {
 			b.setIcon(whiteDisc);
+			b.setPressedIcon(whiteDisc);
+			if (playMode != 0) {
+				b.setRolloverIcon(arrow2);
+				b.addActionListener(this);
+			}
 		}
 
 		switch (playMode) {

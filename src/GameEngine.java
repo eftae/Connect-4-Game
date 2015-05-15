@@ -40,15 +40,16 @@ public class GameEngine implements Runnable {
 				// check isInGame to avoid AI delay while screen jumping
 				if (isInGame && thisGame == totalGame
 						&& currState.isValidMove(nextMove)) {
+					
 					int row = currState.runNextMove(nextMove);
+					
+					// display disc dropped
+					gameBoardPanel.displayDisc(nextMove, row,
+							getCurrPlayerIndex());
 
 					// increment turn
 					currState.incTurn();
 					currState.setCurrPlayer(currState.getOtherPlayer());
-
-					// display disc dropped
-					gameBoardPanel.displayDisc(nextMove, row,
-							currState.getTurn() % 2);
 
 					// check game end and winner
 					if (currState.checkGameEnd()) {
@@ -83,5 +84,9 @@ public class GameEngine implements Runnable {
 	public boolean isGameOn() {
 		return isInGame;
 	}
-	
+
+	public int getCurrPlayerIndex() {
+		return currState.getTurn() % 2;
+	}
+
 }
