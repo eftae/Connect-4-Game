@@ -1,10 +1,15 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.text.LayeredHighlighter;
 
 public class Connect4 implements Runnable {
 
@@ -12,6 +17,7 @@ public class Connect4 implements Runnable {
 	private MenuPanel menuPanel;
 	private GameBoardPanel gameBoardPanel;
 	private GameEngine gameEngine;
+	private MyGlassPane myGlassPane;
 
 	// public BackgroundMusic backMusic = new BackgroundMusic();
 
@@ -33,6 +39,7 @@ public class Connect4 implements Runnable {
 		gameBoardPanel = new GameBoardPanel(0, null, this);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 
+
 	}
 
 	public static void main(String[] args) {
@@ -52,9 +59,14 @@ public class Connect4 implements Runnable {
 	/**
 	 * Method to display the main window
 	 */
-	private void display() {
-		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST); // better?
+	private void display() {		
+		
+		myGlassPane = new MyGlassPane ();
+		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST); // better?	
 		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.WEST);
+		mainFrame.setGlassPane(myGlassPane);
+		myGlassPane.setOpaque(false);
+		myGlassPane.setVisible(true);
 		mainFrame.pack();
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);

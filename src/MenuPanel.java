@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel {
 
 	private Connect4 mainFrame;
 
-	public MenuPanel(Connect4 mainFrame) {
+	public MenuPanel(final Connect4 mainFrame) {
 		this.mainFrame = mainFrame;
 
 		setLayout(new GridBagLayout());
