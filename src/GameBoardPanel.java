@@ -23,15 +23,15 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/redDot.png"), 110, 110);
+			"src/pics/redDot.png"), 100, 100);
 	ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/yellowDot.png"), 110, 110);
+			"src/pics/yellowDot.png"), 100, 100);
 	ImageIcon whiteDisc = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/whiteDot.png"), 110, 110);
+			"src/pics/whiteDot.png"), 100, 100);
 	ImageIcon arrow1 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/redarrow.png"), 110, 110);
+			"src/pics/redarrow.png"), 100, 100);
 	ImageIcon arrow2 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/yellowarrow.png"), 110, 110);
+			"src/pics/yellowarrow.png"), 100, 100);
 
 	public GameBoardPanel(int playMode, PlayerWindow playerWindow,
 			Connect4 mainFrame) {
