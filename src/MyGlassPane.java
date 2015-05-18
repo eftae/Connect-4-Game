@@ -22,8 +22,8 @@ import javax.swing.Timer;
 public class MyGlassPane extends JPanel implements ActionListener {
 	Timer timer = new Timer(15, this);
 	float opacity = 0;
-	ImageIcon icon1 = ResizeImage.changeImage(new ImageIcon("src/pics/welcome2.png"), 800, 330);
-	ImageIcon icon2 = ResizeImage.changeImage(new ImageIcon("src/pics/logo.png"), 400, 100);
+	ImageIcon icon1 = ResizeImage.changeImage(new ImageIcon("src/pics/welcome2.png"), 800, 300);
+	ImageIcon icon2 = ResizeImage.changeImage(new ImageIcon("src/pics/logo.png"), 400, 90);
 	//ImageIcon icon3 = ResizeImage.changeImage(new ImageIcon("src/pics/to1.png"), 400, 200);
 	
 	public MyGlassPane() {
@@ -60,7 +60,8 @@ public class MyGlassPane extends JPanel implements ActionListener {
 	    if (opacity > 1f) {
 	    	opacity = 1f;
 	    	timer.stop();
-	    }
-	    repaint();
+	    } else 
+	    	repaint();
+	    
 	} 
 }
