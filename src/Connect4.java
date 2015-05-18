@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -29,7 +30,6 @@ public class Connect4 implements Runnable {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setPreferredSize(new Dimension(1000, 700));
 		mainFrame.setLocationRelativeTo(null);
-		mainFrame.add(new JLabel(new ImageIcon("src/pics/pic.png")));
 
 		// menu panel
 		menuPanel = new MenuPanel(this);
@@ -38,7 +38,6 @@ public class Connect4 implements Runnable {
 		// game board panel
 		gameBoardPanel = new GameBoardPanel(0, null, this);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
-
 
 	}
 
@@ -59,10 +58,10 @@ public class Connect4 implements Runnable {
 	/**
 	 * Method to display the main window
 	 */
-	private void display() {		
-		
-		myGlassPane = new MyGlassPane ();
-		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST); // better?	
+	private void display() {
+
+		myGlassPane = new MyGlassPane();
+		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST); // better?
 		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.WEST);
 		mainFrame.setGlassPane(myGlassPane);
 		myGlassPane.setOpaque(false);

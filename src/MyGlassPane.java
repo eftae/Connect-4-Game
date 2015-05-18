@@ -19,7 +19,7 @@ public class MyGlassPane extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		ImageIcon icon1 = new ImageIcon("src/pics/welcome2.png");
-		ImageIcon newIcon1 = ResizeImage.changeImage(icon1, 600, 160);
+		ImageIcon newIcon1 = ResizeImage.changeImage(icon1, 800, 350);
 
 		ImageIcon icon2 = new ImageIcon("src/pics/logo.png");
 		ImageIcon newIcon2 = ResizeImage.changeImage(icon2, 400, 100);
@@ -27,7 +27,7 @@ public class MyGlassPane extends JPanel {
 		ImageIcon icon3 = new ImageIcon("src/pics/to1.png");
 		ImageIcon newIcon3 = ResizeImage.changeImage(icon3, 400, 200);
 
-		newIcon1.paintIcon(this, g, 80, 260);
+		newIcon1.paintIcon(this, g, -20, 180);
 		// newIcon3.paintIcon(this, g, 200, 200);
 		newIcon2.paintIcon(this, g, 175, 100);
 
