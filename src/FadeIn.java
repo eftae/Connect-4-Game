@@ -15,6 +15,8 @@ public class FadeIn extends JPanel implements ActionListener {
   private Image i;
   private Timer timer;
   private float opacity;
+  private int x;
+  private int y;
   
   /*
   public static void main(String[] args) {
@@ -26,10 +28,12 @@ public class FadeIn extends JPanel implements ActionListener {
 	  frame.setVisible(true);
   }*/
   
-  public FadeIn(Image img) {
+  public FadeIn(Image img, int hor, int vert) {
 	  i = img;
 	  timer = new Timer(10, this);
 	  opacity = 0;
+	  x = hor;
+	  y = vert;
 	  timer.start();
   }
   
@@ -37,7 +41,7 @@ public class FadeIn extends JPanel implements ActionListener {
     super.paint(g);
     Graphics2D g2d = (Graphics2D) g;
     g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
-    g2d.drawImage(i, 10, 10, null);
+    g2d.drawImage(i, x, y, null);
   }
   
   public void actionPerformed(ActionEvent e) {
