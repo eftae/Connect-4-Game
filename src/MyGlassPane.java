@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class MyGlassPane extends JPanel implements ActionListener {
-	Timer timer = new Timer(10, this);
+	Timer timer = new Timer(15, this);
 	float opacity = 0;
 	ImageIcon icon1 = ResizeImage.changeImage(new ImageIcon("src/pics/welcome2.png"), 800, 330);
 	ImageIcon icon2 = ResizeImage.changeImage(new ImageIcon("src/pics/logo.png"), 400, 100);
@@ -30,8 +30,8 @@ public class MyGlassPane extends JPanel implements ActionListener {
 		timer.start();
 	}
 	
-	/*public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void paintComponent(Graphics g) {
+		/*super.paintComponent(g);
 		ImageIcon icon1 = new ImageIcon("src/pics/welcome2.png");
 		ImageIcon newIcon1 = ResizeImage.changeImage(icon1, 800, 350);
 
@@ -42,16 +42,16 @@ public class MyGlassPane extends JPanel implements ActionListener {
 		ImageIcon newIcon3 = ResizeImage.changeImage(icon3, 400, 200);
 
 		newIcon1.paintIcon(this, g, -20, 180);
-		// newIcon3.paintIcon(this, g, 200, 200);
-		newIcon2.paintIcon(this, g, 175, 100);
-	}*/
+		// newIcon3.paintIcon(this, g, 200, 200);*/
+		icon2.paintIcon(this, g, 175, 100);
+	}
 	
 	public void paint(Graphics g) {
 	    super.paint(g);
 	    Graphics2D g2d = (Graphics2D) g;
 	    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 	    g2d.drawImage(icon1.getImage(), -20, 180, null);
-	    g2d.drawImage(icon2.getImage(), 175, 100, null);
+	    //g2d.drawImage(icon2.getImage(), 175, 100, null);
 	    //g2d.drawImage(icon3.getImage(), 400, 200, null);
 	}
 	  
