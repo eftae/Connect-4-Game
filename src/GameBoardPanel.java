@@ -51,6 +51,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			JButton b = new JButton();
 			b.setOpaque(false);
 			b.setContentAreaFilled(false);
+			b.setFocusPainted(false);
 			b.setBorderPainted(false);
 			b.setIcon(whiteDisc);
 			b.setPressedIcon(whiteDisc);
