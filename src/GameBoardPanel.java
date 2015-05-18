@@ -75,7 +75,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		default:
 			initSimulationGame();
 		}
-
+		updateStaticsPanel();
 	}
 
 	private void initSinglePlayerGame() {
@@ -169,6 +169,17 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		b.setPressedIcon(icn);
 		b.removeActionListener(this);
 		b.setRolloverIcon(null);
+	}
+	
+	public void updateStaticsPanel() {
+		ImageIcon icn = null;
+		if(gameEngine.getCurrPlayerIndex() == 1)
+			icn = ResizeImage.changeImage(icn2, 50, 50);
+		else
+			icn = ResizeImage.changeImage(icn1, 50, 50);
+				
+		if(playerWindow != null && playerWindow.getStaticsPanel() != null)
+			playerWindow.getStaticsPanel().setWhosTurn(gameEngine.getCurrPlayer(),icn);
 	}
 
 	public void displayEndGame(Player winner) {

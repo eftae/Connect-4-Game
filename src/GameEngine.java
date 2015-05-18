@@ -7,16 +7,27 @@ public class GameEngine implements Runnable {
 
 	private GameState currState;
 	private GameBoardPanel gameBoardPanel;
+	private GameStaticsPanel gameStaticsPanel;
 	private boolean isInGame; // game is in run
 	private int totalGame; // number of game started
-
+	
 	public void startNewGame(Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
 		currState = new GameState(player1, player2);
 		this.gameBoardPanel = gameBoardPanel;
+		gameStaticsPanel = null;
 		totalGame++;
 		isInGame = true;
 	}
+	
+//	public void startNewGame(Player player1, Player player2,
+//			GameBoardPanel gameBoardPanel, GameStaticsPanel gameStaticsPanel) {
+//		currState = new GameState(player1, player2);
+//		this.gameBoardPanel = gameBoardPanel;
+//		this.gameStaticsPanel = gameStaticsPanel;
+//		totalGame++;
+//		isInGame = true;
+//	}
 
 	@Override
 	public void run() {
@@ -44,12 +55,13 @@ public class GameEngine implements Runnable {
 					int row = currState.runNextMove(nextMove);
 					
 					// display disc dropped
-					gameBoardPanel.displayDisc(nextMove, row,
-							getCurrPlayerIndex());
-
+					gameBoardPanel.displayDisc(nextMove,row,getCurrPlayerIndex());
+					
 					// increment turn
 					currState.incTurn();
 					currState.setCurrPlayer(currState.getOtherPlayer());
+					
+					gameBoardPanel.updateStaticsPanel();
 
 					// check game end and winner
 					if (currState.checkGameEnd()) {
@@ -75,6 +87,10 @@ public class GameEngine implements Runnable {
 
 	public Player getCurrPlayer() {
 		return currState.getCurrPlayer();
+	}
+	
+	public Player getOtherPlayer() {
+		return currState.getOtherPlayer();
 	}
 
 	public boolean isValidMove(int move) {
