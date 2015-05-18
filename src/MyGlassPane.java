@@ -28,9 +28,9 @@ public class MyGlassPane extends JPanel {
 		ImageIcon icon3 = new ImageIcon("src/pics/to1.png");
 		ImageIcon newIcon3 = ResizeImage.changeImage(icon3, 400, 200);
 				
-		newIcon1.paintIcon(this, g, 50, 50);
-		newIcon3.paintIcon(this, g, 200, 200);
-		newIcon2.paintIcon(this, g, 200, 400);
+		newIcon1.paintIcon(this, g, 30, 50);
+		//newIcon3.paintIcon(this, g, 200, 200);
+		newIcon2.paintIcon(this, g, 160, 400);
 		
 	}
 }
