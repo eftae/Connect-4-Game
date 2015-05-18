@@ -27,9 +27,9 @@ public class Connect4 implements Runnable {
 
 		// main frame
 		mainFrame = new JFrame("Connect 4");
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setPreferredSize(new Dimension(1000, 700));
+		mainFrame.setSize(1000, 700);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// menu panel
 		menuPanel = new MenuPanel(this);
