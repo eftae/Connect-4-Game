@@ -20,7 +20,7 @@ public class GameMenuBar extends JMenuBar {
 
 	// private static int counter = 0;
 
-	public GameMenuBar(final Connect4 mainGame, final PlayerWindow psw) {
+	public GameMenuBar(Connect4 mainGame, PlayerWindow psw) {
 
 		this.mainGame = mainGame;
 		this.psw = psw;
@@ -65,7 +65,12 @@ public class GameMenuBar extends JMenuBar {
 		menuItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				// mainGame.getGameEngine().suspendGame();
+				mainGame.suspendGame();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
 				mainGame.setVisity(true);
 				psw.dispose();
 			}

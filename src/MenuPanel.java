@@ -15,14 +15,14 @@ import javax.swing.border.TitledBorder;
 
 public class MenuPanel extends JPanel {
 
-	private Connect4 mainFrame;
+	private Connect4 mainGame;
 	public static boolean counter = true;
 	public static JButton muteButton = null;
 	
 
 
-	public MenuPanel(final Connect4 mainFrame) {
-		this.mainFrame = mainFrame;
+	public MenuPanel(Connect4 mainGame) {
+		this.mainGame = mainGame;
 
 		setLayout(new GridBagLayout());
 		setBorder(new TitledBorder("New Game"));
@@ -46,10 +46,10 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				ButtonSound.music("src/sound/button.wav");
-				PlayerWindow singlePlayerWindow = new PlayerWindow(mainFrame,
+				PlayerWindow singlePlayerWindow = new PlayerWindow(mainGame,
 						1, "Single Player Game");
 				singlePlayerWindow.setVisible(true);
-				mainFrame.setVisity(false);
+				mainGame.setVisity(false);
 
 				BackgroundMusic.stopMusic();
 				if (counter == true) {
@@ -73,10 +73,10 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				ButtonSound.music("src/sound/button.wav");
-				PlayerWindow twoPlayerWindow = new PlayerWindow(mainFrame, 2,
+				PlayerWindow twoPlayerWindow = new PlayerWindow(mainGame, 2,
 						"Mutiple Player Game");
 				twoPlayerWindow.setVisible(true);
-				mainFrame.setVisity(false);
+				mainGame.setVisity(false);
 
 				BackgroundMusic.stopMusic();
 				if (counter == true) {
@@ -100,7 +100,7 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonSound.music("src/sound/button.wav");
-				mainFrame.displayStatistic();
+				mainGame.displayStatistic();
 			}
 
 		});
@@ -117,7 +117,7 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonSound.music("src/sound/button.wav");
-				mainFrame.displayCredits();
+				mainGame.displayCredits();
 			}
 		});
 

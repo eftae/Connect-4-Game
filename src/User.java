@@ -35,7 +35,7 @@ public class User implements Player {
 
 	private int modeGUI() {
 		// wait isReady to be set
-		while (!isReady) {
+		while (!isReady && !Thread.interrupted()) {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException ex) {

@@ -19,6 +19,8 @@ public class Connect4 implements Runnable {
 	private GameBoardPanel gameBoardPanel;
 	private GameEngine gameEngine;
 	private MyGlassPane myGlassPane;
+	private static Thread threadGE;
+	private static Thread threadGUI;
 
 	// public BackgroundMusic backMusic = new BackgroundMusic();
 
@@ -44,11 +46,11 @@ public class Connect4 implements Runnable {
 	public static void main(String[] args) {
 		// game engine thread
 		Runnable mainGameEngine = new GameEngine();
-		Thread threadGE = new Thread(mainGameEngine);
+		threadGE = new Thread(mainGameEngine);
 		GameEngine gameEngine = (GameEngine) mainGameEngine;
 		// GUI thread
 		Runnable mainWindow = new Connect4(gameEngine);
-		Thread threadGUI = new Thread(mainWindow);
+		threadGUI = new Thread(mainWindow);
 
 		// start all threads
 		threadGE.start();
@@ -93,6 +95,11 @@ public class Connect4 implements Runnable {
 
 	public JFrame getMainFrame() {
 		return mainFrame;
+	}
+
+	public void suspendGame() {
+		gameEngine.suspendGame();
+		threadGE.interrupt();
 	}
 
 	@Override
