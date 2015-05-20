@@ -43,7 +43,7 @@ public class MyGlassPane extends JPanel implements ActionListener {
 
 		newIcon1.paintIcon(this, g, -20, 180);
 		// newIcon3.paintIcon(this, g, 200, 200);*/
-		icon2.paintIcon(this, g, 175, 100);
+		//icon2.paintIcon(this, g, 175, 100);
 	}
 	
 	public void paint(Graphics g) {
@@ -51,7 +51,7 @@ public class MyGlassPane extends JPanel implements ActionListener {
 	    Graphics2D g2d = (Graphics2D) g;
 	    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 	    g2d.drawImage(icon1.getImage(), -20, 180, null);
-	    //g2d.drawImage(icon2.getImage(), 175, 100, null);
+	    g2d.drawImage(icon2.getImage(), 175, 100, null);
 	    //g2d.drawImage(icon3.getImage(), 400, 200, null);
 	}
 	  
