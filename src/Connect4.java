@@ -91,6 +91,10 @@ public class Connect4 implements Runnable {
 		return gameBoardPanel;
 	}
 
+	public JFrame getMainFrame() {
+		return mainFrame;
+	}
+
 	@Override
 	public void run() {
 		display();

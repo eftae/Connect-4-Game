@@ -8,40 +8,40 @@ public class PlayerWindow extends JFrame {
 
 	private GameBoardPanel gameBoardPanel;
 	private GameStaticsPanel gameStaticsPanel;
-	private Connect4 mainFrame;
+	private Connect4 mainGame;
 
 	private JTextField msg;
 
-	public PlayerWindow(Connect4 mainFrame, int playMode, String player) {
+	public PlayerWindow(Connect4 mainGame, int playMode, String player) {
 		super(player);
-		this.mainFrame = mainFrame;
+		this.mainGame = mainGame;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(900, 700);
+		setSize(1000, 700);
 		// add(new JLabel(new ImageIcon("src/pics/pic.png")));
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
+		setBounds(mainGame.getMainFrame().getBounds());
+
 		gameStaticsPanel = new GameStaticsPanel();
+		gameStaticsPanel.setPreferredSize(new Dimension(250, 700));
 		getContentPane().add(gameStaticsPanel, BorderLayout.EAST);
-		
-		gameBoardPanel = new GameBoardPanel(playMode, this, mainFrame);
+
+		gameBoardPanel = new GameBoardPanel(playMode, this, mainGame);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 		getContentPane().add(gameBoardPanel, BorderLayout.WEST);
 
-
-
-		GameMenuBar menu = new GameMenuBar(mainFrame, this);
+		GameMenuBar menu = new GameMenuBar(mainGame, this);
 		setJMenuBar(menu);
 
 		msg = new JTextField();
 		msg.setEditable(false);
-		//getContentPane().add(msg, BorderLayout.SOUTH);
+		// getContentPane().add(msg, BorderLayout.SOUTH);
 	}
 
 	public void setMsg(String s) {
 		msg.setText(s);
 	}
-	
+
 	public GameStaticsPanel getStaticsPanel() {
 		return gameStaticsPanel;
 	}

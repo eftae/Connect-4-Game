@@ -46,6 +46,11 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		setBackground(bkgdColor);
 		setLayout(new GridLayout(6, 7));
 
+		// setup new game
+		gameEngine = mainFrame.getGameEngine();
+		startNewGame(playMode);
+		updateStaticsPanel();
+
 		// setup discs space
 		for (int i = 0; i < 42; i++) {
 			JButton b = new JButton();
@@ -58,24 +63,16 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			buttons.add(b);
 			add(b);
 			if (playMode != 0) {// not for simulation
-				b.setRolloverIcon(arrow2);
+				if (gameEngine.getCurrState().getCurrPlayer() instanceof AI) {
+					// do not display rollover icon for AI
+					b.setRolloverIcon(whiteDisc);
+				} else {
+					b.setRolloverIcon(arrow2);
+					b.setPressedIcon(arrow2);
+				}
 				b.addActionListener(this);
 			}
 		}
-
-		// setup new game
-		gameEngine = mainFrame.getGameEngine();
-		switch (playMode) {
-		case 1:
-			initSinglePlayerGame();
-			break;
-		case 2:
-			initDoublePlayersGame();
-			break;
-		default:
-			initSimulationGame();
-		}
-		updateStaticsPanel();
 	}
 
 	private void initSinglePlayerGame() {
@@ -84,6 +81,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		int randPlayer = rand.nextInt(2);
 		setBorder(new TitledBorder("Single Player Game"));
 		name1 = JOptionPane.showInputDialog("Please enter your name: ");
+		if (name1.equals("")) {
+			name1 = "Player 1";
+		}
 		if (randPlayer == 0) {
 			player1 = new User(name1);
 			player2 = new AI("BOT", 2);
@@ -105,6 +105,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				.showInputDialog("Please enter your name for player 1: ");
 		name2 = JOptionPane
 				.showInputDialog("Please enter your name for player 2: ");
+		if (name1.equals("")) {
+			name1 = "Player 1";
+		}
+		if (name2.equals("")) {
+			name2 = "Player 2";
+		}
 		if (randPlayer == 0) {
 			player1 = new User(name1);
 			player2 = new User(name2);
@@ -159,8 +165,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		if (b.getRolloverIcon() != null)
 			for (JButton btn : buttons) {
 				if (btn.getIcon() == whiteDisc) {
-					btn.setRolloverIcon(arrow);
-					btn.setPressedIcon(arrow);
+					if (gameEngine.getCurrState().getOtherPlayer() instanceof AI) {
+						// do not display rollover icon for AI
+						btn.setRolloverIcon(whiteDisc);
+					} else {
+						btn.setRolloverIcon(arrow);
+						btn.setPressedIcon(arrow);
+					}
 				}
 			}
 
@@ -170,16 +181,17 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		b.removeActionListener(this);
 		b.setRolloverIcon(null);
 	}
-	
+
 	public void updateStaticsPanel() {
 		ImageIcon icn = null;
-		if(gameEngine.getCurrPlayerIndex() == 1)
+		if (gameEngine.getCurrPlayerIndex() == 1)
 			icn = ResizeImage.changeImage(icn2, 50, 50);
 		else
 			icn = ResizeImage.changeImage(icn1, 50, 50);
-				
-		if(playerWindow != null && playerWindow.getStaticsPanel() != null)
-			playerWindow.getStaticsPanel().setWhosTurn(gameEngine.getCurrPlayer(),icn);
+
+		if (playerWindow != null && playerWindow.getStaticsPanel() != null)
+			playerWindow.getStaticsPanel().setWhosTurn(
+					gameEngine.getCurrPlayer(), icn);
 	}
 
 	public void displayEndGame(Player winner) {
@@ -208,11 +220,15 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			b.setPressedIcon(whiteDisc);
 			if (playMode != 0) {
 				b.setRolloverIcon(arrow2);
+				b.setPressedIcon(arrow2);
 				b.addActionListener(this);
 			}
 		}
 
 		switch (playMode) {
+		case 0:
+			initSimulationGame();
+			break;
 		case 1:
 			initSinglePlayerGame();
 			break;

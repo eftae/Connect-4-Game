@@ -10,7 +10,7 @@ public class GameEngine implements Runnable {
 	private GameStaticsPanel gameStaticsPanel;
 	private boolean isInGame; // game is in run
 	private int totalGame; // number of game started
-	
+
 	public void startNewGame(Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
 		currState = new GameState(player1, player2);
@@ -19,15 +19,15 @@ public class GameEngine implements Runnable {
 		totalGame++;
 		isInGame = true;
 	}
-	
-//	public void startNewGame(Player player1, Player player2,
-//			GameBoardPanel gameBoardPanel, GameStaticsPanel gameStaticsPanel) {
-//		currState = new GameState(player1, player2);
-//		this.gameBoardPanel = gameBoardPanel;
-//		this.gameStaticsPanel = gameStaticsPanel;
-//		totalGame++;
-//		isInGame = true;
-//	}
+
+	// public void startNewGame(Player player1, Player player2,
+	// GameBoardPanel gameBoardPanel, GameStaticsPanel gameStaticsPanel) {
+	// currState = new GameState(player1, player2);
+	// this.gameBoardPanel = gameBoardPanel;
+	// this.gameStaticsPanel = gameStaticsPanel;
+	// totalGame++;
+	// isInGame = true;
+	// }
 
 	@Override
 	public void run() {
@@ -51,16 +51,17 @@ public class GameEngine implements Runnable {
 				// check isInGame to avoid AI delay while screen jumping
 				if (isInGame && thisGame == totalGame
 						&& currState.isValidMove(nextMove)) {
-					
+
 					int row = currState.runNextMove(nextMove);
-					
+
 					// display disc dropped
-					gameBoardPanel.displayDisc(nextMove,row,getCurrPlayerIndex());
-					
+					gameBoardPanel.displayDisc(nextMove, row,
+							getCurrPlayerIndex());
+
 					// increment turn
 					currState.incTurn();
 					currState.setCurrPlayer(currState.getOtherPlayer());
-					
+
 					gameBoardPanel.updateStaticsPanel();
 
 					// check game end and winner
@@ -88,7 +89,7 @@ public class GameEngine implements Runnable {
 	public Player getCurrPlayer() {
 		return currState.getCurrPlayer();
 	}
-	
+
 	public Player getOtherPlayer() {
 		return currState.getOtherPlayer();
 	}
@@ -99,6 +100,10 @@ public class GameEngine implements Runnable {
 
 	public boolean isGameOn() {
 		return isInGame;
+	}
+
+	public void suspendGame() {
+		isInGame = false;
 	}
 
 	public int getCurrPlayerIndex() {

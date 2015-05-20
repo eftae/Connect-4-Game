@@ -42,18 +42,16 @@ public class GameMenuBar extends JMenuBar {
 		JMenuItem menuItem1 = new JMenuItem("Save", newIcon1);
 		JMenuItem menuItem2 = new JMenuItem("Home", newIcon2);
 		JMenuItem menuItem3 = new JMenuItem("Exit", newIcon3);
-		
+
 		if (MenuPanel.counter == true) {
 			title = "Mute";
 			muteIcon = newIcon4;
-		}else {
+		} else {
 			title = "Speaker";
 			muteIcon = newIcon5;
 		}
-			
+
 		final JMenuItem menuItem4 = new JMenuItem(title, muteIcon);
-	
-		
 
 		menuItem1.setToolTipText("Exit application");
 		menuItem1.addActionListener(new ActionListener() {
@@ -67,9 +65,9 @@ public class GameMenuBar extends JMenuBar {
 		menuItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
+				// mainGame.getGameEngine().suspendGame();
 				mainGame.setVisity(true);
 				psw.dispose();
-
 			}
 		});
 
