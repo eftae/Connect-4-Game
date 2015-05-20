@@ -16,11 +16,13 @@ import javax.swing.border.TitledBorder;
 public class MenuPanel extends JPanel {
 
 	private Connect4 mainFrame;
-	static int counter = 0;
+	public static boolean counter = true;
+	public static JButton muteButton = null;
+	
+
 
 	public MenuPanel(final Connect4 mainFrame) {
 		this.mainFrame = mainFrame;
-	
 
 		setLayout(new GridBagLayout());
 		setBorder(new TitledBorder("New Game"));
@@ -50,8 +52,10 @@ public class MenuPanel extends JPanel {
 				mainFrame.setVisity(false);
 
 				BackgroundMusic.stopMusic();
-				BackgroundMusic
-						.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
+				if (counter == true) {
+					BackgroundMusic
+							.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
+				}
 			}
 		});
 
@@ -75,7 +79,10 @@ public class MenuPanel extends JPanel {
 				mainFrame.setVisity(false);
 
 				BackgroundMusic.stopMusic();
-				BackgroundMusic.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
+				if (counter == true) {
+					BackgroundMusic
+							.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
+				}
 			}
 
 		});
@@ -114,13 +121,14 @@ public class MenuPanel extends JPanel {
 			}
 		});
 
-		
 		// button for mute/play music
 		gc.gridx = 0;
 		gc.gridy = 4;
-		final ImageIcon muteButtonIcon= new ImageIcon("src/pics/Mute.png");
-		final ImageIcon speakerButtonIcon = new ImageIcon("src/pics/Speaker.png");
-		final JButton muteButton = new JButton("Mute Music", muteButtonIcon);
+		
+		final ImageIcon muteButtonIcon = new ImageIcon("src/pics/Mute.png");
+		final ImageIcon speakerButtonIcon = new ImageIcon(
+				"src/pics/Speaker.png");
+		muteButton = new JButton("Mute Music", muteButtonIcon);
 		muteButton.setToolTipText("Mute/Start Music");
 		muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(muteButton, gc);
@@ -128,41 +136,41 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ButtonSound.music("src/sound/button.wav");
-				if (counter % 2 == 0) {
+				if (counter == true) {
 					muteButton.setIcon(speakerButtonIcon);
 					muteButton.setText("Play music");
 					muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
-					BackgroundMusic.stopMusic();					
-					counter++;
-				}else {
+					BackgroundMusic.stopMusic();
+					counter = false;
+				} else {
 					muteButton.setIcon(muteButtonIcon);
 					muteButton.setText("Mute music");
 					muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
-					BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
-					counter++;
+					BackgroundMusic
+							.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
+					counter = true;
 				}
-				
+
 			}
 
 		});
-		
-		
-		// Button for Quit
-				gc.gridx = 0;
-				gc.gridy = 5;
-				ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
-				JButton quitButton = new JButton("Quit Game", quitButtonIcon);
-				quitButton.setToolTipText("Exit the Game");
-				quitButton.setFont(new Font("Arial", Font.PLAIN, 20));
-				add(quitButton, gc);
-				quitButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						ButtonSound.music("src/sound/button.wav");
-						System.exit(0);
-					}
 
-				});
+		// Button for Quit
+		gc.gridx = 0;
+		gc.gridy = 5;
+		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
+		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
+		quitButton.setToolTipText("Exit the Game");
+		quitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		add(quitButton, gc);
+		quitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ButtonSound.music("src/sound/button.wav");
+				System.exit(0);
+			}
+
+		});
 
 	}
 }
