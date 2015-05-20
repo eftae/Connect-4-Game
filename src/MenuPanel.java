@@ -114,25 +114,10 @@ public class MenuPanel extends JPanel {
 			}
 		});
 
-		// Button for Quit
+		
+		// button for mute/play music
 		gc.gridx = 0;
 		gc.gridy = 4;
-		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
-		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
-		quitButton.setToolTipText("Exit the Game");
-		quitButton.setFont(new Font("Arial", Font.PLAIN, 20));
-		add(quitButton, gc);
-		quitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ButtonSound.music("src/sound/button.wav");
-				System.exit(0);
-			}
-
-		});
-		
-		gc.gridx = 0;
-		gc.gridy = 5;
 		final ImageIcon muteButtonIcon= new ImageIcon("src/pics/Mute.png");
 		final ImageIcon speakerButtonIcon = new ImageIcon("src/pics/Speaker.png");
 		final JButton muteButton = new JButton("Mute Music", muteButtonIcon);
@@ -160,6 +145,24 @@ public class MenuPanel extends JPanel {
 			}
 
 		});
+		
+		
+		// Button for Quit
+				gc.gridx = 0;
+				gc.gridy = 5;
+				ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
+				JButton quitButton = new JButton("Quit Game", quitButtonIcon);
+				quitButton.setToolTipText("Exit the Game");
+				quitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+				add(quitButton, gc);
+				quitButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ButtonSound.music("src/sound/button.wav");
+						System.exit(0);
+					}
+
+				});
 
 	}
 }
