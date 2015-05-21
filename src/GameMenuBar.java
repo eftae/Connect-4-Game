@@ -20,7 +20,7 @@ public class GameMenuBar extends JMenuBar {
 
 	// private static int counter = 0;
 
-	public GameMenuBar(Connect4 mainGame, PlayerWindow psw) {
+	public GameMenuBar(final Connect4 mainGame, final PlayerWindow psw) {
 
 		this.mainGame = mainGame;
 		this.psw = psw;

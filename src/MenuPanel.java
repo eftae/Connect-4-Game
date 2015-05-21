@@ -21,7 +21,7 @@ public class MenuPanel extends JPanel {
 	
 
 
-	public MenuPanel(Connect4 mainGame) {
+	public MenuPanel(final Connect4 mainGame) {
 		this.mainGame = mainGame;
 
 		setLayout(new GridBagLayout());
