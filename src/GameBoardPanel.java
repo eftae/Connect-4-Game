@@ -72,7 +72,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		String name1 = null;
 		setBorder(new TitledBorder("Single Player Game"));
 		name1 = JOptionPane.showInputDialog("Please enter your name: ");
-		if (name1.equals("")) {
+		if (name1 != null && name1.equals("")) {
 			name1 = "Player 1";
 		}
 		if (randPlayer() == 0) {
@@ -95,10 +95,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				.showInputDialog("Please enter your name for player 1: ");
 		name2 = JOptionPane
 				.showInputDialog("Please enter your name for player 2: ");
-		if (name1.equals("")) {
+		if (name1 != null && name1.equals("")) {
 			name1 = "Player 1";
 		}
-		if (name2.equals("")) {
+		if (name2 != null && name2.equals("")) {
 			name2 = "Player 2";
 		}
 		if (randPlayer() == 0) {
@@ -134,7 +134,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				int nextMove = buttons.indexOf(pressed) % 7;
 				if (gameEngine.isValidMove(nextMove)) {
 					currUser.userInputReady(nextMove);
-					if(!MenuPanel.isMute) ButtonSound.music("src/sound/button.wav");
+					if (!MenuPanel.isMute)
+						ButtonSound.music("src/sound/button.wav");
 					return;
 				}
 			}
