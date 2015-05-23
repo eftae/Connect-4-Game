@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 public class GameStatisticsPanel extends JPanel {
 
 	private JLabel turns;
+	private JLabel winMsg;
 
 	public GameStatisticsPanel() {
 		setBorder(new TitledBorder("Game Statistic"));
@@ -23,6 +24,8 @@ public class GameStatisticsPanel extends JPanel {
 		// who's turn
 		turns = new JLabel("Who's Turn");
 		add(turns);
+		winMsg = new JLabel("Game started.");
+		add(winMsg);
 	}
 
 	public void setWhosTurn(Player p, ImageIcon icn) {
@@ -33,5 +36,14 @@ public class GameStatisticsPanel extends JPanel {
 		} catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
+	}
+
+	public void displayEndGame(Player winner) {
+		if (winner == null) {
+			winMsg.setText("Board Full. Drew.");
+		} else {
+			winMsg.setText(winner.getName() + " won.");
+		}
+		repaint();
 	}
 }

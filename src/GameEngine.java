@@ -62,7 +62,7 @@ public class GameEngine implements Runnable {
 					currState.incTurn();
 					currState.setCurrPlayer(currState.getOtherPlayer());
 
-					gameBoardPanel.updateStaticsPanel();
+					gameBoardPanel.updateStatisticsPanel();
 
 					// check game end and winner
 					if (currState.checkGameEnd()) {

@@ -120,7 +120,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		b.setRolloverIcon(null);
 	}
 
-	public void updateStaticsPanel() {
+	public void updateStatisticsPanel() {
 		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
 			ImageIcon icn = null;
 			if (gameEngine.getCurrPlayerIndex() == 1)
@@ -135,18 +135,22 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public void displayEndGame(Player winner) {
 		if (gameMode == 0)
-			return;
+			return; // stimulation
 
-		if (winner != null) {
-			JOptionPane.showMessageDialog(null, winner.getName() + " win");
-		} else {
-			JOptionPane.showMessageDialog(null, "Board Full, Game Over");
+		for (JButton btn : buttons) {
+			btn.removeActionListener(this);
+			if (btn.getIcon() == whiteDisc) {
+				btn.setRolloverIcon(null);
+				btn.setPressedIcon(whiteDisc);
+			}
 		}
 
-		playerWindow.setVisible(false);
-		playerWindow.dispose();
-		mainGame.setVisity(true);
-		mainGame.changeGlassPane(0);
+		playerWindow.getStatisticsPanel().displayEndGame(winner);
+
+		// playerWindow.setVisible(false);
+		// playerWindow.dispose();
+		// mainGame.setVisity(true);
+		// mainGame.changeGlassPane(0);
 	}
 
 	public void startNewGame() {
@@ -170,7 +174,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			}
 		}
 
-		updateStaticsPanel();
+		updateStatisticsPanel();
 	}
 
 	public void initSinglePlayerGame(String playerName, int AIMode) {
@@ -181,7 +185,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		String nameAI = null;
 		switch (AIMode) {
 		case 0:
-			nameAI = "EASY BOY";
+			nameAI = "EASY BOT";
 			break;
 		case 1:
 			nameAI = "MEDIUM BOT";
