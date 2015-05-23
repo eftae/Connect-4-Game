@@ -33,12 +33,7 @@ public class GameEngine implements Runnable {
 	public void run() {
 		// delay thread to wait game started
 		while (true) {
-			sleep(100);
-
-			// delay before game started
-			if (isInGame && currState.getCurrPlayer() instanceof AI) {
-				sleep(500);
-			}
+			sleep(500);
 
 			// start game run
 			int thisGame = totalGame;
@@ -49,7 +44,7 @@ public class GameEngine implements Runnable {
 				int nextMove = currPlayer.decideMove(currState.clone());
 
 				// check isInGame to avoid AI delay while screen jumping
-				if (isInGame && thisGame == totalGame
+				if (!Thread.interrupted() && isInGame && thisGame == totalGame
 						&& currState.isValidMove(nextMove)) {
 
 					int row = currState.runNextMove(nextMove);
@@ -69,6 +64,8 @@ public class GameEngine implements Runnable {
 						isInGame = false;
 						gameBoardPanel.displayEndGame(currState.getWinner());
 					}
+				} else {
+					break;
 				}
 			}
 		}
@@ -98,7 +95,7 @@ public class GameEngine implements Runnable {
 		return currState.isValidMove(move);
 	}
 
-	public boolean isGameOn() {
+	public boolean isInGame() {
 		return isInGame;
 	}
 

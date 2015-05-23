@@ -26,6 +26,8 @@ public class MenuPanel extends JPanel {
 	public MenuPanel(final Connect4 mainGame) {
 		this.mainGame = mainGame;
 
+		Font defaultFont = new Font("Arial", Font.PLAIN, 20);
+
 		setLayout(new GridBagLayout());
 		setBorder(new TitledBorder("New Game"));
 
@@ -41,7 +43,7 @@ public class MenuPanel extends JPanel {
 		JButton singlePlayerButton = new JButton(" Single Player",
 				singlePlayerButtonIcon);
 		singlePlayerButton.setToolTipText("Start a game against with BOT");
-		singlePlayerButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		singlePlayerButton.setFont(defaultFont);
 		add(singlePlayerButton, gc);
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
@@ -59,7 +61,7 @@ public class MenuPanel extends JPanel {
 		JButton twoPlayersButton = new JButton("Co-op Player",
 				twoPlayersButtonIcon);
 		twoPlayersButton.setToolTipText("Enter a mutiplayer VS Your Friend");
-		twoPlayersButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		twoPlayersButton.setFont(defaultFont);
 		add(twoPlayersButton, gc);
 		twoPlayersButton.addActionListener(new ActionListener() {
 			@Override
@@ -78,7 +80,7 @@ public class MenuPanel extends JPanel {
 		JButton statisticButton = new JButton(" High Score",
 				statisticButtonIcon);
 		statisticButton.setToolTipText("Check High Scored Record");
-		statisticButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		statisticButton.setFont(defaultFont);
 		add(statisticButton, gc);
 		statisticButton.addActionListener(new ActionListener() {
 			@Override
@@ -95,7 +97,7 @@ public class MenuPanel extends JPanel {
 		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
 		JButton creditsButton = new JButton("  Credits", creditsButtonIcon);
 		creditsButton.setToolTipText("View the Development Team");
-		creditsButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		creditsButton.setFont(defaultFont);
 		add(creditsButton, gc);
 		creditsButton.addActionListener(new ActionListener() {
 			@Override
@@ -111,7 +113,7 @@ public class MenuPanel extends JPanel {
 		gc.gridy = 4;
 		muteButton = new JButton("Mute Music", muteButtonIcon);
 		muteButton.setToolTipText("Mute/Unmute Music");
-		muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		muteButton.setFont(defaultFont);
 		add(muteButton, gc);
 		muteActionListener = new ActionListener() {
 			@Override
@@ -120,7 +122,8 @@ public class MenuPanel extends JPanel {
 					mainGame.setisMuted(true);
 				} else {
 					mainGame.setisMuted(false);
-					BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
+					BackgroundMusic
+							.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 				}
 			}
 		};
@@ -132,7 +135,7 @@ public class MenuPanel extends JPanel {
 		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
 		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
 		quitButton.setToolTipText("Exit the Game");
-		quitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		quitButton.setFont(defaultFont);
 		add(quitButton, gc);
 		quitButton.addActionListener(new ActionListener() {
 			@Override
@@ -158,6 +161,6 @@ public class MenuPanel extends JPanel {
 	public void unmute() {
 		muteButton.setIcon(muteButtonIcon);
 		muteButton.setText("Mute");
-		ButtonSound.music("src/sound/button.wav");		
+		ButtonSound.music("src/sound/button.wav");
 	}
 }

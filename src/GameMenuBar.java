@@ -70,10 +70,10 @@ public class GameMenuBar extends JMenuBar {
 					Thread.sleep(1000);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
-				}
-				psw.setVisible(false);
-				mainGame.changeGlassPane(0);
+				}				
 				mainGame.setVisity(true);
+				mainGame.changeGlassPane(0);
+				psw.setVisible(false);
 				psw.dispose();
 			}
 		});

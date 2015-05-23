@@ -8,7 +8,7 @@ public class Connect4 implements Runnable {
 
 	private JFrame mainFrame;
 	private MenuPanel menuPanel;
-	private GameBoardPanel gameBoardPanel;
+	private GameBoardPanel simulationPanel;
 	private GameEngine gameEngine;
 	private JPanel homeGlassPane;
 	private static Thread threadGE;
@@ -31,8 +31,8 @@ public class Connect4 implements Runnable {
 		menuPanel.setPreferredSize(new Dimension(250, 700));
 
 		// game board panel
-		gameBoardPanel = new GameBoardPanel(null, this);
-		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
+		simulationPanel = new GameBoardPanel(null, this);
+		simulationPanel.setPreferredSize(new Dimension(750, 700));
 
 		// logo panel
 		homeGlassPane = new LogoPanel();
@@ -63,9 +63,9 @@ public class Connect4 implements Runnable {
 			homeGlassPane.setVisible(true);
 		}
 		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST);
-		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.WEST);
-		mainFrame.pack();
+		mainFrame.getContentPane().add(simulationPanel, BorderLayout.WEST);
 		mainFrame.setResizable(false);
+		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
 
@@ -75,10 +75,6 @@ public class Connect4 implements Runnable {
 
 	public GameEngine getGameEngine() {
 		return gameEngine;
-	}
-
-	public GameBoardPanel getGameBoardPanel() {
-		return gameBoardPanel;
 	}
 
 	public MenuPanel getMenuPanel() {
@@ -125,26 +121,29 @@ public class Connect4 implements Runnable {
 			homeGlassPane = new Credits();
 			break;
 		default:
-			homeGlassPane = null;
+			homeGlassPane = new JPanel();
 		}
 		display();
 	}
 
+	/**
+	 * GUI thread. Detect game state and restart simulation.
+	 */
 	@Override
 	public void run() {
 		display();
 		BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 
 		while (true) {
+			// start new simulation if game is not on
+			if (!gameEngine.isInGame() && mainFrame.isVisible()) {
+				simulationPanel.startSimulationGame();
+			}
 			// delay waiting
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
-			}
-			// start new simulation if game is not on
-			if (!gameEngine.isGameOn()) {
-				gameBoardPanel.startSimulationGame();
 			}
 		}
 	}

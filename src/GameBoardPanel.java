@@ -39,6 +39,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 		this.playerWindow = playerWindow;
 		this.mainGame = mainGame;
+		gameEngine = mainGame.getGameEngine();
 
 		// setup the game panel
 		Color bkgdColor = new Color(27, 120, 236);
@@ -58,9 +59,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			buttons.add(b);
 			add(b);
 		}
-
-		// setup new game
-		gameEngine = mainGame.getGameEngine();
 	}
 
 	@Override
@@ -95,12 +93,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			arrow = arrow1;
 		}
 
-		// change rollover icon
-		if (b.getRolloverIcon() != null)
+		// swap RolloverIcon icons every turn
+		if (gameMode != 0)
 			for (JButton btn : buttons) {
 				if (btn.getIcon() == whiteDisc) {
 					if (gameEngine.getCurrState().getOtherPlayer() instanceof AI) {
-						// do not display rollover icon for AI
+						// do not display RolloverIcon icon for AI
 						btn.setRolloverIcon(whiteDisc);
 					} else {
 						btn.setRolloverIcon(arrow);
@@ -135,18 +133,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		playerWindow.getStatisticsPanel().displayEndGame(winner);
-
-		// playerWindow.setVisible(false);
-		// playerWindow.dispose();
-		// mainGame.setVisity(true);
-		// mainGame.changeGlassPane(0);
 	}
 
 	public void startNewGame() {
 		gameEngine.startNewGame(player1, player2, this);
-		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
-			playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
-		}
 
 		// clear/initialize buttons icons
 		for (JButton b : buttons) {
@@ -165,8 +155,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				b.setPressedIcon(whiteDisc);
 			}
 		}
+	}
 
-		updateStatisticsPanel();
+	public void startSimulationGame() {
+		player1 = new AI("BOT A", -1);
+		player2 = new AI("BOT B", -1);
+		gameMode = 0;
+		startNewGame();
 	}
 
 	public void initSinglePlayerGame(String playerName, int AIMode) {
@@ -197,7 +192,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			player2 = new User(playerName);
 		}
 		gameMode = 1;
+		playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		startNewGame();
+		updateStatisticsPanel();
 	}
 
 	public void initDoublePlayersGame(String name1, String name2) {
@@ -216,18 +213,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		gameMode = 2;
+		playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		startNewGame();
+		updateStatisticsPanel();
 	}
 
 	private int randPlayer() {
 		Random rand = new Random();
 		return rand.nextInt(2);
-	}
-
-	public void startSimulationGame() {
-		player1 = new AI("BOT A", -1);
-		player2 = new AI("BOT B", -1);
-		gameMode = 0;
-		startNewGame();
 	}
 }
