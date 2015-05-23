@@ -16,9 +16,9 @@ public class DoublePlayersMenu extends JPanel {
 
 	public DoublePlayersMenu(Connect4 mainGame) {
 		// user name input
-		JTextField player1NameField = new JTextField("Player 1", 25);
+		JTextField player1NameField = new JTextField("Player Name A", 25);
 		add(player1NameField);
-		JTextField player2NameField = new JTextField("Player 2", 25);
+		JTextField player2NameField = new JTextField("Player Name B", 25);
 		add(player2NameField);
 
 		// start game button

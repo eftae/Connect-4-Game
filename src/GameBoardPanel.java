@@ -28,10 +28,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			"src/pics/redDot.png"), 100, 100);
 	private ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowDot.png"), 100, 100);
-	private ImageIcon icn1s = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/redDot.png"), 50, 50);
-	private ImageIcon icn2s = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/yellowDot.png"), 50, 50);
 	private ImageIcon whiteDisc = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 100, 100);
 	private ImageIcon arrow1 = ResizeImage.changeImage(new ImageIcon(
@@ -122,14 +118,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public void updateStatisticsPanel() {
 		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
-			ImageIcon icn = null;
-			if (gameEngine.getCurrPlayerIndex() == 1)
-				icn = icn2s;
-			else
-				icn = icn1s;
-
-			playerWindow.getStatisticsPanel().setWhosTurn(
-					gameEngine.getCurrPlayer(), icn);
+			playerWindow.getStatisticsPanel().setWhosTurn();
 		}
 	}
 
@@ -155,6 +144,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public void startNewGame() {
 		gameEngine.startNewGame(player1, player2, this);
+		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
+			playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+		}
 
 		// clear/initialize buttons icons
 		for (JButton b : buttons) {
@@ -179,7 +171,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public void initSinglePlayerGame(String playerName, int AIMode) {
 		if (playerName == null || playerName.equals("")) {
-			playerName = "Player 1";
+			playerName = "Player Name";
 		}
 
 		String nameAI = null;
@@ -210,10 +202,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	public void initDoublePlayersGame(String name1, String name2) {
 		if (name1 == null || name1.equals("")) {
-			name1 = "Player 1";
+			name1 = "Player Name A";
 		}
 		if (name2 == null || name2.equals("")) {
-			name2 = "Player 2";
+			name2 = "Player Name B";
 		}
 		if (randPlayer() == 0) {
 			player1 = new User(name1);

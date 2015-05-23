@@ -16,7 +16,7 @@ public class SinglePlayerMenu extends JPanel {
 
 	public SinglePlayerMenu(Connect4 mainGame) {
 		// user name input
-		JTextField playerNameField = new JTextField("Player 1", 25);
+		JTextField playerNameField = new JTextField("Player Name", 25);
 		add(playerNameField);
 
 		// Easy button
