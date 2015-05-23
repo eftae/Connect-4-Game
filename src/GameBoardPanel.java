@@ -74,7 +74,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				int nextMove = buttons.indexOf(pressed) % 7;
 				if (gameEngine.isValidMove(nextMove)) {
 					currUser.userInputReady(nextMove);
-					if (!MenuPanel.isMute)
+					if (!mainGame.isMuted())
 						ButtonSound.music("src/sound/button.wav");
 					return;
 				}

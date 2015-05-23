@@ -16,8 +16,12 @@ import javax.swing.border.TitledBorder;
 public class MenuPanel extends JPanel {
 
 	private Connect4 mainGame;
-	public static boolean isMute = false;
-	public static JButton muteButton = null;
+
+	// mute function fields
+	private JButton muteButton;
+	private ActionListener muteActionListener;
+	private ImageIcon muteButtonIcon = new ImageIcon("src/pics/Mute.png");
+	private ImageIcon speakerButtonIcon = new ImageIcon("src/pics/Speaker.png");
 
 	public MenuPanel(final Connect4 mainGame) {
 		this.mainGame = mainGame;
@@ -42,15 +46,9 @@ public class MenuPanel extends JPanel {
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!isMute)
+				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-
 				mainGame.changeGlassPane(1);
-
-				BackgroundMusic.stopMusic();
-				if (!isMute)
-					BackgroundMusic
-							.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
 			}
 		});
 
@@ -66,18 +64,9 @@ public class MenuPanel extends JPanel {
 		twoPlayersButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				GameWindow twoPlayerWindow = new GameWindow(mainGame,
-						"Mutiple Player Game");
-
-				mainGame.changeGlassPane(2);
-
-				BackgroundMusic.stopMusic();
-				if (isMute == false) {
+				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-					BackgroundMusic
-							.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
-				}
+				mainGame.changeGlassPane(2);
 			}
 
 		});
@@ -94,11 +83,10 @@ public class MenuPanel extends JPanel {
 		statisticButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!isMute)
+				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
 				mainGame.changeGlassPane(3);
 			}
-
 		});
 
 		// Button for Credits
@@ -112,7 +100,7 @@ public class MenuPanel extends JPanel {
 		creditsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!isMute)
+				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
 				mainGame.changeGlassPane(4);
 			}
@@ -121,36 +109,22 @@ public class MenuPanel extends JPanel {
 		// button for mute/play music
 		gc.gridx = 0;
 		gc.gridy = 4;
-
-		final ImageIcon muteButtonIcon = new ImageIcon("src/pics/Mute.png");
-		final ImageIcon speakerButtonIcon = new ImageIcon(
-				"src/pics/Speaker.png");
 		muteButton = new JButton("Mute Music", muteButtonIcon);
 		muteButton.setToolTipText("Mute/Unmute Music");
 		muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(muteButton, gc);
-		muteButton.addActionListener(new ActionListener() {
+		muteActionListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isMute == false) {
-					muteButton.setIcon(speakerButtonIcon);
-					muteButton.setText("Play music");
-					muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
-					BackgroundMusic.stopMusic();
-					isMute = true;
+				if (!mainGame.isMuted()) {
+					mainGame.setisMuted(true);
 				} else {
-					muteButton.setIcon(muteButtonIcon);
-					muteButton.setText("Mute music");
-					muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
-					ButtonSound.music("src/sound/button.wav");
-					BackgroundMusic
-							.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
-					isMute = false;
+					mainGame.setisMuted(false);
+					BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 				}
-
 			}
-
-		});
+		};
+		muteButton.addActionListener(muteActionListener);
 
 		// Button for Quit
 		gc.gridx = 0;
@@ -163,12 +137,27 @@ public class MenuPanel extends JPanel {
 		quitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!isMute)
+				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
 				System.exit(0);
 			}
 
 		});
+	}
 
+	public ActionListener getMuteActionListener() {
+		return muteActionListener;
+	}
+
+	public void mute() {
+		muteButton.setIcon(speakerButtonIcon);
+		muteButton.setText("Unmute");
+		BackgroundMusic.stopMusic();
+	}
+
+	public void unmute() {
+		muteButton.setIcon(muteButtonIcon);
+		muteButton.setText("Mute");
+		ButtonSound.music("src/sound/button.wav");		
 	}
 }

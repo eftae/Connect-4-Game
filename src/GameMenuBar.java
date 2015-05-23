@@ -24,6 +24,7 @@ public class GameMenuBar extends JMenuBar {
 
 		this.mainGame = mainGame;
 		this.psw = psw;
+
 		JMenu first = new JMenu("Menu");
 		add(first);
 
@@ -39,29 +40,28 @@ public class GameMenuBar extends JMenuBar {
 		final ImageIcon newIcon4 = ResizeImage.changeImage(icon4, 20, 20);
 		final ImageIcon newIcon5 = ResizeImage.changeImage(icon5, 20, 20);
 
-		JMenuItem menuItem1 = new JMenuItem("Save", newIcon1);
-		JMenuItem menuItem2 = new JMenuItem("Home", newIcon2);
-		JMenuItem menuItem3 = new JMenuItem("Exit", newIcon3);
-
-		if (MenuPanel.isMute == false) {
+		if (!mainGame.isMuted()) {
 			title = "Mute";
 			muteIcon = newIcon4;
 		} else {
-			title = "Speaker";
+			title = "Unmute";
 			muteIcon = newIcon5;
 		}
 
-		final JMenuItem menuItem4 = new JMenuItem(title, muteIcon);
+		JMenuItem menuItem1 = new JMenuItem("Save", newIcon1);
+		JMenuItem menuItem2 = new JMenuItem("Home", newIcon2);
+		final JMenuItem menuItem3 = new JMenuItem(title, muteIcon);
+		JMenuItem menuItem4 = new JMenuItem("Exit", newIcon3);
 
-		menuItem1.setToolTipText("Exit application");
+		menuItem1.setToolTipText("Save Game");
 		menuItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				System.exit(0);
+
 			}
 		});
 
-		menuItem2.setToolTipText("Return to Home Menu");
+		menuItem2.setToolTipText("Return to Menu");
 		menuItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -71,40 +71,37 @@ public class GameMenuBar extends JMenuBar {
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
+				psw.setVisible(false);
 				mainGame.changeGlassPane(0);
 				mainGame.setVisity(true);
 				psw.dispose();
 			}
 		});
 
-		menuItem3.setToolTipText("Exit application");
+		menuItem3.setToolTipText("Mute/unmute sound");
 		menuItem3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				System.exit(0);
+				if (!mainGame.isMuted()) {
+					menuItem3.setIcon(newIcon5);
+					menuItem3.setText("Unmute");
+					BackgroundMusic.stopMusic();
+					mainGame.setisMuted(true);
+				} else {
+					menuItem3.setIcon(newIcon4);
+					menuItem3.setText("Mute");
+					BackgroundMusic
+							.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
+					mainGame.setisMuted(false);
+				}
 			}
 		});
 
-		menuItem4.setToolTipText("mute/unmute the music");
+		menuItem4.setToolTipText("Exit application");
 		menuItem4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				if (!MenuPanel.isMute) {
-					menuItem4.setIcon(newIcon5);
-					menuItem4.setText("Speaker");
-					BackgroundMusic.stopMusic();
-					MenuPanel.muteButton.setText("Play Music");
-					MenuPanel.muteButton.setIcon(icon5);
-					MenuPanel.isMute = true;
-				} else {
-					menuItem4.setIcon(newIcon4);
-					menuItem4.setText("Mute");
-					BackgroundMusic.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
-					MenuPanel.muteButton.setText("Mute Music");
-					MenuPanel.muteButton.setIcon(icon4);
-					MenuPanel.isMute = false;
-				}
-
+				System.exit(0);
 			}
 		});
 
@@ -112,9 +109,13 @@ public class GameMenuBar extends JMenuBar {
 		first.addSeparator();
 		first.add(menuItem2);
 		first.addSeparator();
-		first.add(menuItem4);
-		first.addSeparator();
 		first.add(menuItem3);
+		first.addSeparator();
+		first.add(menuItem4);
+
+	}
+
+	public void mute() {
 
 	}
 

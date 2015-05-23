@@ -32,6 +32,13 @@ public class DoublePlayersMenu extends JPanel {
 				mainGame.changeGlassPane(-1);
 				doublePlayersWindow.setVisible(true);
 				mainGame.setVisity(false);
+
+				if (!mainGame.isMuted()) {
+					BackgroundMusic.stopMusic();
+					ButtonSound.music("src/sound/button.wav");
+					BackgroundMusic
+							.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
+				}
 			}
 		});
 		add(startGame);

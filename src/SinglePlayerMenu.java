@@ -57,6 +57,13 @@ public class SinglePlayerMenu extends JPanel {
 				mainGame.changeGlassPane(-1);
 				singlePlayerWindow.setVisible(true);
 				mainGame.setVisity(false);
+
+				if (!mainGame.isMuted()) {
+					BackgroundMusic.stopMusic();
+					ButtonSound.music("src/sound/button.wav");
+					BackgroundMusic
+							.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
+				}
 			}
 		});
 		add(startGame);

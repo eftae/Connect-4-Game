@@ -13,6 +13,7 @@ public class Connect4 implements Runnable {
 	private JPanel homeGlassPane;
 	private static Thread threadGE;
 	private static Thread threadGUI;
+	private boolean isMuted;
 
 	// public BackgroundMusic backMusic = new BackgroundMusic();
 
@@ -80,6 +81,10 @@ public class Connect4 implements Runnable {
 		return gameBoardPanel;
 	}
 
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+
 	public JFrame getMainFrame() {
 		return mainFrame;
 	}
@@ -87,6 +92,19 @@ public class Connect4 implements Runnable {
 	public void suspendGame() {
 		gameEngine.suspendGame();
 		threadGE.interrupt();
+	}
+
+	public boolean isMuted() {
+		return isMuted;
+	}
+
+	public void setisMuted(boolean isMuted) {
+		this.isMuted = isMuted;
+		if (isMuted) {
+			menuPanel.mute();
+		} else {
+			menuPanel.unmute();
+		}
 	}
 
 	public void changeGlassPane(int mode) {
