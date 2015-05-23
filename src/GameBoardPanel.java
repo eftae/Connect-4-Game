@@ -13,34 +13,34 @@ import javax.swing.border.TitledBorder;
 
 public class GameBoardPanel extends JPanel implements ActionListener {
 
-	private int playMode;
-	private PlayerWindow playerWindow;
+	private GameWindow playerWindow;
 	private Connect4 mainGame;
 	private GameEngine gameEngine;
 
-	Player player1;
-	Player player2;
-	ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// game data
+	private Player player1;
+	private Player player2;
+	private int gameMode;
+	private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-	ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
+	// images
+	private ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/redDot.png"), 100, 100);
-	ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
+	private ImageIcon icn2 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowDot.png"), 100, 100);
-	ImageIcon icn1s = ResizeImage.changeImage(new ImageIcon(
+	private ImageIcon icn1s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/redDot.png"), 50, 50);
-	ImageIcon icn2s = ResizeImage.changeImage(new ImageIcon(
+	private ImageIcon icn2s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowDot.png"), 50, 50);
-	ImageIcon whiteDisc = ResizeImage.changeImage(new ImageIcon(
+	private ImageIcon whiteDisc = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 100, 100);
-	ImageIcon arrow1 = ResizeImage.changeImage(new ImageIcon(
+	private ImageIcon arrow1 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/redarrow.png"), 100, 100);
-	ImageIcon arrow2 = ResizeImage.changeImage(new ImageIcon(
+	private ImageIcon arrow2 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowarrow.png"), 100, 100);
 
-	public GameBoardPanel(int playMode, PlayerWindow playerWindow,
-			Connect4 mainGame) {
+	public GameBoardPanel(GameWindow playerWindow, Connect4 mainGame) {
 
-		this.playMode = playMode;
 		this.playerWindow = playerWindow;
 		this.mainGame = mainGame;
 
@@ -65,62 +65,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 		// setup new game
 		gameEngine = mainGame.getGameEngine();
-		startNewGame(playMode);
-	}
-
-	private void initSinglePlayerGame() {
-		String name1 = null;
-		setBorder(new TitledBorder("Single Player Game"));
-		name1 = JOptionPane.showInputDialog("Please enter your name: ");
-		if (name1 != null && name1.equals("")) {
-			name1 = "Player 1";
-		}
-		if (randPlayer() == 0) {
-			player1 = new User(name1);
-			player2 = new AI("BOT", 2);
-		} else {
-			player1 = new AI("BOT", 2);
-			player2 = new User(name1);
-		}
-		// JOptionPane.showMessageDialog(null, player1.getName() +
-		// " goes first.");
-	}
-
-	private void initDoublePlayersGame() {
-		String name1 = null;
-		String name2 = null;
-
-		setBorder(new TitledBorder("Double Players Game"));
-		name1 = JOptionPane
-				.showInputDialog("Please enter your name for player 1: ");
-		name2 = JOptionPane
-				.showInputDialog("Please enter your name for player 2: ");
-		if (name1 != null && name1.equals("")) {
-			name1 = "Player 1";
-		}
-		if (name2 != null && name2.equals("")) {
-			name2 = "Player 2";
-		}
-		if (randPlayer() == 0) {
-			player1 = new User(name1);
-			player2 = new User(name2);
-		} else {
-			player1 = new User(name2);
-			player2 = new User(name1);
-		}
-		// JOptionPane.showMessageDialog(null, player1.getName() +
-		// " goes first.");
-	}
-
-	private int randPlayer() {
-		Random rand = new Random();
-		return rand.nextInt(2);
-	}
-
-	private void initSimulationGame() {
-		setBorder(new TitledBorder("Simulation"));
-		player1 = new AI("BOT A", -1);
-		player2 = new AI("BOT B", -1);
 	}
 
 	@Override
@@ -177,20 +121,20 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	public void updateStaticsPanel() {
-		if (playerWindow != null && playerWindow.getStaticsPanel() != null) {
+		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
 			ImageIcon icn = null;
 			if (gameEngine.getCurrPlayerIndex() == 1)
 				icn = icn2s;
 			else
 				icn = icn1s;
 
-			playerWindow.getStaticsPanel().setWhosTurn(
+			playerWindow.getStatisticsPanel().setWhosTurn(
 					gameEngine.getCurrPlayer(), icn);
 		}
 	}
 
 	public void displayEndGame(Player winner) {
-		if (playMode == 0)
+		if (gameMode == 0)
 			return;
 
 		if (winner != null) {
@@ -202,29 +146,16 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		playerWindow.setVisible(false);
 		playerWindow.dispose();
 		mainGame.setVisity(true);
+		mainGame.changeGlassPane(0);
 	}
 
-	public void startNewGame(int playMode) {
-
-		switch (playMode) {
-		case 0:
-			initSimulationGame();
-			break;
-		case 1:
-			initSinglePlayerGame();
-			break;
-		case 2:
-			initDoublePlayersGame();
-			break;
-		default:
-			initSimulationGame();
-		}
+	public void startNewGame() {
 		gameEngine.startNewGame(player1, player2, this);
 
 		// clear/initialize buttons icons
 		for (JButton b : buttons) {
 			b.setIcon(whiteDisc);
-			if (playMode != 0) {
+			if (gameMode != 0) {
 				if (gameEngine.getCurrPlayer() instanceof AI) {
 					// do not display rollover icon for AI
 					b.setRolloverIcon(whiteDisc);
@@ -242,4 +173,65 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		updateStaticsPanel();
 	}
 
+	public void initSinglePlayerGame(String playerName, int AIMode) {
+		if (playerName == null || playerName.equals("")) {
+			playerName = "Player 1";
+		}
+
+		String nameAI = null;
+		switch (AIMode) {
+		case 0:
+			nameAI = "EASY BOY";
+			break;
+		case 1:
+			nameAI = "MEDIUM BOT";
+			break;
+		case 2:
+			nameAI = "HARD BOT";
+			break;
+		default:
+			nameAI = "BOT";
+		}
+
+		if (randPlayer() == 0) {
+			player1 = new User(playerName);
+			player2 = new AI(nameAI, AIMode);
+		} else {
+			player1 = new AI(nameAI, AIMode);
+			player2 = new User(playerName);
+		}
+		gameMode = 1;
+		startNewGame();
+	}
+
+	public void initDoublePlayersGame(String name1, String name2) {
+		if (name1 == null || name1.equals("")) {
+			name1 = "Player 1";
+		}
+		if (name2 == null || name2.equals("")) {
+			name2 = "Player 2";
+		}
+		if (randPlayer() == 0) {
+			player1 = new User(name1);
+			player2 = new User(name2);
+		} else {
+			player1 = new User(name2);
+			player2 = new User(name1);
+		}
+
+		gameMode = 2;
+		startNewGame();
+	}
+
+	private int randPlayer() {
+		Random rand = new Random();
+		return rand.nextInt(2);
+	}
+
+	public void startSimulationGame() {
+		player1 = new AI("BOT A", -1);
+		player2 = new AI("BOT B", -1);
+		gameMode = 0;
+		startNewGame();
+	}
 }

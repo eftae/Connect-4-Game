@@ -1,16 +1,8 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.text.LayeredHighlighter;
 
 public class Connect4 implements Runnable {
 
@@ -18,7 +10,7 @@ public class Connect4 implements Runnable {
 	private MenuPanel menuPanel;
 	private GameBoardPanel gameBoardPanel;
 	private GameEngine gameEngine;
-	private MyGlassPane myGlassPane;
+	private JPanel homeGlassPane;
 	private static Thread threadGE;
 	private static Thread threadGUI;
 
@@ -38,9 +30,12 @@ public class Connect4 implements Runnable {
 		menuPanel.setPreferredSize(new Dimension(250, 700));
 
 		// game board panel
-		gameBoardPanel = new GameBoardPanel(0, null, this);
+		gameBoardPanel = new GameBoardPanel(null, this);
 		gameBoardPanel.setPreferredSize(new Dimension(750, 700));
 
+		// logo panel
+		homeGlassPane = new LogoPanel();
+		homeGlassPane.setPreferredSize(new Dimension(750, 700));
 	}
 
 	public static void main(String[] args) {
@@ -61,24 +56,16 @@ public class Connect4 implements Runnable {
 	 * Method to display the main window
 	 */
 	private void display() {
-
-		myGlassPane = new MyGlassPane();
-		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST); // better?
+		if (homeGlassPane != null) {
+			mainFrame.setGlassPane(homeGlassPane);
+			homeGlassPane.setOpaque(false);
+			homeGlassPane.setVisible(true);
+		}
+		mainFrame.getContentPane().add(menuPanel, BorderLayout.EAST);
 		mainFrame.getContentPane().add(gameBoardPanel, BorderLayout.WEST);
-		mainFrame.setGlassPane(myGlassPane);
-		myGlassPane.setOpaque(false);
-		myGlassPane.setVisible(true);
 		mainFrame.pack();
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
-	}
-
-	public void displayStatistic() {
-		// Todo
-	}
-
-	public void displayCredits() {
-		// Todo
 	}
 
 	public void setVisity(boolean b) {
@@ -102,6 +89,29 @@ public class Connect4 implements Runnable {
 		threadGE.interrupt();
 	}
 
+	public void changeGlassPane(int mode) {
+		switch (mode) {
+		case 0:
+			homeGlassPane = new LogoPanel();
+			break;
+		case 1:
+			homeGlassPane = new SinglePlayerMenu(this);
+			break;
+		case 2:
+			homeGlassPane = new DoublePlayersMenu(this);
+			break;
+		case 3:
+			// homeGlassPane = new Statistic();
+			break;
+		case 4:
+			homeGlassPane = new Credits();
+			break;
+		default:
+			homeGlassPane = null;
+		}
+		display();
+	}
+
 	@Override
 	public void run() {
 		display();
@@ -116,7 +126,7 @@ public class Connect4 implements Runnable {
 			}
 			// start new simulation if game is not on
 			if (!gameEngine.isGameOn()) {
-				gameBoardPanel.startNewGame(0);
+				gameBoardPanel.startSimulationGame();
 			}
 		}
 	}

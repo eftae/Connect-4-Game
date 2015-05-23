@@ -14,13 +14,13 @@ import javax.swing.JMenuItem;
 public class GameMenuBar extends JMenuBar {
 
 	private Connect4 mainGame;
-	private PlayerWindow psw;
+	private GameWindow psw;
 	private ImageIcon muteIcon;
 	private String title;
 
 	// private static int counter = 0;
 
-	public GameMenuBar(final Connect4 mainGame, final PlayerWindow psw) {
+	public GameMenuBar(final Connect4 mainGame, final GameWindow psw) {
 
 		this.mainGame = mainGame;
 		this.psw = psw;
@@ -71,6 +71,7 @@ public class GameMenuBar extends JMenuBar {
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
+				mainGame.changeGlassPane(0);
 				mainGame.setVisity(true);
 				psw.dispose();
 			}

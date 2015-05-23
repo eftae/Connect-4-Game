@@ -7,7 +7,7 @@ public class GameEngine implements Runnable {
 
 	private GameState currState;
 	private GameBoardPanel gameBoardPanel;
-	private GameStaticsPanel gameStaticsPanel;
+	private GameStatisticsPanel gameStatisticsPanel;
 	private boolean isInGame; // game is in run
 	private int totalGame; // number of game started
 
@@ -15,7 +15,7 @@ public class GameEngine implements Runnable {
 			GameBoardPanel gameBoardPanel) {
 		currState = new GameState(player1, player2);
 		this.gameBoardPanel = gameBoardPanel;
-		gameStaticsPanel = null;
+		gameStatisticsPanel = null;
 		totalGame++;
 		isInGame = true;
 	}

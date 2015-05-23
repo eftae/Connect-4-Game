@@ -18,8 +18,6 @@ public class MenuPanel extends JPanel {
 	private Connect4 mainGame;
 	public static boolean isMute = false;
 	public static JButton muteButton = null;
-	
-
 
 	public MenuPanel(final Connect4 mainGame) {
 		this.mainGame = mainGame;
@@ -44,15 +42,15 @@ public class MenuPanel extends JPanel {
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!isMute) ButtonSound.music("src/sound/button.wav");
-				PlayerWindow singlePlayerWindow = new PlayerWindow(mainGame,
-						1, "Single Player Game");
-				singlePlayerWindow.setVisible(true);
-				mainGame.setVisity(false);
+				if (!isMute)
+					ButtonSound.music("src/sound/button.wav");
+
+				mainGame.changeGlassPane(1);
 
 				BackgroundMusic.stopMusic();
 				if (!isMute)
-					BackgroundMusic.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
+					BackgroundMusic
+							.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
 			}
 		});
 
@@ -69,15 +67,16 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				PlayerWindow twoPlayerWindow = new PlayerWindow(mainGame, 2,
+				GameWindow twoPlayerWindow = new GameWindow(mainGame,
 						"Mutiple Player Game");
-				twoPlayerWindow.setVisible(true);
-				mainGame.setVisity(false);
+
+				mainGame.changeGlassPane(2);
 
 				BackgroundMusic.stopMusic();
 				if (isMute == false) {
 					ButtonSound.music("src/sound/button.wav");
-					BackgroundMusic.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
+					BackgroundMusic
+							.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
 				}
 			}
 
@@ -95,8 +94,9 @@ public class MenuPanel extends JPanel {
 		statisticButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!isMute) ButtonSound.music("src/sound/button.wav");
-				mainGame.displayStatistic();
+				if (!isMute)
+					ButtonSound.music("src/sound/button.wav");
+				mainGame.changeGlassPane(3);
 			}
 
 		});
@@ -112,15 +112,16 @@ public class MenuPanel extends JPanel {
 		creditsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!isMute) ButtonSound.music("src/sound/button.wav");
-				mainGame.displayCredits();
+				if (!isMute)
+					ButtonSound.music("src/sound/button.wav");
+				mainGame.changeGlassPane(4);
 			}
 		});
 
 		// button for mute/play music
 		gc.gridx = 0;
 		gc.gridy = 4;
-		
+
 		final ImageIcon muteButtonIcon = new ImageIcon("src/pics/Mute.png");
 		final ImageIcon speakerButtonIcon = new ImageIcon(
 				"src/pics/Speaker.png");
@@ -142,7 +143,8 @@ public class MenuPanel extends JPanel {
 					muteButton.setText("Mute music");
 					muteButton.setFont(new Font("Arial", Font.PLAIN, 20));
 					ButtonSound.music("src/sound/button.wav");
-					BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
+					BackgroundMusic
+							.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 					isMute = false;
 				}
 
@@ -161,7 +163,8 @@ public class MenuPanel extends JPanel {
 		quitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!isMute) ButtonSound.music("src/sound/button.wav");
+				if (!isMute)
+					ButtonSound.music("src/sound/button.wav");
 				System.exit(0);
 			}
 
