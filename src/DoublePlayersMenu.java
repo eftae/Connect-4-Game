@@ -14,11 +14,11 @@ public class DoublePlayersMenu extends JPanel {
 	private final float opacity = 0.3f;
 	private int AIMode;
 
-	public DoublePlayersMenu(Connect4 mainGame) {
+	public DoublePlayersMenu(final Connect4 mainGame) {
 		// user name input
-		JTextField player1NameField = new JTextField("Player Name A", 25);
+		final JTextField player1NameField = new JTextField("Player Name A", 25);
 		add(player1NameField);
-		JTextField player2NameField = new JTextField("Player Name B", 25);
+		final JTextField player2NameField = new JTextField("Player Name B", 25);
 		add(player2NameField);
 
 		// start game button

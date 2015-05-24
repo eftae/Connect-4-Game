@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.sun.prism.paint.Color;
+//import com.sun.prism.paint.Color;
 
 public class Connect4 implements Runnable {
 
