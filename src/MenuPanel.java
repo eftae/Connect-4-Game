@@ -53,7 +53,7 @@ public class MenuPanel extends JPanel {
 					ButtonSound.music("src/sound/button.wav");
 				//mainGame.changeGlassPane(1);
 				SinglePlayerMenu singlePlayer = new SinglePlayerMenu (mainGame);
-				JOptionPane.showConfirmDialog(null, singlePlayer,"Mode Selection",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showOptionDialog(null, singlePlayer,"Mode Selection", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,new String[]{"Cancel"},"default");
 				
 			}
 		});
@@ -72,7 +72,9 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-				mainGame.changeGlassPane(2);
+				//mainGame.changeGlassPane(2);
+				DoublePlayersMenu doublePlayer = new DoublePlayersMenu (mainGame);
+				JOptionPane.showOptionDialog(null, doublePlayer,"Enter Players Name",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,new String[]{"Cancel"},"default");
 			}
 
 		});
@@ -166,5 +168,8 @@ public class MenuPanel extends JPanel {
 		muteButton.setIcon(muteButtonIcon);
 		muteButton.setText("Mute");
 		ButtonSound.music("src/sound/button.wav");
+	}
+	public static void closeJOptionPanel () {
+		JOptionPane.getRootFrame().dispose();
 	}
 }

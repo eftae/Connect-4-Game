@@ -29,9 +29,6 @@ public class SinglePlayerMenu extends JPanel {
 
 	public SinglePlayerMenu(final Connect4 mainGame) {
 		
-		//ImageIcon background = new ImageIcon("src/pics/modes.jpg");
-		
-		setPreferredSize(new Dimension(100, 200));
 		
 		
 		// set the format of the buttons
@@ -114,6 +111,7 @@ public class SinglePlayerMenu extends JPanel {
 
 				singlePlayerWindow.setVisible(true);
 				mainGame.setVisity(false);
+				MenuPanel.closeJOptionPanel();
 			}
 		});
 		add(startGame, gc);
