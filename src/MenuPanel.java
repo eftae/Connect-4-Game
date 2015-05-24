@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -50,7 +51,10 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-				mainGame.changeGlassPane(1);
+				//mainGame.changeGlassPane(1);
+				SinglePlayerMenu singlePlayer = new SinglePlayerMenu (mainGame);
+				JOptionPane.showConfirmDialog(null, singlePlayer,"Mode Selection",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+				
 			}
 		});
 

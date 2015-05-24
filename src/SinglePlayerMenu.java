@@ -1,12 +1,18 @@
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -22,13 +28,30 @@ public class SinglePlayerMenu extends JPanel {
 	
 
 	public SinglePlayerMenu(final Connect4 mainGame) {
-		// user name input
-		final JTextField playerNameField = new JTextField("Player Name", 25);
-		add(playerNameField);
 		
-	
+		//ImageIcon background = new ImageIcon("src/pics/modes.jpg");
+		
+		setPreferredSize(new Dimension(100, 200));
+		
+		
+		// set the format of the buttons
+		setLayout(new GridBagLayout());
+		GridBagConstraints gc = new GridBagConstraints();
+		gc.weightx = 0;
+		gc.weighty = 0;
+		gc.fill = GridBagConstraints.BOTH;
+		
+		// user name input
+		
+		gc.gridx = 0;
+		gc.gridy = 0;
+		final JTextField playerNameField = new JTextField("Player Name", 10);
+		add(playerNameField,gc);
+		
 
 		// Easy button
+		gc.gridx = 0;
+		gc.gridy = 1;
 		AIButton0 = new JRadioButton("Easy");
 		AIButton0.setToolTipText("For Beginner of this game");
 		AIButton0.addMouseListener(new MouseAdapter() {
@@ -36,9 +59,11 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 0;
 			}
 		});
-		add(AIButton0);
+		add(AIButton0,gc);
 
 		// Medium button
+		gc.gridx = 0;
+		gc.gridy = 2;
 		AIButton1 = new JRadioButton("Medium");
 		AIButton1.setToolTipText("For Adavance Thinker");
 		AIButton1.addMouseListener(new MouseAdapter() {
@@ -46,9 +71,11 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 1;
 			}
 		});
-		add(AIButton1);
+		add(AIButton1,gc);
 
 		// Hard button
+		gc.gridx = 0;
+		gc.gridy = 3;
 		AIButton2 = new JRadioButton("Hard");
 		AIButton2.setToolTipText("For Extreme Player!");
 		AIButton2.addMouseListener(new MouseAdapter() {
@@ -56,7 +83,7 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 2;
 			}
 		});
-		add(AIButton2);
+		add(AIButton2,gc);
 		
 		
 		group = new ButtonGroup ();
@@ -68,6 +95,8 @@ public class SinglePlayerMenu extends JPanel {
 		
 
 		// start game button
+		gc.gridx = 0;
+		gc.gridy = 4;
 		JButton startGame = new JButton("Start Game");
 		startGame.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -87,14 +116,15 @@ public class SinglePlayerMenu extends JPanel {
 				mainGame.setVisity(false);
 			}
 		});
-		add(startGame);
+		add(startGame, gc);
 	}
-
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 				opacity));
 	}
+	
 
 }

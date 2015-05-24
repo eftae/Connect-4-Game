@@ -67,7 +67,7 @@ public class GameMenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent event) {
 				mainGame.suspendGame();
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(400);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}				
