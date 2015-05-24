@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sun.prism.paint.Color;
+
 public class Connect4 implements Runnable {
 
 	private JFrame mainFrame;
@@ -109,16 +111,19 @@ public class Connect4 implements Runnable {
 			homeGlassPane = new LogoPanel();
 			break;
 		case 1:
-			homeGlassPane = new SinglePlayerMenu(this);
+			if(homeGlassPane instanceof SinglePlayerMenu) homeGlassPane = new LogoPanel();
+			else homeGlassPane = new SinglePlayerMenu(this);
 			break;
 		case 2:
-			homeGlassPane = new DoublePlayersMenu(this);
+			if(homeGlassPane instanceof DoublePlayersMenu) homeGlassPane = new LogoPanel();
+			else homeGlassPane = new DoublePlayersMenu(this);
 			break;
 		case 3:
 			// homeGlassPane = new Statistic();
 			break;
 		case 4:
-			homeGlassPane = new Credits();
+			if(homeGlassPane instanceof Credits) homeGlassPane = new LogoPanel();
+			else homeGlassPane = new Credits();
 			break;
 		default:
 			homeGlassPane = new JPanel();

@@ -1,23 +1,38 @@
+
+
+import java.awt.AlphaComposite;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 
-public class Credits extends JPanel {
+
+public class Credits extends JPanel implements ActionListener {
+	Timer timer = new Timer(15,this);
+	float opacity = 0;
+	ImageIcon icn = ResizeImage.changeImage(new ImageIcon("src/pics/credit.png"),800,753);
 
 	public Credits() {
-		JTextArea name1 = new JTextArea("Chris");
-		name1.setEditable(false);
-		add(name1);
+		timer.start();
+	}
 
-		JTextArea name2 = new JTextArea("Mick");
-		name2.setEditable(false);
-		add(name2);
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(icn.getImage(), -20, -40, null);
+	}
 
-		JTextArea name3 = new JTextArea("Kelvin");
-		name3.setEditable(false);
-		add(name3);
-
-		JTextArea name4 = new JTextArea("Wayne");
-		name4.setEditable(false);
-		add(name4);
+	public void actionPerformed(ActionEvent e) {
+		opacity += 0.01f;
+		if (opacity > 1f) {
+			opacity = 1f;
+			timer.stop();
+		} else
+			repaint();
 	}
 }
