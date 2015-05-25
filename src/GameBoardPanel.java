@@ -63,7 +63,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getModifiers() != 16) return; 
+		if (e.getModifiers() != 16)
+			return;
 		JButton pressed = (JButton) e.getSource();
 		Player currPlayer = gameEngine.getCurrPlayer();
 
@@ -136,7 +137,25 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		playerWindow.getStatisticsPanel().displayEndGame(winner);
 	}
 
+	public void restartNewGame() {
+		mainGame.suspendGame();
+
+		// randomize first player for single player mode
+		if (gameMode == 1) {
+			if (randPlayer() == 0) {
+				Player temp = player1;
+				player1 = player2;
+				player2 = temp;
+			}
+			playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+		}
+
+		startNewGame();
+		updateStatisticsPanel();
+	}
+
 	public void startNewGame() {
+
 		gameEngine.startNewGame(player1, player2, this);
 
 		// clear/initialize buttons icons
@@ -151,11 +170,13 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 					b.setRolloverIcon(arrow2);
 					b.setPressedIcon(arrow2);
 				}
+				// b.removeActionListener(this);
 				b.addActionListener(this);
 			} else {
 				b.setPressedIcon(whiteDisc);
 			}
 		}
+
 	}
 
 	public void startSimulationGame() {

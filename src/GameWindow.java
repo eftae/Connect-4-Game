@@ -51,4 +51,8 @@ public class GameWindow extends JFrame {
 	public void startDoublePlayersGame(String playerName, String playerName2) {
 		gameBoardPanel.initDoublePlayersGame(playerName, playerName2);
 	}
+	
+	public void displayWinMsg(){
+		
+	}
 }

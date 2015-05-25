@@ -70,7 +70,8 @@ public class GameStatisticsPanel extends JPanel {
 		if (winner == null) {
 			msg.setText("Board Full. Drew.");
 		} else {
-			msg.setText(winner.getName() + " won.");
+			msg.setText(winner.getName() + " won.");		
+			
 		}
 		repaint();
 	}

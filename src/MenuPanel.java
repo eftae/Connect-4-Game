@@ -79,23 +79,23 @@ public class MenuPanel extends JPanel {
 
 		});
 
-		// Button for Statistic
-		gc.gridx = 0;
-		gc.gridy = 2;
-		ImageIcon statisticButtonIcon = new ImageIcon("src/pics/Trophy-50.png");
-		JButton statisticButton = new JButton(" High Score",
-				statisticButtonIcon);
-		statisticButton.setToolTipText("Check High Scored Record");
-		statisticButton.setFont(defaultFont);
-		add(statisticButton, gc);
-		statisticButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!mainGame.isMuted())
-					ButtonSound.music("src/sound/button.wav");
-				mainGame.changeGlassPane(3);
-			}
-		});
+//		// Button for Statistic
+//		gc.gridx = 0;
+//		gc.gridy = 2;
+//		ImageIcon statisticButtonIcon = new ImageIcon("src/pics/Trophy-50.png");
+//		JButton statisticButton = new JButton(" High Score",
+//				statisticButtonIcon);
+//		statisticButton.setToolTipText("Check High Scored Record");
+//		statisticButton.setFont(defaultFont);
+//		add(statisticButton, gc);
+//		statisticButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if (!mainGame.isMuted())
+//					ButtonSound.music("src/sound/button.wav");
+//				mainGame.changeGlassPane(3);
+//			}
+//		});
 
 		// Button for Credits
 		gc.gridx = 0;

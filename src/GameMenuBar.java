@@ -48,16 +48,16 @@ public class GameMenuBar extends JMenuBar {
 			muteIcon = newIcon5;
 		}
 
-		JMenuItem menuItem1 = new JMenuItem("Save", newIcon1);
+		JMenuItem menuItem1 = new JMenuItem("Restart Game", newIcon1);
 		JMenuItem menuItem2 = new JMenuItem("Home", newIcon2);
 		final JMenuItem menuItem3 = new JMenuItem(title, muteIcon);
 		JMenuItem menuItem4 = new JMenuItem("Exit", newIcon3);
 
-		menuItem1.setToolTipText("Save Game");
+		menuItem1.setToolTipText("Restart Game");
 		menuItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-
+				psw.getGameBoardPanel().restartNewGame();
 			}
 		});
 
@@ -70,7 +70,7 @@ public class GameMenuBar extends JMenuBar {
 					Thread.sleep(400);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
-				}				
+				}
 				mainGame.setVisity(true);
 				mainGame.changeGlassPane(0);
 				psw.setVisible(false);
@@ -114,9 +114,4 @@ public class GameMenuBar extends JMenuBar {
 		first.add(menuItem4);
 
 	}
-
-	public void mute() {
-
-	}
-
 }
