@@ -58,6 +58,7 @@ public class GameStatisticsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				getGameWindow().getGameBoardPanel().restartNewGame();
+				
 			}
 		});
 		add(restartGameButton);

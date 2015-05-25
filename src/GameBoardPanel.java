@@ -17,6 +17,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	private GameWindow gameWindow;
 	private Connect4 mainGame;
 	private GameEngine gameEngine;
+	private JPanel finishPanel;
 
 	// game data
 	private Player player1;
@@ -162,8 +163,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		gameWindow.getStatisticsPanel().displayEndGame(winner);
 
 		// finish panel
-		FinishPanel finishPanel = new FinishPanel(mainGame, gameWindow, winner,
-				gameMode);
+		finishPanel = new FinishPanel(mainGame, gameWindow, winner, gameMode);
 		finishPanel.setPreferredSize(new Dimension(750, 700));
 		gameWindow.setGlassPane(finishPanel);
 		finishPanel.setOpaque(false);
@@ -175,6 +175,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 */
 	public void restartNewGame() {
 		mainGame.suspendGame();
+		finishPanel.setVisible(false);
 
 		// randomize first player for single player mode
 		if (gameMode != 0) {
