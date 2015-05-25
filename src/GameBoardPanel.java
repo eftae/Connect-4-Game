@@ -21,7 +21,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	private Player player1;
 	private Player player2;
 	private int gameMode;
-	private ArrayList<JButton> buttons = new ArrayList<JButton>();
+	private ArrayList<JButton> buttons;
 
 	// images
 	private ImageIcon icn1 = ResizeImage.changeImage(new ImageIcon(
@@ -35,11 +35,17 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	private ImageIcon arrow2 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowarrow.png"), 100, 100);
 
+	/**
+	 * 
+	 * @param playerWindow
+	 * @param mainGame
+	 */
 	public GameBoardPanel(GameWindow playerWindow, Connect4 mainGame) {
 
 		this.playerWindow = playerWindow;
 		this.mainGame = mainGame;
 		gameEngine = mainGame.getGameEngine();
+		buttons = new ArrayList<JButton>();
 
 		// setup the game panel
 		Color bkgdColor = new Color(27, 120, 236);
@@ -61,6 +67,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * actions to do when discs clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getModifiers() != 16)
@@ -73,15 +82,23 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			if (!currUser.isReady()) {
 				int nextMove = buttons.indexOf(pressed) % 7;
 				if (gameEngine.isValidMove(nextMove)) {
+					System.out.println("clicked: " + nextMove);
 					currUser.userInputReady(nextMove);
 					if (!mainGame.isMuted())
 						ButtonSound.music("src/sound/button.wav");
-					return;
 				}
 			}
 		}
 	}
 
+	/**
+	 * display a clicked disc.
+	 * 
+	 * @param col
+	 * @param row
+	 * @param colorId
+	 *            player index
+	 */
 	public void displayDisc(int col, int row, int colorId) {
 		int btnID = (5 - row) * 7 + col;
 		JButton b = buttons.get(btnID);
@@ -114,14 +131,23 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		b.setPressedIcon(icn);
 		b.removeActionListener(this);
 		b.setRolloverIcon(null);
+		System.out.println("displayed: " + row + " " + col);
 	}
 
+	/**
+	 * Update the turn information in the statistic panel.
+	 */
 	public void updateStatisticsPanel() {
 		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
 			playerWindow.getStatisticsPanel().setWhosTurn();
 		}
 	}
 
+	/**
+	 * Display after game ended.
+	 * 
+	 * @param winner
+	 */
 	public void displayEndGame(Player winner) {
 		if (gameMode == 0)
 			return; // stimulation
@@ -137,6 +163,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		playerWindow.getStatisticsPanel().displayEndGame(winner);
 	}
 
+	/**
+	 * Restart a new game inside the game window.
+	 */
 	public void restartNewGame() {
 		mainGame.suspendGame();
 
@@ -154,11 +183,14 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		updateStatisticsPanel();
 	}
 
+	/**
+	 * Start a new game. Precondition: players are set.
+	 */
 	public void startNewGame() {
 
 		gameEngine.startNewGame(player1, player2, this);
 
-		// clear/initialize buttons icons
+		// initialize buttons
 		for (JButton b : buttons) {
 			b.setIcon(whiteDisc);
 			if (gameMode != 0) {
@@ -170,7 +202,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 					b.setRolloverIcon(arrow2);
 					b.setPressedIcon(arrow2);
 				}
-				// b.removeActionListener(this);
 				b.addActionListener(this);
 			} else {
 				b.setPressedIcon(whiteDisc);

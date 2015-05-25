@@ -23,6 +23,10 @@ public class User implements Player {
 		return isReady;
 	}
 
+	public void resetPlayer() {
+		isReady = false;
+	}
+
 	public void userInputReady(int nextMove) {
 		isReady = true;
 		this.nextMove = nextMove;
@@ -35,13 +39,17 @@ public class User implements Player {
 
 	private int modeGUI() {
 		// wait isReady to be set
-		while (!isReady && !Thread.interrupted()) {
+		while (!isReady) {
+			if (Thread.interrupted()) {
+				return -1;
+			}
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
 		}
+
 		return nextMove;
 	}
 }

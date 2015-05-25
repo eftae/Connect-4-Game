@@ -7,27 +7,25 @@ public class GameEngine implements Runnable {
 
 	private GameState currState;
 	private GameBoardPanel gameBoardPanel;
-	private GameStatisticsPanel gameStatisticsPanel;
 	private boolean isInGame; // game is in run
 	private int totalGame; // number of game started
 
 	public void startNewGame(Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
-		currState = new GameState(player1, player2);
 		this.gameBoardPanel = gameBoardPanel;
-		gameStatisticsPanel = null;
+
+		// reset users
+		if (player1 instanceof User) {
+			((User) player1).resetPlayer();
+		}
+		if (player2 instanceof User) {
+			((User) player2).resetPlayer();
+		}
+
+		currState = new GameState(player1, player2);
 		totalGame++;
 		isInGame = true;
 	}
-
-	// public void startNewGame(Player player1, Player player2,
-	// GameBoardPanel gameBoardPanel, GameStaticsPanel gameStaticsPanel) {
-	// currState = new GameState(player1, player2);
-	// this.gameBoardPanel = gameBoardPanel;
-	// this.gameStaticsPanel = gameStaticsPanel;
-	// totalGame++;
-	// isInGame = true;
-	// }
 
 	@Override
 	public void run() {
