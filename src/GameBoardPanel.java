@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -159,6 +160,14 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		gameWindow.getStatisticsPanel().displayEndGame(winner);
+
+		// finish panel
+		FinishPanel finishPanel = new FinishPanel(mainGame, gameWindow, winner,
+				gameMode);
+		finishPanel.setPreferredSize(new Dimension(750, 700));
+		gameWindow.setGlassPane(finishPanel);
+		finishPanel.setOpaque(false);
+		finishPanel.setVisible(true);
 	}
 
 	/**
