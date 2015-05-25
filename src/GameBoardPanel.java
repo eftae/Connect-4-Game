@@ -63,6 +63,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getModifiers() != 16) return; 
 		JButton pressed = (JButton) e.getSource();
 		Player currPlayer = gameEngine.getCurrPlayer();
 
