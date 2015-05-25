@@ -141,7 +141,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		mainGame.suspendGame();
 
 		// randomize first player for single player mode
-		if (gameMode == 1) {
+		if (gameMode != 0) {
 			if (randPlayer() == 0) {
 				Player temp = player1;
 				player1 = player2;

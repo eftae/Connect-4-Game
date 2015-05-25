@@ -24,7 +24,7 @@ public class GameWindow extends JFrame {
 		setResizable(false);
 		setBounds(mainGame.getMainFrame().getBounds());
 
-		gameStatisticsPanel = new GameStatisticsPanel(mainGame.getGameEngine());
+		gameStatisticsPanel = new GameStatisticsPanel(this, mainGame);
 		gameStatisticsPanel.setPreferredSize(new Dimension(250, 700));
 		getContentPane().add(gameStatisticsPanel, BorderLayout.EAST);
 
@@ -34,6 +34,8 @@ public class GameWindow extends JFrame {
 
 		GameMenuBar menu = new GameMenuBar(mainGame, this);
 		setJMenuBar(menu);
+
+		pack();
 	}
 
 	public GameStatisticsPanel getStatisticsPanel() {
@@ -51,8 +53,8 @@ public class GameWindow extends JFrame {
 	public void startDoublePlayersGame(String playerName, String playerName2) {
 		gameBoardPanel.initDoublePlayersGame(playerName, playerName2);
 	}
-	
-	public void displayWinMsg(){
-		
+
+	public void displayWinMsg() {
+
 	}
 }
