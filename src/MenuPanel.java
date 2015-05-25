@@ -51,10 +51,13 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-				//mainGame.changeGlassPane(1);
-				SinglePlayerMenu singlePlayer = new SinglePlayerMenu (mainGame);
-				JOptionPane.showOptionDialog(null, singlePlayer,"Mode Selection", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,new String[]{"Cancel"},"default");
-				
+				// mainGame.changeGlassPane(1);
+				SinglePlayerMenu singlePlayer = new SinglePlayerMenu(mainGame);
+				JOptionPane.showOptionDialog(null, singlePlayer,
+						"Mode Selection", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null,
+						new String[] { "Cancel" }, "default");
+
 			}
 		});
 
@@ -72,30 +75,15 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-				//mainGame.changeGlassPane(2);
-				DoublePlayersMenu doublePlayer = new DoublePlayersMenu (mainGame);
-				JOptionPane.showOptionDialog(null, doublePlayer,"Enter Players Name",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,null,new String[]{"Cancel"},"default");
+				// mainGame.changeGlassPane(2);
+				DoublePlayersMenu doublePlayer = new DoublePlayersMenu(mainGame);
+				JOptionPane.showOptionDialog(null, doublePlayer,
+						"Enter Players Name", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null,
+						new String[] { "Cancel" }, "default");
 			}
 
 		});
-
-//		// Button for Statistic
-//		gc.gridx = 0;
-//		gc.gridy = 2;
-//		ImageIcon statisticButtonIcon = new ImageIcon("src/pics/Trophy-50.png");
-//		JButton statisticButton = new JButton(" High Score",
-//				statisticButtonIcon);
-//		statisticButton.setToolTipText("Check High Scored Record");
-//		statisticButton.setFont(defaultFont);
-//		add(statisticButton, gc);
-//		statisticButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if (!mainGame.isMuted())
-//					ButtonSound.music("src/sound/button.wav");
-//				mainGame.changeGlassPane(3);
-//			}
-//		});
 
 		// Button for Credits
 		gc.gridx = 0;
@@ -110,7 +98,7 @@ public class MenuPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!mainGame.isMuted())
 					ButtonSound.music("src/sound/button.wav");
-				mainGame.changeGlassPane(4);
+				mainGame.changeGlassPane(3);
 			}
 		});
 
@@ -169,7 +157,8 @@ public class MenuPanel extends JPanel {
 		muteButton.setText("Mute");
 		ButtonSound.music("src/sound/button.wav");
 	}
-	public static void closeJOptionPanel () {
+
+	public static void closeJOptionPanel() {
 		JOptionPane.getRootFrame().dispose();
 	}
 }

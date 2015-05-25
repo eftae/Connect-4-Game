@@ -4,7 +4,7 @@
  * @version 0.1
  */
 
-public interface HeuristicAlgorithm {
+public interface AlphaBetaHeuristic {
 
 	/**
 	 * Get the heuristic value of a GameState

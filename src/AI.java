@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class AI implements Player {
 	private String name;
-	private HeuristicAlgorithm hAlgo;
+	private AlphaBetaHeuristic hAlgo;
 	private int mode;
 	private int depth;
 	private int nextMove;
@@ -30,20 +30,24 @@ public class AI implements Player {
 		this.mode = mode;
 	}
 
+	@Override
 	public int decideMove(GameState currState) {
-		long startTime = 0;
+		long startTime = 0; // starting timer for simulation delay
 
-		// setting difficulty
+		// set difficulty
 		switch (mode) {
 		case 0:
+			// easy
 			hAlgo = new H0();
 			depth = 5;
 			break;
 		case 1:
+			// medium
 			hAlgo = new H1();
 			depth = 7;
 			break;
 		case 2:
+			// hard
 			hAlgo = new H2();
 			depth = 9;
 			break;
@@ -60,6 +64,7 @@ public class AI implements Player {
 		if (mode == -1) {
 			long endTime = System.currentTimeMillis();
 			long delay = 500 - (endTime - startTime);
+
 			if (delay > 0)
 				try {
 					Thread.sleep(delay);
@@ -91,7 +96,7 @@ public class AI implements Player {
 		if (state.getWinner() == state.getOtherPlayer()) {
 			return -1000 << depth;
 		}
-		// reaches depth limit
+		// check depth limit
 		if (depth == 0) {
 			return hAlgo.h(state);
 		}

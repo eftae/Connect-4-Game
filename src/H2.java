@@ -4,7 +4,7 @@
  * 
  */
 
-public class H2 implements HeuristicAlgorithm {
+public class H2 implements AlphaBetaHeuristic {
 
 	public int h(GameState state) {
 
@@ -13,6 +13,7 @@ public class H2 implements HeuristicAlgorithm {
 		int h = 0;
 		int steps = 0;
 
+		// checks every slot belong to current AI player
 		for (int c = 0; c < 7; c++) {
 			for (int r = 0; r < 6; r++) {
 
@@ -69,6 +70,20 @@ public class H2 implements HeuristicAlgorithm {
 		return h;
 	}
 
+	/**
+	 * check how many discs have to put in a column in order to connect 4.
+	 * 
+	 * @param state
+	 * @param c
+	 *            column
+	 * @param r
+	 *            row
+	 * @param dc
+	 *            direction displacement of column
+	 * @param dr
+	 *            direction displacement of row
+	 * @return
+	 */
 	private int evalStepsToWin(GameState state, int c, int r, int dc, int dr) {
 
 		Player curr = state.getCurrPlayer();

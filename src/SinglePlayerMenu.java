@@ -1,7 +1,8 @@
+/**
+ * A glass panel for displaying single player mode menu.
+ */
+
 import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -10,41 +11,36 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class SinglePlayerMenu extends JPanel {
+
 	private Connect4 mainGame;
-	private final float opacity = 0.3f;
+	private final float opacity = 0;
 	private int AIMode;
 	private JRadioButton AIButton0;
 	private JRadioButton AIButton1;
 	private JRadioButton AIButton2;
 	ButtonGroup group;
-	
 
 	public SinglePlayerMenu(final Connect4 mainGame) {
-		
-		
-		
+
 		// set the format of the buttons
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0;
 		gc.weighty = 0;
 		gc.fill = GridBagConstraints.BOTH;
-		
+
 		// user name input
-		
+
 		gc.gridx = 0;
 		gc.gridy = 0;
 		final JTextField playerNameField = new JTextField("Player Name", 10);
-		add(playerNameField,gc);
-		
+		add(playerNameField, gc);
 
 		// Easy button
 		gc.gridx = 0;
@@ -56,7 +52,7 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 0;
 			}
 		});
-		add(AIButton0,gc);
+		add(AIButton0, gc);
 
 		// Medium button
 		gc.gridx = 0;
@@ -68,7 +64,7 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 1;
 			}
 		});
-		add(AIButton1,gc);
+		add(AIButton1, gc);
 
 		// Hard button
 		gc.gridx = 0;
@@ -80,16 +76,12 @@ public class SinglePlayerMenu extends JPanel {
 				AIMode = 2;
 			}
 		});
-		add(AIButton2,gc);
-		
-		
-		group = new ButtonGroup ();
+		add(AIButton2, gc);
+
+		group = new ButtonGroup();
 		group.add(AIButton0);
 		group.add(AIButton1);
 		group.add(AIButton2);
-		
-		
-		
 
 		// start game button
 		gc.gridx = 0;
@@ -103,7 +95,7 @@ public class SinglePlayerMenu extends JPanel {
 					BackgroundMusic
 							.music("src/sound/2-05_Playing_with_a_Full_Deck.wav");
 				}
-				
+
 				GameWindow singlePlayerWindow = new GameWindow(mainGame,
 						"Single Player Game");
 				singlePlayerWindow.startSinglePlayerGame(
@@ -116,13 +108,12 @@ public class SinglePlayerMenu extends JPanel {
 		});
 		add(startGame, gc);
 	}
-	
+
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 				opacity));
 	}
-	
 
 }

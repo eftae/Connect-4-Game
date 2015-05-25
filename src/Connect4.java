@@ -19,6 +19,10 @@ public class Connect4 implements Runnable {
 
 	// public BackgroundMusic backMusic = new BackgroundMusic();
 
+	/**
+	 * 
+	 * @param gameEngine
+	 */
 	public Connect4(GameEngine gameEngine) {
 		this.gameEngine = gameEngine;
 
@@ -46,6 +50,7 @@ public class Connect4 implements Runnable {
 		Runnable mainGameEngine = new GameEngine();
 		threadGE = new Thread(mainGameEngine);
 		GameEngine gameEngine = (GameEngine) mainGameEngine;
+
 		// GUI thread
 		Runnable mainWindow = new Connect4(gameEngine);
 		threadGUI = new Thread(mainWindow);
@@ -71,31 +76,64 @@ public class Connect4 implements Runnable {
 		mainFrame.setVisible(true);
 	}
 
+	/**
+	 * Set visibility of the mainframe.
+	 * 
+	 * @param b
+	 */
 	public void setVisity(boolean b) {
 		mainFrame.setVisible(b);
 	}
 
+	/**
+	 * Getter for game engine.
+	 * 
+	 * @return gameEngine
+	 */
 	public GameEngine getGameEngine() {
 		return gameEngine;
 	}
 
+	/**
+	 * Getter for menu panel.
+	 * 
+	 * @return menuPanel
+	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
+	/**
+	 * Getter for main frame.
+	 * 
+	 * @return mainFrame
+	 */
 	public JFrame getMainFrame() {
 		return mainFrame;
 	}
 
+	/**
+	 * suspend current game.
+	 */
 	public void suspendGame() {
 		gameEngine.suspendGame();
+		// interrupt user input
 		threadGE.interrupt();
 	}
 
+	/**
+	 * 
+	 * @return if sound is muted
+	 */
 	public boolean isMuted() {
 		return isMuted;
 	}
 
+	/**
+	 * set mute or unmute
+	 * 
+	 * @param isMuted
+	 */
 	public void setisMuted(boolean isMuted) {
 		this.isMuted = isMuted;
 		if (isMuted) {
@@ -105,29 +143,43 @@ public class Connect4 implements Runnable {
 		}
 	}
 
+	/**
+	 * Change the glass panel on home screen.
+	 * 
+	 * @param mode
+	 */
 	public void changeGlassPane(int mode) {
 		switch (mode) {
 		case 0:
+			// logo
 			homeGlassPane = new LogoPanel();
 			break;
 		case 1:
-			if(homeGlassPane instanceof SinglePlayerMenu) homeGlassPane = new LogoPanel();
-			else homeGlassPane = new SinglePlayerMenu(this);
+			// single player menu
+			if (homeGlassPane instanceof SinglePlayerMenu)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new SinglePlayerMenu(this);
 			break;
 		case 2:
-			if(homeGlassPane instanceof DoublePlayersMenu) homeGlassPane = new LogoPanel();
-			else homeGlassPane = new DoublePlayersMenu(this);
+			// double players menu
+			if (homeGlassPane instanceof DoublePlayersMenu)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new DoublePlayersMenu(this);
 			break;
 		case 3:
-			// homeGlassPane = new Statistic();
-			break;
-		case 4:
-			if(homeGlassPane instanceof Credits) homeGlassPane = new LogoPanel();
-			else homeGlassPane = new Credits();
+			// credits page
+			if (homeGlassPane instanceof Credits)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new Credits();
 			break;
 		default:
+			// blank
 			homeGlassPane = new JPanel();
 		}
+
 		display();
 	}
 

@@ -1,5 +1,8 @@
+/**
+ * A glass panel for displaying double players mode menu.
+ */
+
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -12,30 +15,34 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class DoublePlayersMenu extends JPanel {
+
 	private Connect4 mainGame;
-	private final float opacity = 0.3f;
+	private final float opacity = 0;
 	private int AIMode;
 
+	/**
+	 * 
+	 * @param mainGame
+	 */
 	public DoublePlayersMenu(final Connect4 mainGame) {
-		
+
 		// set button layout
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0;
 		gc.weighty = 0;
 		gc.fill = GridBagConstraints.BOTH;
-		
+
 		// user name input
 		gc.gridx = 0;
 		gc.gridy = 0;
 		final JTextField player1NameField = new JTextField("Player Name A", 10);
-		add(player1NameField,gc);
+		add(player1NameField, gc);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		final JTextField player2NameField = new JTextField("Player Name B", 10);
-		add(player2NameField,gc);
+		add(player2NameField, gc);
 
-	
 		// start game button
 		gc.gridx = 0;
 		gc.gridy = 2;
@@ -59,7 +66,7 @@ public class DoublePlayersMenu extends JPanel {
 				}
 			}
 		});
-		add(startGame,gc);
+		add(startGame, gc);
 	}
 
 	public void paint(Graphics g) {

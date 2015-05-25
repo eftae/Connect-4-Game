@@ -1,9 +1,9 @@
 /**
- * Zero Heuristic giving a random priority.
+ * Zero Heuristic giving a random order.
  * 
  */
 
-public class H0 implements HeuristicAlgorithm {
+public class H0 implements AlphaBetaHeuristic {
 	public int h(GameState state) {
 		return 0;
 	}

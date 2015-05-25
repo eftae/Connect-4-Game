@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
 
 public class GameBoardPanel extends JPanel implements ActionListener {
 
-	private GameWindow playerWindow;
+	private GameWindow gameWindow;
 	private Connect4 mainGame;
 	private GameEngine gameEngine;
 
@@ -37,12 +37,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	/**
 	 * 
-	 * @param playerWindow
+	 * @param gameWindow
 	 * @param mainGame
 	 */
-	public GameBoardPanel(GameWindow playerWindow, Connect4 mainGame) {
+	public GameBoardPanel(GameWindow gameWindow, Connect4 mainGame) {
 
-		this.playerWindow = playerWindow;
+		this.gameWindow = gameWindow;
 		this.mainGame = mainGame;
 		gameEngine = mainGame.getGameEngine();
 		buttons = new ArrayList<JButton>();
@@ -82,7 +82,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			if (!currUser.isReady()) {
 				int nextMove = buttons.indexOf(pressed) % 7;
 				if (gameEngine.isValidMove(nextMove)) {
-					System.out.println("clicked: " + nextMove);
 					currUser.userInputReady(nextMove);
 					if (!mainGame.isMuted())
 						ButtonSound.music("src/sound/button.wav");
@@ -131,15 +130,14 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		b.setPressedIcon(icn);
 		b.removeActionListener(this);
 		b.setRolloverIcon(null);
-		System.out.println("displayed: " + row + " " + col);
 	}
 
 	/**
 	 * Update the turn information in the statistic panel.
 	 */
 	public void updateStatisticsPanel() {
-		if (playerWindow != null && playerWindow.getStatisticsPanel() != null) {
-			playerWindow.getStatisticsPanel().setWhosTurn();
+		if (gameWindow != null && gameWindow.getStatisticsPanel() != null) {
+			gameWindow.getStatisticsPanel().setWhosTurn();
 		}
 	}
 
@@ -160,7 +158,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			}
 		}
 
-		playerWindow.getStatisticsPanel().displayEndGame(winner);
+		gameWindow.getStatisticsPanel().displayEndGame(winner);
 	}
 
 	/**
@@ -176,7 +174,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				player1 = player2;
 				player2 = temp;
 			}
-			playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+			gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		}
 
 		startNewGame();
@@ -210,6 +208,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * initialize simulation between 2 AI
+	 */
 	public void startSimulationGame() {
 		player1 = new AI("BOT A", -1);
 		player2 = new AI("BOT B", -1);
@@ -217,6 +218,14 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		startNewGame();
 	}
 
+	/**
+	 * initialize single player mode game
+	 * 
+	 * @param playerName
+	 *            user name
+	 * @param AIMode
+	 *            AI difficulty
+	 */
 	public void initSinglePlayerGame(String playerName, int AIMode) {
 		if (playerName == null || playerName.equals("")) {
 			playerName = "Player Name";
@@ -245,18 +254,29 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			player2 = new User(playerName);
 		}
 		gameMode = 1;
-		playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+		gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		startNewGame();
 		updateStatisticsPanel();
 	}
 
+	/**
+	 * initialize double players mode game.
+	 * 
+	 * @param name1
+	 *            first player name
+	 * @param name2
+	 *            second player name
+	 */
 	public void initDoublePlayersGame(String name1, String name2) {
+		// set default name if input is empty
 		if (name1 == null || name1.equals("")) {
 			name1 = "Player Name A";
 		}
 		if (name2 == null || name2.equals("")) {
 			name2 = "Player Name B";
 		}
+
+		// randomize user play order
 		if (randPlayer() == 0) {
 			player1 = new User(name1);
 			player2 = new User(name2);
@@ -266,11 +286,15 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		gameMode = 2;
-		playerWindow.getStatisticsPanel().setPlayerNames(player1, player2);
+		gameWindow.getStatisticsPanel().setPlayerNames(player1, player2);
 		startNewGame();
 		updateStatisticsPanel();
 	}
 
+	/**
+	 * 
+	 * @return random return 0 or 1 with same probability
+	 */
 	private int randPlayer() {
 		Random rand = new Random();
 		return rand.nextInt(2);

@@ -5,13 +5,13 @@
  * @version v0.1
  */
 
-public class H1 implements HeuristicAlgorithm {
+public class H1 implements AlphaBetaHeuristic {
 
 	public int h(GameState state) {
 
 		int h = 0;
 
-		// sequence of 3
+		// for each empty slot, check all directions
 		for (int c = 0; c < 7; c++) {
 			for (int r = 0; r < 6; r++) {
 				if (state.getLocation(c, r) == null) {
@@ -53,6 +53,21 @@ public class H1 implements HeuristicAlgorithm {
 		return h;
 	}
 
+	/**
+	 * Gives score only if there is a chance to connect 4 if placing one more
+	 * disc in the given empty slot.
+	 * 
+	 * @param state
+	 * @param c
+	 *            column
+	 * @param r
+	 *            row
+	 * @param dc
+	 *            direction displacement of column
+	 * @param dr
+	 *            direction displacement of row
+	 * @return
+	 */
 	private int evalEmptySlot(GameState state, int c, int r, int dc, int dr) {
 
 		Player oppo = state.getOtherPlayer();
