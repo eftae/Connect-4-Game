@@ -30,7 +30,6 @@ public class MenuPanel extends JPanel {
 		Font defaultFont = new Font("Arial", Font.PLAIN, 20);
 
 		setLayout(new GridBagLayout());
-		setBorder(new TitledBorder("New Game"));
 
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0.5;
