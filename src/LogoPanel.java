@@ -20,7 +20,7 @@ public class LogoPanel extends JPanel {
 	ImageIcon icon1 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/welcome2.png"), 800, 300);
 	ImageIcon icon2 = ResizeImage.changeImage(
-			new ImageIcon("src/pics/logo.png"), 400, 90);
+			new ImageIcon("src/pics/logo.png"), 600, 120);
 
 	public LogoPanel() {
 		timer = new Timer(15, new ActionListener() {
@@ -47,7 +47,7 @@ public class LogoPanel extends JPanel {
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 				opacity));
 		g2d.drawImage(icon1.getImage(), -20, 180, null);
-		g2d.drawImage(icon2.getImage(), 175, 100, null);
+		g2d.drawImage(icon2.getImage(), 100, 100, null);
 	}
 
 }

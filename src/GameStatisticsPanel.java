@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -5,11 +6,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 public class GameStatisticsPanel extends JPanel {
@@ -21,6 +24,7 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel player1;
 	private JLabel player2;
 	private JLabel msg;
+	private JLabel modeLabel;
 
 	private ImageIcon icn1s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/redDot.png"), 50, 50);
@@ -28,6 +32,14 @@ public class GameStatisticsPanel extends JPanel {
 			"src/pics/yellowDot.png"), 50, 50);
 	private ImageIcon icn0s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 50, 50);
+	private ImageIcon icon5 = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/Baby.png"), 120, 120);
+	private ImageIcon icon6 = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/solider.png"), 120, 120);
+	private ImageIcon icon7 = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/Thor.png"), 120, 120);
+	ImageIcon icon4 = new ImageIcon("src/pics/Restart-50.png");
+	ImageIcon modeIcon;
 
 	public GameStatisticsPanel(GameWindow gameWindow, Connect4 mainGame) {
 
@@ -41,7 +53,7 @@ public class GameStatisticsPanel extends JPanel {
 		Dimension d = getPreferredSize();
 		d.width = 150;
 		setPreferredSize(d);
-		setBackground(Color.WHITE);
+		setBackground(Color.PINK);
 		setLayout(new GridLayout(5, 1));
 
 		// who's turn
@@ -51,9 +63,30 @@ public class GameStatisticsPanel extends JPanel {
 		add(player2);
 		msg = new JLabel();
 		//add(msg);
-
+		modeLabel = new JLabel ();
+		
+		String modeName;
+		
+		if (player1.getText().equals("EASY BOT")||player2.getText().equals("EASY BOT")){			
+			modeLabel.setIcon (icon5);
+			modeName = "It's a baby!";
+		}else if (player1.getText().equals("MEDIUM BOT")||player2.getText().equals("MEDIUM BOT")){
+			modeLabel.setIcon(icon6);
+			modeName = "Solider is tough!";
+		}else {
+			modeLabel.setIcon(icon7);
+			modeName = "Challenging thunder God!";
+		}
+		add(modeLabel);	
+		JLabel modeDescription = new JLabel(modeName);
+		add(modeDescription);
+			
+			
+		
 		JButton restartGameButton = new JButton("Restart Game");
 		restartGameButton.setFont(defaultFont);
+		restartGameButton.setIcon(icon4);
+		restartGameButton.setBackground(Color.lightGray);
 		restartGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -62,7 +95,8 @@ public class GameStatisticsPanel extends JPanel {
 			}
 		});
 		add(restartGameButton);
-
+	
+		/*
 		JButton returnHomeButton = new JButton("Return Home");
 		returnHomeButton.setFont(defaultFont);
 		returnHomeButton.addActionListener(new ActionListener() {
@@ -91,7 +125,11 @@ public class GameStatisticsPanel extends JPanel {
 			}
 		});
 		add(quitButton);
+		
+		*/
 	}
+	
+	
 
 	public void setPlayerNames(Player p1, Player p2) {
 		player1.setText(p1.getName());

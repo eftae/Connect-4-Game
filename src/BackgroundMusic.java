@@ -11,30 +11,22 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
+/**
+ * This Class Plays/stops background Music in loop.
+ * @author Jiangkan Pan
+ *
+ */
 public class BackgroundMusic {
 	
-	//static AudioPlayer MGP;
-	//static ContinuousAudioDataStream loop;
 	static Clip clip;
 	static AudioInputStream ais;
 	static URL url;
-
+/**
+ * the constructor tasks in the path of audio file that user like to play
+ * @param songName
+ */
 	public static void music(String songName) {
-		/*
-
-		MGP = AudioPlayer.player;
-		AudioStream BGM;
-		AudioData MD;
-		loop = null;
-		try {
-			BGM = new AudioStream(new FileInputStream(songName));
-			MD = BGM.getData();
-			loop = new ContinuousAudioDataStream(MD);
-		} catch (IOException error) {
-			System.out.print("file not found");
-		}
-		MGP.start(loop);
-		*/
+	
 		 	try {
 				 url = new File(songName).toURI().toURL();
 			} catch (MalformedURLException e1) {
@@ -45,15 +37,14 @@ public class BackgroundMusic {
 			try {
 				clip = AudioSystem.getClip();
 			} catch (LineUnavailableException e) {
-				// TODO Auto-generated catch block
+	
 				System.out.println("file not found 1");
 			}
-	        // getAudioInputStream() also accepts a File or InputStream
 	         ais = null;
 			try {
 				ais = AudioSystem.getAudioInputStream(url);
 			} catch (UnsupportedAudioFileException | IOException e) {
-				// TODO Auto-generated catch block
+
 				System.out.println("file not found 2");
 			}
 	        try {
@@ -65,7 +56,9 @@ public class BackgroundMusic {
 				
 
 	}
-	
+	/**
+	 * static top method for easy access to turn off the music
+	 */
 	public static void stopMusic() {
 		clip.stop();
 	}

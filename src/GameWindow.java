@@ -5,6 +5,10 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+/**
+ * Class creates Game Window for each game modes
+ *
+ */
 
 public class GameWindow extends JFrame {
 

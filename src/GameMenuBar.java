@@ -1,4 +1,5 @@
 import java.awt.Font;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,6 +12,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+/**
+ * Class create the top game menu for game windows
+ * @author Jiangkan Pan
+ *
+ */
 public class GameMenuBar extends JMenuBar {
 
 	private Connect4 mainGame;
@@ -19,6 +25,12 @@ public class GameMenuBar extends JMenuBar {
 	private String title;
 
 	// private static int counter = 0;
+	
+	/**
+	 * 
+	 * @param mainGame
+	 * @param psw
+	 */
 
 	public GameMenuBar(final Connect4 mainGame, final GameWindow psw) {
 
