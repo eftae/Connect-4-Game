@@ -2,6 +2,7 @@
  * Class for menu. Calling corresponding function in the main.
  */
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -32,8 +33,8 @@ public class MenuPanel extends JPanel {
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints gc = new GridBagConstraints();
-		gc.weightx = 0.5;
-		gc.weighty = 1;
+		gc.weightx = 1;
+		gc.weighty = 10;
 		gc.fill = GridBagConstraints.BOTH;
 
 		// Button for Single Player
@@ -43,7 +44,7 @@ public class MenuPanel extends JPanel {
 		JButton singlePlayerButton = new JButton(" Single Player",
 				singlePlayerButtonIcon);
 		singlePlayerButton.setToolTipText("Start a game against with BOT");
-		singlePlayerButton.setFont(defaultFont);
+		singlePlayerButton.setFont(defaultFont);		
 		add(singlePlayerButton, gc);
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
@@ -61,7 +62,6 @@ public class MenuPanel extends JPanel {
 		});
 
 		// Button for Two Player
-		gc.gridx = 0;
 		gc.gridy = 1;
 		ImageIcon twoPlayersButtonIcon = new ImageIcon("src/pics/Group-50.png");
 		JButton twoPlayersButton = new JButton("Co-op Player",
@@ -85,8 +85,7 @@ public class MenuPanel extends JPanel {
 		});
 
 		// Button for Credits
-		gc.gridx = 0;
-		gc.gridy = 3;
+		gc.gridy = 2;
 		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
 		JButton creditsButton = new JButton("  Credits", creditsButtonIcon);
 		creditsButton.setToolTipText("View the Development Team");
@@ -102,8 +101,7 @@ public class MenuPanel extends JPanel {
 		});
 
 		// button for mute/play music
-		gc.gridx = 0;
-		gc.gridy = 4;
+		gc.gridy = 3;
 		muteButton = new JButton("Mute Music", muteButtonIcon);
 		muteButton.setToolTipText("Mute/Unmute Music");
 		muteButton.setFont(defaultFont);
@@ -123,8 +121,7 @@ public class MenuPanel extends JPanel {
 		muteButton.addActionListener(muteActionListener);
 
 		// Button for Quit
-		gc.gridx = 0;
-		gc.gridy = 5;
+		gc.gridy = 4;
 		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
 		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
 		quitButton.setToolTipText("Exit the Game");
