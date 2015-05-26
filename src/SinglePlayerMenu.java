@@ -20,7 +20,7 @@ public class SinglePlayerMenu extends JPanel {
 
 	private Connect4 mainGame;
 	private final float opacity = 0;
-	private int AIMode;
+	public static int AIMode;
 	private JRadioButton AIButton0;
 	private JRadioButton AIButton1;
 	private JRadioButton AIButton2;

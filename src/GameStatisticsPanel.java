@@ -33,11 +33,11 @@ public class GameStatisticsPanel extends JPanel {
 	private ImageIcon icn0s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 50, 50);
 	private ImageIcon icon5 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/Baby.png"), 120, 120);
+			"src/pics/Baby.png"), 100, 100);
 	private ImageIcon icon6 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/solider.png"), 120, 120);
+			"src/pics/solider.png"), 100, 100);
 	private ImageIcon icon7 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/Thor.png"), 120, 120);
+			"src/pics/Thor.png"), 100, 100);
 	ImageIcon icon4 = new ImageIcon("src/pics/Restart-50.png");
 	ImageIcon modeIcon;
 
@@ -67,10 +67,10 @@ public class GameStatisticsPanel extends JPanel {
 		
 		String modeName;
 		
-		if (player1.getText().equals("EASY BOT")||player2.getText().equals("EASY BOT")){			
+		if (SinglePlayerMenu.AIMode == 0){			
 			modeLabel.setIcon (icon5);
 			modeName = "It's a baby!";
-		}else if (player1.getText().equals("MEDIUM BOT")||player2.getText().equals("MEDIUM BOT")){
+		}else if (SinglePlayerMenu.AIMode == 1){
 			modeLabel.setIcon(icon6);
 			modeName = "Solider is tough!";
 		}else {
