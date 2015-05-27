@@ -57,10 +57,7 @@ public class GameStatisticsPanel extends JPanel {
 
 		Font defaultFont = new Font("Arial", Font.BOLD, 20);
 
-		setBorder(new TitledBorder("Game Statistic"));
-		Dimension d = getPreferredSize();
-		d.width = 150;
-		setPreferredSize(d);
+		setBorder(new TitledBorder("Welcome"));
 		setBackground(Color.LIGHT_GRAY);
 
 		setLayout(new GridBagLayout());
