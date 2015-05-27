@@ -161,6 +161,9 @@ public class GameState {
 	}
 
 	public ArrayList<Integer> getWinDiscs() {
+		if (winDiscs == null) {
+			return null;
+		}
 		return new ArrayList<Integer>(winDiscs);
 	}
 

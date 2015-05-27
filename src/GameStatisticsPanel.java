@@ -152,19 +152,23 @@ public class GameStatisticsPanel extends JPanel {
 	}
 
 	public void displayEndGame(Player winner) {
-		if (gameEngine.getCurrPlayerIndex() == 0) {
-			player1.setIcon(yellowWinIcn);
-			player2.setIcon(icn0s);
-		} else {
-			player1.setIcon(icn0s);
-			player2.setIcon(redWinIcn);
-		}
 		if (winner == null) {
 			msg.setText("Board Full. Drew.");
+			player1.setIcon(icn0s);
+			player2.setIcon(icn0s);
 		} else {
 			msg.setText(winner.getName() + " won.");
+			if (gameEngine.getCurrPlayerIndex() == 0) {
+				player1.setIcon(yellowWinIcn);
+				player2.setIcon(icn0s);
+				msg.setForeground(Color.YELLOW);
+			} else {
+				player1.setIcon(icn0s);
+				player2.setIcon(redWinIcn);
+				msg.setForeground(Color.RED);
+			}
 		}
-		msg.setForeground(Color.YELLOW);
+
 		repaint();
 	}
 

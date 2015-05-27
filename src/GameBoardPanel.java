@@ -149,6 +149,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 * @param winner
 	 */
 	public void displayEndGame(Player winner, ArrayList<Integer> winDiscs) {
+		if (gameMode == 0)
+			return; // stimulation
+
 		ImageIcon redEndIcn = ResizeImage.changeImage(new ImageIcon(
 				"src/pics/redGlow.png"), 100, 100);
 		ImageIcon yellowEndIcn = ResizeImage.changeImage(new ImageIcon(
@@ -157,9 +160,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				"src/pics/redWin.png"), 100, 100);
 		ImageIcon yellowWInIcn = ResizeImage.changeImage(new ImageIcon(
 				"src/pics/yellowWin.png"), 100, 100);
-
-		if (gameMode == 0)
-			return; // stimulation
 
 		for (JButton btn : buttons) {
 			btn.removeActionListener(this);
@@ -175,18 +175,20 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			}
 
 			// glow effects
-			for (int i = 0; i < 4; i++) {
-				int btnID = (5 - winDiscs.get(2 * i)) * 7
-						+ winDiscs.get(2 * i + 1);
-				if (btn.equals(buttons.get(btnID))) {
-					if (gameEngine.getCurrPlayerIndex() == 0) {
-						btn.setIcon(yellowWInIcn); // red dots win
-						btn.setPressedIcon(yellowWInIcn);
-					} else {
-						btn.setIcon(redWinIcn); // yellow dots win
-						btn.setPressedIcon(redWinIcn);
+			if (winDiscs != null) {
+				for (int i = 0; i < 4; i++) {
+					int btnID = (5 - winDiscs.get(2 * i)) * 7
+							+ winDiscs.get(2 * i + 1);
+					if (btn.equals(buttons.get(btnID))) {
+						if (gameEngine.getCurrPlayerIndex() == 0) {
+							btn.setIcon(yellowWInIcn); // red dots win
+							btn.setPressedIcon(yellowWInIcn);
+						} else {
+							btn.setIcon(redWinIcn); // yellow dots win
+							btn.setPressedIcon(redWinIcn);
+						}
+						break;
 					}
-					break;
 				}
 			}
 		}
