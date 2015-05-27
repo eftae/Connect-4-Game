@@ -42,7 +42,7 @@ public class BackgroundMusic {
 		
 				 
 				clip = Applet.newAudioClip(url);
-				clip.play();
+				clip.loop();
 
 	}
 	/**
