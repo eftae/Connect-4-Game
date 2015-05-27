@@ -175,7 +175,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 */
 	public void restartNewGame() {
 		mainGame.suspendGame();
-		finishPanel.setVisible(false);
 
 		// randomize first player for single player mode
 		if (gameMode != 0) {
