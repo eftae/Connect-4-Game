@@ -60,7 +60,8 @@ public class GameEngine implements Runnable {
 					// check game end and winner
 					if (currState.checkGameEnd()) {
 						isInGame = false;
-						gameBoardPanel.displayEndGame(currState.getWinner());
+						gameBoardPanel.displayEndGame(currState.getWinner(),
+								currState.getWinDiscs());
 					}
 				} else {
 					break;

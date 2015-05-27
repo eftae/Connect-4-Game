@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Handle the state of a game v0.11 added clone() v0.12 modified
  * 
@@ -25,6 +27,7 @@ public class GameState {
 	private Player nextPlayer;
 	private Player winner;
 	private int turn;
+	private ArrayList<Integer> winDiscs;
 
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
@@ -74,6 +77,15 @@ public class GameState {
 						&& curr.equals(board[c][r + 2])
 						&& curr.equals(board[c][r + 3])) {
 					winner = curr;
+					winDiscs = new ArrayList<Integer>();
+					winDiscs.add(r);
+					winDiscs.add(c);
+					winDiscs.add(r + 1);
+					winDiscs.add(c);
+					winDiscs.add(r + 2);
+					winDiscs.add(c);
+					winDiscs.add(r + 3);
+					winDiscs.add(c);
 					return true;
 				}
 			}
@@ -87,6 +99,15 @@ public class GameState {
 						&& curr.equals(board[c + 2][r])
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
+					winDiscs = new ArrayList<Integer>();
+					winDiscs.add(r);
+					winDiscs.add(c);
+					winDiscs.add(r);
+					winDiscs.add(c + 1);
+					winDiscs.add(r);
+					winDiscs.add(c + 2);
+					winDiscs.add(r);
+					winDiscs.add(c + 3);
 					return true;
 				}
 			}
@@ -98,6 +119,15 @@ public class GameState {
 						&& curr.equals(board[c + 2][r + 2])
 						&& curr.equals(board[c + 3][r + 3])) {
 					winner = curr;
+					winDiscs = new ArrayList<Integer>();
+					winDiscs.add(r);
+					winDiscs.add(c);
+					winDiscs.add(r + 1);
+					winDiscs.add(c + 1);
+					winDiscs.add(r + 2);
+					winDiscs.add(c + 2);
+					winDiscs.add(r + 3);
+					winDiscs.add(c + 3);
 					return true;
 				}
 
@@ -107,6 +137,15 @@ public class GameState {
 						&& curr.equals(board[c + 2][r + 1])
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
+					winDiscs = new ArrayList<Integer>();
+					winDiscs.add(r);
+					winDiscs.add(c);
+					winDiscs.add(r + 2);
+					winDiscs.add(c + 1);
+					winDiscs.add(r + 1);
+					winDiscs.add(c + 2);
+					winDiscs.add(r);
+					winDiscs.add(c + 3);
 					return true;
 				}
 			}
@@ -119,6 +158,10 @@ public class GameState {
 		}
 
 		return false;
+	}
+
+	public ArrayList<Integer> getWinDiscs() {
+		return new ArrayList<Integer>(winDiscs);
 	}
 
 	/**

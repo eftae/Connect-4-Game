@@ -148,7 +148,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 * 
 	 * @param winner
 	 */
-	public void displayEndGame(Player winner) {
+	public void displayEndGame(Player winner, ArrayList<Integer> winDiscs) {
 		if (gameMode == 0)
 			return; // stimulation
 
@@ -157,6 +157,24 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			if (btn.getIcon() == whiteDisc) {
 				btn.setRolloverIcon(null);
 				btn.setPressedIcon(whiteDisc);
+			} else if (btn.getIcon() == icn1) {
+				btn.setIcon(arrow1); // red dots end
+			} else {
+				btn.setIcon(arrow2); // yellow dots end
+			}
+
+			// glow effects
+			for (int i = 0; i < 4; i++) {
+				int btnID = (5 - winDiscs.get(2 * i)) * 7
+						+ winDiscs.get(2 * i + 1);
+				if (btn.equals(buttons.get(btnID))) {
+					if (gameEngine.getCurrPlayerIndex() == 0) {
+						btn.setIcon(arrow2); // red dots win
+					} else {
+						btn.setIcon(arrow1); // yellow dots win
+					}
+					break;
+				}
 			}
 		}
 
