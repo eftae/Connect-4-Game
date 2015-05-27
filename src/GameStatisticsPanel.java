@@ -40,6 +40,8 @@ public class GameStatisticsPanel extends JPanel {
 			"src/pics/Ironman.png"), 100, 100);
 	private ImageIcon icon7 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/Thor3.png"), 100, 100);
+	private ImageIcon icon8 = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/vs.png"), 100, 100);
 	ImageIcon icon4 = new ImageIcon("src/pics/Restart-50.png");
 	ImageIcon modeIcon;
 
@@ -77,17 +79,20 @@ public class GameStatisticsPanel extends JPanel {
 		add(msg, gc);
 		modeLabel = new JLabel();
 
-		String modeName;
+		String modeName = null;
 
-		if (SinglePlayerMenu.AIMode == 0) {
+		if (SinglePlayerMenu.AIMode == 0 && DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon5);
 			modeName = "It's a baby boy!";
-		} else if (SinglePlayerMenu.AIMode == 1) {
+		} else if (SinglePlayerMenu.AIMode == 1 && DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon6);
 			modeName = "Challenging tech Genius!";
-		} else {
+		} else if (SinglePlayerMenu.AIMode == 2 && DoublePlayersMenu.AIModeDouble == false){
 			modeLabel.setIcon(icon7);
 			modeName = "Challenging thunder God!";
+		} else {
+			modeLabel.setIcon(icon8);
+			modeName = "Fight to death !";
 		}
 		gc.gridy = 4;
 		add(modeLabel, gc);

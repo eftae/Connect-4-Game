@@ -19,6 +19,7 @@ public class DoublePlayersMenu extends JPanel {
 	private Connect4 mainGame;
 	private final float opacity = 0;
 	private int AIMode;
+	public static  boolean AIModeDouble = false;
 
 	/**
 	 * 
@@ -27,6 +28,7 @@ public class DoublePlayersMenu extends JPanel {
 	public DoublePlayersMenu(final Connect4 mainGame) {
 
 		// set button layout
+		AIModeDouble = true;
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 0;
