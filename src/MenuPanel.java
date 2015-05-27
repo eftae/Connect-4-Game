@@ -100,8 +100,23 @@ public class MenuPanel extends JPanel {
 			}
 		});
 
-		// button for mute/play music
+		
+		// how to play button
 		gc.gridy = 3;
+		JButton htpButton = new JButton("How To Play", muteButtonIcon);
+		htpButton.setToolTipText("User Manual");
+		htpButton.setFont(defaultFont);
+		add(htpButton, gc);
+		htpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+
+		
+		// button for mute/play music
+		gc.gridy = 4;
 		muteButton = new JButton("Mute Music", muteButtonIcon);
 		muteButton.setToolTipText("Mute/Unmute Music");
 		muteButton.setFont(defaultFont);
@@ -121,7 +136,7 @@ public class MenuPanel extends JPanel {
 		muteButton.addActionListener(muteActionListener);
 
 		// Button for Quit
-		gc.gridy = 4;
+		gc.gridy = 5;
 		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
 		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
 		quitButton.setToolTipText("Exit the Game");

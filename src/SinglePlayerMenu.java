@@ -26,6 +26,11 @@ public class SinglePlayerMenu extends JPanel {
 	private JRadioButton AIButton2;
 	ButtonGroup group;
 
+	/**
+	 * create a pop up jPanel for the user to enter their name, choose the difficulties 
+	 * of the game and enter the game with the current setting.
+	 * @param mainGame the game system
+	 */
 	public SinglePlayerMenu(final Connect4 mainGame) {
 
 		// set the format of the buttons
@@ -109,11 +114,10 @@ public class SinglePlayerMenu extends JPanel {
 		add(startGame, gc);
 	}
 
-	public void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-				opacity));
-	}
+//	public void paint(Graphics g) {
+//		super.paint(g);
+//		Graphics2D g2d = (Graphics2D) g;
+//		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,opacity));
+//	}
 
 }
