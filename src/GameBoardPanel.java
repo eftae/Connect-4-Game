@@ -179,13 +179,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		}
 
 		gameWindow.getStatisticsPanel().displayEndGame(winner);
-
-		// finish panel
-		finishPanel = new FinishPanel(mainGame, gameWindow, winner, gameMode);
-		finishPanel.setPreferredSize(new Dimension(750, 700));
-		gameWindow.setGlassPane(finishPanel);
-		finishPanel.setOpaque(false);
-		finishPanel.setVisible(true);
 	}
 
 	/**

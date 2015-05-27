@@ -51,7 +51,7 @@ public class GameStatisticsPanel extends JPanel {
 		this.gameWindow = gameWindow;
 		gameEngine = mainGame.getGameEngine();
 
-		Font defaultFont = new Font("Arial", Font.PLAIN, 20);
+		Font defaultFont = new Font("Arial", Font.BOLD, 20);
 
 		setBorder(new TitledBorder("Game Statistic"));
 		Dimension d = getPreferredSize();
@@ -67,7 +67,6 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.WEST;
-		//gc.fill = GridBagConstraints.BOTH;
 
 		// who's turn
 		player1 = new JLabel();
@@ -78,6 +77,7 @@ public class GameStatisticsPanel extends JPanel {
 
 		gc.anchor = GridBagConstraints.SOUTH;
 		msg = new JLabel();
+		msg.setFont(defaultFont);
 		gc.gridy = 3;
 		add(msg, gc);
 		modeLabel = new JLabel();
@@ -101,7 +101,7 @@ public class GameStatisticsPanel extends JPanel {
 			modeName = "Fight to death !";
 			DoublePlayersMenu.AIModeDouble = false;
 		}
-		
+
 		gc.gridy = 4;
 		add(modeLabel, gc);
 		JLabel modeDescription = new JLabel(modeName);
@@ -151,6 +151,7 @@ public class GameStatisticsPanel extends JPanel {
 		player1.setText(p1.getName());
 		player2.setText(p2.getName());
 		msg.setText("Game Started.");
+		msg.setForeground(Color.BLUE);
 	}
 
 	public void setWhosTurn() {
@@ -176,8 +177,8 @@ public class GameStatisticsPanel extends JPanel {
 			msg.setText("Board Full. Drew.");
 		} else {
 			msg.setText(winner.getName() + " won.");
-
 		}
+		msg.setForeground(Color.YELLOW);
 		repaint();
 	}
 
