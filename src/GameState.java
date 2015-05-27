@@ -138,7 +138,7 @@ public class GameState {
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
 					winDiscs = new ArrayList<Integer>();
-					winDiscs.add(r);
+					winDiscs.add(r + 3);
 					winDiscs.add(c);
 					winDiscs.add(r + 2);
 					winDiscs.add(c + 1);
