@@ -34,6 +34,7 @@ public class GameState {
 		currPlayer = firstPlayer;
 		nextPlayer = secondPlayer;
 		turn = 1;
+		winDiscs = new ArrayList<Integer>();
 	}
 
 	/**
@@ -46,6 +47,7 @@ public class GameState {
 		this.nextPlayer = nextPlayer;
 		this.winner = winner;
 		this.turn = turn;
+		winDiscs = new ArrayList<Integer>();
 	}
 
 	/**
@@ -68,6 +70,8 @@ public class GameState {
 	 * @return the player connects 4 discs, winner
 	 */
 	public boolean checkGameEnd() {
+		boolean gameEnd = false;
+		winDiscs.clear();
 
 		// check vertical
 		for (int c = 0; c < COL_MAX; c++) {
@@ -77,7 +81,6 @@ public class GameState {
 						&& curr.equals(board[c][r + 2])
 						&& curr.equals(board[c][r + 3])) {
 					winner = curr;
-					winDiscs = new ArrayList<Integer>();
 					winDiscs.add(r);
 					winDiscs.add(c);
 					winDiscs.add(r + 1);
@@ -86,7 +89,7 @@ public class GameState {
 					winDiscs.add(c);
 					winDiscs.add(r + 3);
 					winDiscs.add(c);
-					return true;
+					gameEnd = true;
 				}
 			}
 		}
@@ -99,7 +102,6 @@ public class GameState {
 						&& curr.equals(board[c + 2][r])
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
-					winDiscs = new ArrayList<Integer>();
 					winDiscs.add(r);
 					winDiscs.add(c);
 					winDiscs.add(r);
@@ -120,7 +122,7 @@ public class GameState {
 							}
 						}
 					}
-					return true;
+					gameEnd = true;
 				}
 			}
 
@@ -131,7 +133,6 @@ public class GameState {
 						&& curr.equals(board[c + 2][r + 2])
 						&& curr.equals(board[c + 3][r + 3])) {
 					winner = curr;
-					winDiscs = new ArrayList<Integer>();
 					winDiscs.add(r);
 					winDiscs.add(c);
 					winDiscs.add(r + 1);
@@ -150,7 +151,7 @@ public class GameState {
 							winDiscs.add(c + 5);
 						}
 					}
-					return true;
+					gameEnd = true;
 				}
 
 				// check diagonals: \
@@ -159,7 +160,6 @@ public class GameState {
 						&& curr.equals(board[c + 2][r + 1])
 						&& curr.equals(board[c + 3][r])) {
 					winner = curr;
-					winDiscs = new ArrayList<Integer>();
 					winDiscs.add(r + 3);
 					winDiscs.add(c);
 					winDiscs.add(r + 2);
@@ -178,7 +178,7 @@ public class GameState {
 							winDiscs.add(c + 5);
 						}
 					}
-					return true;
+					gameEnd = true;
 				}
 			}
 		}
@@ -186,9 +186,12 @@ public class GameState {
 		// check turn number
 		// check only if no winner on 42
 		if (turn == MAX_TURN + 1) {
-			return true;
+			gameEnd = true;
 		}
 
+		if (gameEnd) {
+			return true;
+		}
 		return false;
 	}
 
