@@ -83,9 +83,25 @@ public class MenuPanel extends JPanel {
 			}
 
 		});
+		
+		// how to play button
+		gc.gridy = 2;
+		ImageIcon htpIcn = new ImageIcon("src/pics/Rules-50.png");
+		JButton htpButton = new JButton("How To Play", htpIcn);
+		htpButton.setToolTipText("User Manual");
+		htpButton.setFont(defaultFont);
+		add(htpButton, gc);
+		htpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!mainGame.isMuted())
+					ButtonSound.music("src/sound/button.wav");
+				mainGame.changeGlassPane(4);
+			}
+		});
 
 		// Button for Credits
-		gc.gridy = 2;
+		gc.gridy = 3;
 		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
 		JButton creditsButton = new JButton("  Credits", creditsButtonIcon);
 		creditsButton.setToolTipText("View the Development Team");
@@ -101,18 +117,7 @@ public class MenuPanel extends JPanel {
 		});
 
 		
-		// how to play button
-		gc.gridy = 3;
-		JButton htpButton = new JButton("How To Play", muteButtonIcon);
-		htpButton.setToolTipText("User Manual");
-		htpButton.setFont(defaultFont);
-		add(htpButton, gc);
-		htpButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		
 
 		
 		// button for mute/play music
