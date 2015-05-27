@@ -35,11 +35,11 @@ public class GameStatisticsPanel extends JPanel {
 	private ImageIcon icn0s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 50, 50);
 	private ImageIcon icon5 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/Baby.png"), 100, 100);
+			"src/pics/Baby2.png"), 100, 100);
 	private ImageIcon icon6 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/solider.png"), 100, 100);
+			"src/pics/Ironman.png"), 100, 100);
 	private ImageIcon icon7 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/Thor.png"), 100, 100);
+			"src/pics/Thor3.png"), 100, 100);
 	ImageIcon icon4 = new ImageIcon("src/pics/Restart-50.png");
 	ImageIcon modeIcon;
 
@@ -55,7 +55,7 @@ public class GameStatisticsPanel extends JPanel {
 		Dimension d = getPreferredSize();
 		d.width = 150;
 		setPreferredSize(d);
-		setBackground(Color.WHITE);
+		setBackground(Color.LIGHT_GRAY);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -81,10 +81,10 @@ public class GameStatisticsPanel extends JPanel {
 
 		if (SinglePlayerMenu.AIMode == 0) {
 			modeLabel.setIcon(icon5);
-			modeName = "It's a baby!";
+			modeName = "It's a baby boy!";
 		} else if (SinglePlayerMenu.AIMode == 1) {
 			modeLabel.setIcon(icon6);
-			modeName = "Solider is tough!";
+			modeName = "Challenging tech Genius!";
 		} else {
 			modeLabel.setIcon(icon7);
 			modeName = "Challenging thunder God!";
@@ -98,7 +98,7 @@ public class GameStatisticsPanel extends JPanel {
 		JButton restartGameButton = new JButton("Restart Game");
 		restartGameButton.setFont(defaultFont);
 		restartGameButton.setIcon(icon4);
-		restartGameButton.setBackground(Color.lightGray);
+		//restartGameButton.setBackground(Color.PINK);
 		restartGameButton.setPreferredSize(new Dimension(220, 100));
 		restartGameButton.addActionListener(new ActionListener() {
 			@Override
@@ -108,6 +108,8 @@ public class GameStatisticsPanel extends JPanel {
 		});
 		gc.gridy = 6;
 		add(restartGameButton, gc);
+		
+			/*
 
 		JButton returnHomeButton = new JButton("Return Home");
 		returnHomeButton.setFont(defaultFont);
@@ -129,7 +131,9 @@ public class GameStatisticsPanel extends JPanel {
 		});
 		gc.gridy = 7;
 		add(returnHomeButton, gc);
-		/*
+		
+	
+		
 		 * JButton quitButton = new JButton("Quit Game");
 		 * quitButton.setFont(defaultFont); quitButton.addActionListener(new
 		 * ActionListener() {
