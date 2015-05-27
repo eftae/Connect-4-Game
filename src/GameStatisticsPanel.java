@@ -66,6 +66,8 @@ public class GameStatisticsPanel extends JPanel {
 		gc.fill = GridBagConstraints.FIRST_LINE_START;
 		gc.gridx = 0;
 		gc.gridy = 0;
+		gc.anchor = GridBagConstraints.WEST;
+		//gc.fill = GridBagConstraints.BOTH;
 
 		// who's turn
 		player1 = new JLabel();
@@ -74,6 +76,7 @@ public class GameStatisticsPanel extends JPanel {
 		player2 = new JLabel();
 		add(player2, gc);
 
+		gc.anchor = GridBagConstraints.SOUTH;
 		msg = new JLabel();
 		gc.gridy = 3;
 		add(msg, gc);
@@ -81,13 +84,16 @@ public class GameStatisticsPanel extends JPanel {
 
 		String modeName = null;
 
-		if (SinglePlayerMenu.AIMode == 0 && DoublePlayersMenu.AIModeDouble == false) {
+		if (SinglePlayerMenu.AIMode == 0
+				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon5);
 			modeName = "It's a baby boy!";
-		} else if (SinglePlayerMenu.AIMode == 1 && DoublePlayersMenu.AIModeDouble == false) {
+		} else if (SinglePlayerMenu.AIMode == 1
+				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon6);
 			modeName = "Challenging tech Genius!";
-		} else if (SinglePlayerMenu.AIMode == 2 && DoublePlayersMenu.AIModeDouble == false){
+		} else if (SinglePlayerMenu.AIMode == 2
+				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon7);
 			modeName = "Challenging thunder God!";
 		} else {
@@ -95,6 +101,7 @@ public class GameStatisticsPanel extends JPanel {
 			modeName = "Fight to death !";
 			DoublePlayersMenu.AIModeDouble = false;
 		}
+		
 		gc.gridy = 4;
 		add(modeLabel, gc);
 		JLabel modeDescription = new JLabel(modeName);
@@ -104,7 +111,7 @@ public class GameStatisticsPanel extends JPanel {
 		JButton restartGameButton = new JButton("Restart Game");
 		restartGameButton.setFont(defaultFont);
 		restartGameButton.setIcon(icon4);
-		//restartGameButton.setBackground(Color.PINK);
+		// restartGameButton.setBackground(Color.PINK);
 		restartGameButton.setPreferredSize(new Dimension(220, 100));
 		restartGameButton.addActionListener(new ActionListener() {
 			@Override
@@ -114,32 +121,23 @@ public class GameStatisticsPanel extends JPanel {
 		});
 		gc.gridy = 6;
 		add(restartGameButton, gc);
-		
-			/*
 
-		JButton returnHomeButton = new JButton("Return Home");
-		returnHomeButton.setFont(defaultFont);
-		returnHomeButton.setPreferredSize(new Dimension(220, 100));
-		returnHomeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				getMainGame().suspendGame();
-				try {
-					Thread.sleep(400);
-				} catch (InterruptedException ex) {
-					Thread.currentThread().interrupt();
-				}
-				getMainGame().setVisity(true);
-				getMainGame().changeGlassPane(0);
-				getGameWindow().setVisible(false);
-				getGameWindow().dispose();
-			}
-		});
-		gc.gridy = 7;
-		add(returnHomeButton, gc);
-		
-	
-		
+		/*
+		 * 
+		 * JButton returnHomeButton = new JButton("Return Home");
+		 * returnHomeButton.setFont(defaultFont);
+		 * returnHomeButton.setPreferredSize(new Dimension(220, 100));
+		 * returnHomeButton.addActionListener(new ActionListener() {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent event) {
+		 * getMainGame().suspendGame(); try { Thread.sleep(400); } catch
+		 * (InterruptedException ex) { Thread.currentThread().interrupt(); }
+		 * getMainGame().setVisity(true); getMainGame().changeGlassPane(0);
+		 * getGameWindow().setVisible(false); getGameWindow().dispose(); } });
+		 * gc.gridy = 7; add(returnHomeButton, gc);
+		 * 
+		 * 
+		 * 
 		 * JButton quitButton = new JButton("Quit Game");
 		 * quitButton.setFont(defaultFont); quitButton.addActionListener(new
 		 * ActionListener() {
