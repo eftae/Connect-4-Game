@@ -175,6 +175,13 @@ public class Connect4 implements Runnable {
 			else
 				homeGlassPane = new Credits();
 			break;
+		case 4:
+			// credits page
+			if (homeGlassPane instanceof HowToPlay)
+				homeGlassPane = new LogoPanel();
+			else
+				homeGlassPane = new HowToPlay();
+			break;
 		default:
 			// blank
 			homeGlassPane = new JPanel();
