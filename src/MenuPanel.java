@@ -2,6 +2,7 @@
  * Class for menu. Calling corresponding function in the main.
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -22,8 +23,6 @@ public class MenuPanel extends JPanel {
 	// mute function fields
 	private JButton muteButton;
 	private ActionListener muteActionListener;
-	private ImageIcon muteButtonIcon = new ImageIcon("src/pics/Mute.png");
-	private ImageIcon speakerButtonIcon = new ImageIcon("src/pics/Speaker.png");
 
 	public MenuPanel(final Connect4 mainGame) {
 		this.mainGame = mainGame;
@@ -31,7 +30,11 @@ public class MenuPanel extends JPanel {
 		Font defaultFont = new Font("Arial", Font.PLAIN, 20);
 
 		setLayout(new GridBagLayout());
-
+		
+		setOpaque(true);
+		setBackground(new Color(27, 120, 236));
+        //setBackground(Color.BLACK);
+		
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 1;
 		gc.weighty = 10;
@@ -40,11 +43,21 @@ public class MenuPanel extends JPanel {
 		// Button for Single Player
 		gc.gridx = 0;
 		gc.gridy = 0;
-		ImageIcon singlePlayerButtonIcon = new ImageIcon("src/pics/single.png");
-		JButton singlePlayerButton = new JButton(" Single Player",
-				singlePlayerButtonIcon);
+
+        ImageIcon singlePlayerButtonIcon = ResizeImage.changeImage(new ImageIcon("src/pics/singleIcn.png"),245,114);
+        ImageIcon singlePlayerButtonIconClick = ResizeImage.changeImage(new ImageIcon("src/pics/singleIcnC.png"),245,114);
+//		ImageIcon singlePlayerButtonIcon = new ImageIcon("src/pics/singleIcn.png");
+		JButton singlePlayerButton = new JButton();
 		singlePlayerButton.setToolTipText("Start a game against with BOT");
-		singlePlayerButton.setFont(defaultFont);		
+		singlePlayerButton.setFont(defaultFont);
+		
+		singlePlayerButton.setOpaque(false);
+		singlePlayerButton.setContentAreaFilled(false);
+		singlePlayerButton.setFocusPainted(false);
+		singlePlayerButton.setBorderPainted(false);
+		singlePlayerButton.setIcon(singlePlayerButtonIcon);
+		singlePlayerButton.setPressedIcon(singlePlayerButtonIconClick);
+		
 		add(singlePlayerButton, gc);
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
@@ -63,11 +76,18 @@ public class MenuPanel extends JPanel {
 
 		// Button for Two Player
 		gc.gridy = 1;
-		ImageIcon twoPlayersButtonIcon = new ImageIcon("src/pics/Group-50.png");
-		JButton twoPlayersButton = new JButton("Co-op Player",
-				twoPlayersButtonIcon);
+	    ImageIcon doublePlayerButtonIcon = ResizeImage.changeImage(new ImageIcon("src/pics/doubleIcn.png"),245,114);
+	    ImageIcon doublePlayerButtonIconClick = ResizeImage.changeImage(new ImageIcon("src/pics/doubleIcnC.png"),245,114);
+		//ImageIcon twoPlayersButtonIcon = new ImageIcon("src/pics/Group-50.png");
+		JButton twoPlayersButton = new JButton();
 		twoPlayersButton.setToolTipText("Enter a mutiplayer VS Your Friend");
 		twoPlayersButton.setFont(defaultFont);
+		twoPlayersButton.setOpaque(false);
+		twoPlayersButton.setContentAreaFilled(false);
+		twoPlayersButton.setFocusPainted(false);
+		twoPlayersButton.setBorderPainted(false);
+		twoPlayersButton.setIcon(doublePlayerButtonIcon);
+		twoPlayersButton.setPressedIcon(doublePlayerButtonIconClick);
 		add(twoPlayersButton, gc);
 		twoPlayersButton.addActionListener(new ActionListener() {
 			@Override
@@ -86,10 +106,18 @@ public class MenuPanel extends JPanel {
 		
 		// how to play button
 		gc.gridy = 2;
-		ImageIcon htpIcn = new ImageIcon("src/pics/Rules-50.png");
-		JButton htpButton = new JButton("How To Play", htpIcn);
+		ImageIcon htpIcn = ResizeImage.changeImage(new ImageIcon("src/pics/htpIcn.png"),245,114);
+	    ImageIcon htpIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/htpIcnC.png"),245,114);
+		//ImageIcon htpIcn = new ImageIcon("src/pics/Rules-50.png");
+		JButton htpButton = new JButton();
 		htpButton.setToolTipText("User Manual");
 		htpButton.setFont(defaultFont);
+		htpButton.setOpaque(false);
+		htpButton.setContentAreaFilled(false);
+		htpButton.setFocusPainted(false);
+		htpButton.setBorderPainted(false);
+		htpButton.setIcon(htpIcn);
+		htpButton.setPressedIcon(htpIcnClick);
 		add(htpButton, gc);
 		htpButton.addActionListener(new ActionListener() {
 			@Override
@@ -102,10 +130,18 @@ public class MenuPanel extends JPanel {
 
 		// Button for Credits
 		gc.gridy = 3;
-		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
-		JButton creditsButton = new JButton("  Credits", creditsButtonIcon);
+		ImageIcon creditsIcn = ResizeImage.changeImage(new ImageIcon("src/pics/creditIcn.png"),245,114);
+	    ImageIcon creditsIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/creditIcnC.png"),245,114);
+//		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
+		JButton creditsButton = new JButton();
 		creditsButton.setToolTipText("View the Development Team");
 		creditsButton.setFont(defaultFont);
+		creditsButton.setOpaque(false);
+		creditsButton.setContentAreaFilled(false);
+		creditsButton.setFocusPainted(false);
+		creditsButton.setBorderPainted(false);
+		creditsButton.setIcon(creditsIcn);
+		creditsButton.setPressedIcon(creditsIcnClick);
 		add(creditsButton, gc);
 		creditsButton.addActionListener(new ActionListener() {
 			@Override
@@ -122,9 +158,17 @@ public class MenuPanel extends JPanel {
 		
 		// button for mute/play music
 		gc.gridy = 4;
-		muteButton = new JButton("Mute Music", muteButtonIcon);
+		muteButton = new JButton();
 		muteButton.setToolTipText("Mute/Unmute Music");
 		muteButton.setFont(defaultFont);
+		ImageIcon muteIcn = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcn.png"),245,114);
+		ImageIcon muteIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcnC.png"),245,114);
+		muteButton.setIcon(muteIcn);
+		muteButton.setPressedIcon(muteIcnClick);
+		muteButton.setOpaque(false);
+		muteButton.setContentAreaFilled(false);
+		muteButton.setFocusPainted(false);
+		muteButton.setBorderPainted(false);
 		add(muteButton, gc);
 		muteActionListener = new ActionListener() {
 			@Override
@@ -133,8 +177,7 @@ public class MenuPanel extends JPanel {
 					mainGame.setisMuted(true);
 				} else {
 					mainGame.setisMuted(false);
-					BackgroundMusic
-							.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
+					BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 				}
 			}
 		};
@@ -142,10 +185,18 @@ public class MenuPanel extends JPanel {
 
 		// Button for Quit
 		gc.gridy = 5;
-		ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
-		JButton quitButton = new JButton("Quit Game", quitButtonIcon);
+		ImageIcon quitIcn = ResizeImage.changeImage(new ImageIcon("src/pics/quitIcn.png"),245,114);
+	    ImageIcon quitIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/quitIcnC.png"),245,114);
+		//ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
+		JButton quitButton = new JButton();
 		quitButton.setToolTipText("Exit the Game");
 		quitButton.setFont(defaultFont);
+		quitButton.setOpaque(false);
+		quitButton.setContentAreaFilled(false);
+		quitButton.setFocusPainted(false);
+		quitButton.setBorderPainted(false);
+		quitButton.setIcon(quitIcn);
+		quitButton.setPressedIcon(quitIcnClick);
 		add(quitButton, gc);
 		quitButton.addActionListener(new ActionListener() {
 			@Override
@@ -163,14 +214,18 @@ public class MenuPanel extends JPanel {
 	}
 
 	public void mute() {
-		muteButton.setIcon(speakerButtonIcon);
-		muteButton.setText("Unmute");
+		ImageIcon unmuteIcn = ResizeImage.changeImage(new ImageIcon("src/pics/unmuteIcn.png"),245,114);
+		ImageIcon unmuteIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/unmuteIcnC.png"),245,114);
+		muteButton.setIcon(unmuteIcn);
+		muteButton.setPressedIcon(unmuteIcnClick);
 		BackgroundMusic.stopMusic();
 	}
 
 	public void unmute() {
-		muteButton.setIcon(muteButtonIcon);
-		muteButton.setText("Mute");
+		ImageIcon muteIcn = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcn.png"),245,114);
+		ImageIcon muteIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcnC.png"),245,114);
+		muteButton.setIcon(muteIcn);
+		muteButton.setPressedIcon(muteIcnClick);
 		ButtonSound.music("src/sound/button.wav");
 	}
 
