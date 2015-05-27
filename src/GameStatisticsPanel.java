@@ -42,6 +42,10 @@ public class GameStatisticsPanel extends JPanel {
 			"src/pics/Thor3.png"), 100, 100);
 	private ImageIcon icon8 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/vs.png"), 100, 100);
+	private ImageIcon redWinIcn = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/redWin.png"), 50, 50);
+	private ImageIcon yellowWinIcn = ResizeImage.changeImage(new ImageIcon(
+			"src/pics/yellowWin.png"), 50, 50);
 	ImageIcon icon4 = new ImageIcon("src/pics/Restart-50.png");
 	ImageIcon modeIcon;
 
@@ -87,15 +91,15 @@ public class GameStatisticsPanel extends JPanel {
 		if (SinglePlayerMenu.AIMode == 0
 				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon5);
-			modeName = "It's a baby boy!";
+			modeName = "Challenge Baby Boy!";
 		} else if (SinglePlayerMenu.AIMode == 1
 				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon6);
-			modeName = "Challenging tech Genius!";
+			modeName = "Challenge Tony Stark!";
 		} else if (SinglePlayerMenu.AIMode == 2
 				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon7);
-			modeName = "Challenging thunder God!";
+			modeName = "Challenge Thunder God!";
 		} else {
 			modeLabel.setIcon(icon8);
 			modeName = "Fight to death !";
@@ -122,29 +126,6 @@ public class GameStatisticsPanel extends JPanel {
 		gc.gridy = 6;
 		add(restartGameButton, gc);
 
-		/*
-		 * 
-		 * JButton returnHomeButton = new JButton("Return Home");
-		 * returnHomeButton.setFont(defaultFont);
-		 * returnHomeButton.setPreferredSize(new Dimension(220, 100));
-		 * returnHomeButton.addActionListener(new ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent event) {
-		 * getMainGame().suspendGame(); try { Thread.sleep(400); } catch
-		 * (InterruptedException ex) { Thread.currentThread().interrupt(); }
-		 * getMainGame().setVisity(true); getMainGame().changeGlassPane(0);
-		 * getGameWindow().setVisible(false); getGameWindow().dispose(); } });
-		 * gc.gridy = 7; add(returnHomeButton, gc);
-		 * 
-		 * 
-		 * 
-		 * JButton quitButton = new JButton("Quit Game");
-		 * quitButton.setFont(defaultFont); quitButton.addActionListener(new
-		 * ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent event) {
-		 * System.exit(0); } }); add(quitButton);
-		 */
 	}
 
 	public void setPlayerNames(Player p1, Player p2) {
@@ -171,8 +152,13 @@ public class GameStatisticsPanel extends JPanel {
 	}
 
 	public void displayEndGame(Player winner) {
-		player1.setIcon(icn0s);
-		player2.setIcon(icn0s);
+		if (gameEngine.getCurrPlayerIndex() == 0) {
+			player1.setIcon(yellowWinIcn);
+			player2.setIcon(icn0s);
+		} else {
+			player1.setIcon(icn0s);
+			player2.setIcon(redWinIcn);
+		}
 		if (winner == null) {
 			msg.setText("Board Full. Drew.");
 		} else {

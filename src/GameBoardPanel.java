@@ -149,12 +149,15 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 * @param winner
 	 */
 	public void displayEndGame(Player winner, ArrayList<Integer> winDiscs) {
-		ImageIcon redEndIcn = ResizeImage.changeImage(new ImageIcon("src/pics/redGlow.png"), 100, 100);
-		ImageIcon yellowEndIcn = ResizeImage.changeImage(new ImageIcon("src/pics/yellowGlow.png"), 100, 100);
-		ImageIcon redWinIcn = ResizeImage.changeImage(new ImageIcon("src/pics/redWin.png"), 100, 100);
-		ImageIcon yellowWInIcn = ResizeImage.changeImage(new ImageIcon("src/pics/yellowWin.png"), 100, 100);
-		
-		
+		ImageIcon redEndIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/redGlow.png"), 100, 100);
+		ImageIcon yellowEndIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/yellowGlow.png"), 100, 100);
+		ImageIcon redWinIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/redWin.png"), 100, 100);
+		ImageIcon yellowWInIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/yellowWin.png"), 100, 100);
+
 		if (gameMode == 0)
 			return; // stimulation
 
@@ -165,8 +168,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				btn.setPressedIcon(whiteDisc);
 			} else if (btn.getIcon() == icn1) {
 				btn.setIcon(redEndIcn); // red dots end
+				btn.setPressedIcon(redEndIcn);
 			} else {
 				btn.setIcon(yellowEndIcn); // yellow dots end
+				btn.setPressedIcon(yellowEndIcn);
 			}
 
 			// glow effects
@@ -176,8 +181,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				if (btn.equals(buttons.get(btnID))) {
 					if (gameEngine.getCurrPlayerIndex() == 0) {
 						btn.setIcon(yellowWInIcn); // red dots win
+						btn.setPressedIcon(yellowWInIcn);
 					} else {
 						btn.setIcon(redWinIcn); // yellow dots win
+						btn.setPressedIcon(redWinIcn);
 					}
 					break;
 				}
@@ -254,19 +261,19 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 */
 	public void initSinglePlayerGame(String playerName, int AIMode) {
 		if (playerName == null || playerName.equals("")) {
-			playerName = "Player Name";
+			playerName = "YOU";
 		}
 
 		String nameAI = null;
 		switch (AIMode) {
 		case 0:
-			nameAI = "EASY BOT";
+			nameAI = "Baby Boy";
 			break;
 		case 1:
-			nameAI = "MEDIUM BOT";
+			nameAI = "Tony Stark";
 			break;
 		case 2:
-			nameAI = "HARD BOT";
+			nameAI = "Thunder God";
 			break;
 		default:
 			nameAI = "BOT";
