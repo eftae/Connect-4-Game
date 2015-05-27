@@ -108,6 +108,18 @@ public class GameState {
 					winDiscs.add(c + 2);
 					winDiscs.add(r);
 					winDiscs.add(c + 3);
+					if (c + 4 < COL_MAX && curr.equals(board[c + 4][r])) {
+						winDiscs.add(r);
+						winDiscs.add(c + 4);
+						if (c + 5 < COL_MAX && curr.equals(board[c + 5][r])) {
+							winDiscs.add(r);
+							winDiscs.add(c + 5);
+							if (c + 6 < COL_MAX && curr.equals(board[c + 6][r])) {
+								winDiscs.add(r);
+								winDiscs.add(c + 6);
+							}
+						}
+					}
 					return true;
 				}
 			}
@@ -128,6 +140,16 @@ public class GameState {
 					winDiscs.add(c + 2);
 					winDiscs.add(r + 3);
 					winDiscs.add(c + 3);
+					if (c + 4 < COL_MAX && r + 4 < ROW_MAX
+							&& curr.equals(board[c + 4][r + 4])) {
+						winDiscs.add(r + 4);
+						winDiscs.add(c + 4);
+						if (c + 5 < COL_MAX && r + 5 < ROW_MAX
+								&& curr.equals(board[c + 5][r + 5])) {
+							winDiscs.add(r + 5);
+							winDiscs.add(c + 5);
+						}
+					}
 					return true;
 				}
 
@@ -146,6 +168,16 @@ public class GameState {
 					winDiscs.add(c + 2);
 					winDiscs.add(r);
 					winDiscs.add(c + 3);
+					if (c + 4 < COL_MAX && r - 1 >= 0
+							&& curr.equals(board[c + 4][r - 1])) {
+						winDiscs.add(r - 1);
+						winDiscs.add(c + 4);
+						if (c + 5 < COL_MAX && r - 2 >= 0
+								&& curr.equals(board[c + 5][r - 2])) {
+							winDiscs.add(r - 2);
+							winDiscs.add(c + 5);
+						}
+					}
 					return true;
 				}
 			}

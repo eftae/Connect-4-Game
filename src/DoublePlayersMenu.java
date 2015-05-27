@@ -56,7 +56,7 @@ public class DoublePlayersMenu extends JPanel {
 		add(player2NameField, gc);
 
 		// start game button
-		gc.gridx = 0;
+		gc.gridx = 1;
 		gc.gridy = 2;
 		JButton startGame = new JButton("Start Game");
 		startGame.addMouseListener(new MouseAdapter() {

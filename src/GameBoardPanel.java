@@ -176,7 +176,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 			// glow effects
 			if (winDiscs != null) {
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < winDiscs.size() / 2; i++) {
 					int btnID = (5 - winDiscs.get(2 * i)) * 7
 							+ winDiscs.get(2 * i + 1);
 					if (btn.equals(buttons.get(btnID))) {
