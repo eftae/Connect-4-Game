@@ -1,5 +1,7 @@
 
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,8 +20,10 @@ import javax.swing.*;
  */
 public class BackgroundMusic {
 	
-	static Clip clip;
+	//static Clip clip;
 	static AudioInputStream ais;
+	static File soundFile;
+	static AudioClip clip;
 	static URL url;
 /**
  * the constructor tasks in the path of audio file that user like to play
@@ -27,33 +31,18 @@ public class BackgroundMusic {
  */
 	public static void music(String songName) {
 	
-		 	try {
-				 url = new File(songName).toURI().toURL();
+		 	
+			try {
+				url = new File(songName).toURI().toURL();
 			} catch (MalformedURLException e1) {
-				System.out.println("file not found 4");
-			}
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 			
-	        clip = null;
-			try {
-				clip = AudioSystem.getClip();
-			} catch (LineUnavailableException e) {
-	
-				System.out.println("file not found 1");
-			}
-	         ais = null;
-			try {
-				ais = AudioSystem.getAudioInputStream(url);
-			} catch (UnsupportedAudioFileException | IOException e) {
-
-				System.out.println("file not found 2");
-			}
-	        try {
-				clip.open(ais);
-			} catch (LineUnavailableException | IOException e) {
-				System.out.println("file not found 3");
-			}
-	        clip.loop(Clip.LOOP_CONTINUOUSLY);
-				
+		
+				 
+				clip = Applet.newAudioClip(url);
+				clip.play();
 
 	}
 	/**
