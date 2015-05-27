@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -19,7 +20,7 @@ public class DoublePlayersMenu extends JPanel {
 	private Connect4 mainGame;
 	private final float opacity = 0;
 	private int AIMode;
-	public static  boolean AIModeDouble = false;
+	public static boolean AIModeDouble = false;
 
 	/**
 	 * 
@@ -38,11 +39,20 @@ public class DoublePlayersMenu extends JPanel {
 		// user name input
 		gc.gridx = 0;
 		gc.gridy = 0;
-		final JTextField player1NameField = new JTextField("Player Name A", 10);
+		JLabel username = new JLabel("Player Name A:  ");
+		add(username, gc);
+		gc.gridx = 1;
+		gc.gridy = 0;
+		final JTextField player1NameField = new JTextField("", 10);
 		add(player1NameField, gc);
+
 		gc.gridx = 0;
 		gc.gridy = 1;
-		final JTextField player2NameField = new JTextField("Player Name B", 10);
+		JLabel username2 = new JLabel("Player Name B:  ");
+		add(username2, gc);
+		gc.gridx = 1;
+		gc.gridy = 1;
+		final JTextField player2NameField = new JTextField("", 10);
 		add(player2NameField, gc);
 
 		// start game button

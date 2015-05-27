@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -39,11 +40,21 @@ public class SinglePlayerMenu extends JPanel {
 
 		gc.gridx = 0;
 		gc.gridy = 0;
-		final JTextField playerNameField = new JTextField("Player Name", 10);
+		JLabel username = new JLabel("Your name:  ");
+		add(username, gc);
+
+		gc.gridx = 1;
+		gc.gridy = 0;
+		final JTextField playerNameField = new JTextField("", 10);
 		add(playerNameField, gc);
 
-		// Easy button
 		gc.gridx = 0;
+		gc.gridy = 1;
+		JLabel modeText = new JLabel("Difficulty:");
+		add(modeText, gc);
+
+		// Easy button
+		gc.gridx = 1;
 		gc.gridy = 1;
 		AIButton0 = new JRadioButton("Easy");
 		AIButton0.setToolTipText("For Beginner of this game");
@@ -55,7 +66,7 @@ public class SinglePlayerMenu extends JPanel {
 		add(AIButton0, gc);
 
 		// Medium button
-		gc.gridx = 0;
+		gc.gridx = 1;
 		gc.gridy = 2;
 		AIButton1 = new JRadioButton("Medium");
 		AIButton1.setToolTipText("For Adavance Thinker");
@@ -67,7 +78,7 @@ public class SinglePlayerMenu extends JPanel {
 		add(AIButton1, gc);
 
 		// Hard button
-		gc.gridx = 0;
+		gc.gridx = 1;
 		gc.gridy = 3;
 		AIButton2 = new JRadioButton("Hard");
 		AIButton2.setToolTipText("For Extreme Player!");
@@ -84,7 +95,7 @@ public class SinglePlayerMenu extends JPanel {
 		group.add(AIButton2);
 
 		// start game button
-		gc.gridx = 0;
+		gc.gridx = 1;
 		gc.gridy = 4;
 		JButton startGame = new JButton("Start Game");
 		startGame.addMouseListener(new MouseAdapter() {

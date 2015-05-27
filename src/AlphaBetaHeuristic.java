@@ -1,7 +1,6 @@
 /**
  * Interface for heuristic algorithms of alpha-beta search.
  * 
- * @version 0.1
  */
 
 public interface AlphaBetaHeuristic {
