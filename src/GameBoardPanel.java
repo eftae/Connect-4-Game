@@ -149,6 +149,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 * @param winner
 	 */
 	public void displayEndGame(Player winner, ArrayList<Integer> winDiscs) {
+		ImageIcon redEndIcn = ResizeImage.changeImage(new ImageIcon("src/pics/redGlow.png"), 100, 100);
+		ImageIcon yellowEndIcn = ResizeImage.changeImage(new ImageIcon("src/pics/yellowGlow.png"), 100, 100);
+		ImageIcon redWinIcn = ResizeImage.changeImage(new ImageIcon("src/pics/redWin.png"), 100, 100);
+		ImageIcon yellowWInIcn = ResizeImage.changeImage(new ImageIcon("src/pics/yellowWin.png"), 100, 100);
+		
+		
 		if (gameMode == 0)
 			return; // stimulation
 
@@ -158,9 +164,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				btn.setRolloverIcon(null);
 				btn.setPressedIcon(whiteDisc);
 			} else if (btn.getIcon() == icn1) {
-				btn.setIcon(arrow1); // red dots end
+				btn.setIcon(redEndIcn); // red dots end
 			} else {
-				btn.setIcon(arrow2); // yellow dots end
+				btn.setIcon(yellowEndIcn); // yellow dots end
 			}
 
 			// glow effects
@@ -169,9 +175,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 						+ winDiscs.get(2 * i + 1);
 				if (btn.equals(buttons.get(btnID))) {
 					if (gameEngine.getCurrPlayerIndex() == 0) {
-						btn.setIcon(arrow2); // red dots win
+						btn.setIcon(yellowWInIcn); // red dots win
 					} else {
-						btn.setIcon(arrow1); // yellow dots win
+						btn.setIcon(redWinIcn); // yellow dots win
 					}
 					break;
 				}
