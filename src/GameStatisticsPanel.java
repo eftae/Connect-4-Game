@@ -93,6 +93,7 @@ public class GameStatisticsPanel extends JPanel {
 		} else {
 			modeLabel.setIcon(icon8);
 			modeName = "Fight to death !";
+			DoublePlayersMenu.AIModeDouble = false;
 		}
 		gc.gridy = 4;
 		add(modeLabel, gc);

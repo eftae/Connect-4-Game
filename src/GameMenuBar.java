@@ -86,7 +86,6 @@ public class GameMenuBar extends JMenuBar {
 				mainGame.setVisity(true);
 				mainGame.changeGlassPane(0);
 				psw.setVisible(false);
-				DoublePlayersMenu.AIModeDouble = false;
 				psw.dispose();
 			}
 		});
