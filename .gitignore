@@ -1,5 +1,7 @@
 # all class files
 *.class
+
 /bin/
+/doc/
 
 .DS_Store
