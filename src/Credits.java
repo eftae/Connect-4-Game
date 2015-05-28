@@ -29,7 +29,7 @@ public class Credits extends JPanel {
 		timer = new Timer(15, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				opacity += 0.1f;
+				opacity += 0.08f;
 				if (opacity > 1f) {
 					opacity = 1f;
 					timer.stop();
