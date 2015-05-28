@@ -28,6 +28,7 @@ public class LogoPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				opacity += 0.1f;
+
 				if (opacity > 1f) {
 					opacity = 1f;
 					timer.stop();
