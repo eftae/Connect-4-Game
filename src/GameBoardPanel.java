@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 /**
  * The game board panel contains the whole board including the 42 disc.
+ * The game board panel is in control of the color and pattern of each 
+ * disc at different game state.
  */
 public class GameBoardPanel extends JPanel implements ActionListener {
 
@@ -197,7 +199,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Restart a new game inside the game window.
+	 * Restart a new game inside the game window by 
+	 * reorder who goes first and start the game all over again 
+	 * with updating the statistics panel
 	 */
 	public void restartNewGame() {
 		mainGame.suspendGame();
@@ -249,7 +253,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * initialize the two AI for simulation on the main page
+	 * initialize the two AI for simulation on the main page, 
+	 * and start the simulation.
 	 */
 	public void startSimulationGame() {
 		player1 = new AI("BOT A", -1);
@@ -259,7 +264,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * initialize a single player mode game by setting the AI's 
+	 * Initialize a single player mode game by setting the AI's 
 	 * name and the user's name, also start up the game in the game engine 
 	 * and update the statistics panel.
 	 * 
@@ -296,14 +301,12 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * initialize a double players mode game by setting up 
+	 * Initialize a double players mode game by setting up 
 	 * the player's name for two players, starting the game engine, 
 	 * and update the statistics panel.
 	 * 
-	 * @param name1
-	 *            first player name
-	 * @param name2
-	 *            second player name
+	 * @param name1 first player name
+	 * @param name2 second player name
 	 */
 	public void initDoublePlayersGame(String name1, String name2) {
 		// set default name if input is empty

@@ -15,10 +15,8 @@ public class AI implements Player {
 
 	/**
 	 * 
-	 * @param name
-	 *            AI name
-	 * @param mode
-	 *            AI mode, three levels from 0 to 1 in increasing difficulty.
+	 * @param name AI name
+	 * @param mode AI mode, three levels from 0 to 2 in increasing difficulty.
 	 */
 	public AI(String name, int mode) {
 		this.name = name;
