@@ -2,7 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-
 /**
  * Class creates Game Window for each game modes
  *
@@ -59,7 +58,4 @@ public class GameWindow extends JFrame {
 		gameBoardPanel.initDoublePlayersGame(playerName, playerName2);
 	}
 
-	public void displayWinMsg() {
-
-	}
 }

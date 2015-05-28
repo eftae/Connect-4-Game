@@ -19,11 +19,11 @@ public class SinglePlayerMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Connect4 mainGame;
-	public static int AIMode;
+	private int AIMode;
 	private JRadioButton AIButton0;
 	private JRadioButton AIButton1;
 	private JRadioButton AIButton2;
-	ButtonGroup group;
+	private ButtonGroup group;
 
 	/**
 	 * create a pop up jPanel for the user to enter their name, choose the

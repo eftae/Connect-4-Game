@@ -112,4 +112,15 @@ public class GameEngine implements Runnable {
 		return gameMode;
 	}
 
+	public int getAIMode() {
+		if (gameMode == 1) {
+			if (getCurrPlayer() instanceof AI) {
+				return ((AI) getCurrPlayer()).getMode();
+			}
+			if (getOtherPlayer() instanceof AI) {
+				return ((AI) getOtherPlayer()).getMode();
+			}
+		}
+		return -1;
+	}
 }

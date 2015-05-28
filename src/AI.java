@@ -193,4 +193,8 @@ public class AI implements Player {
 	public String getName() {
 		return name;
 	}
+
+	public int getMode() {
+		return mode;
+	}
 }

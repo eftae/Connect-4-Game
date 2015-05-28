@@ -22,6 +22,7 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel player2;
 	private JLabel msg;
 	private JLabel modeLabel;
+	String modeName;
 
 	private ImageIcon icn1s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/redDot.png"), 50, 50);
@@ -77,24 +78,6 @@ public class GameStatisticsPanel extends JPanel {
 		add(msg, gc);
 		modeLabel = new JLabel();
 
-		String modeName = null;
-
-		if (gameEngine.getGameMode() == 1) {
-			if (SinglePlayerMenu.AIMode == 0) {
-				modeLabel.setIcon(icon5);
-				modeName = "Challenge with Woddy";
-			} else if (SinglePlayerMenu.AIMode == 1) {
-				modeLabel.setIcon(icon6);
-				modeName = "Challenge with Tony Stark!";
-			} else if (SinglePlayerMenu.AIMode == 2) {
-				modeLabel.setIcon(icon7);
-				modeName = "Challenge with Thunder God!";
-			}
-		} else if (gameEngine.getGameMode() == 2) {
-			modeLabel.setIcon(icon8);
-			modeName = "Fight to death !";
-		}
-
 		gc.gridy = 4;
 		add(modeLabel, gc);
 		JLabel modeDescription = new JLabel(modeName);
@@ -129,8 +112,24 @@ public class GameStatisticsPanel extends JPanel {
 	public void setPlayerNames(Player p1, Player p2) {
 		player1.setText(p1.getName());
 		player2.setText(p2.getName());
-		msg.setText("Game Started." + gameEngine.getGameMode());
+		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
+
+		if (gameEngine.getGameMode() == 1) {
+			if (gameEngine.getAIMode() == 0) {
+				modeLabel.setIcon(icon5);
+				modeName = "Challenge with Woddy";
+			} else if (gameEngine.getAIMode() == 1) {
+				modeLabel.setIcon(icon6);
+				modeName = "Challenge with Tony Stark!";
+			} else if (gameEngine.getAIMode() == 2) {
+				modeLabel.setIcon(icon7);
+				modeName = "Challenge with Thunder God!";
+			}
+		} else if (gameEngine.getGameMode() == 2) {
+			modeLabel.setIcon(icon8);
+			modeName = "Fight to death !";
+		}
 	}
 
 	public void setWhosTurn() {
