@@ -19,10 +19,10 @@ public class LogoPanel extends JPanel {
 	// images
 	ImageIcon icon1 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/welcome2.png"), 800, 267);
-//	ImageIcon icon2 = ResizeImage.changeImage(
-//			new ImageIcon("src/pics/logo.png"), 500, 150);
 	ImageIcon icon2 = ResizeImage.changeImage(
-			new ImageIcon("src/pics/logo1.png"), 450, 98);
+			new ImageIcon("src/pics/logo.png"), 500, 150);
+//	ImageIcon icon2 = ResizeImage.changeImage(
+//			new ImageIcon("src/pics/logo1.png"), 450, 98);
 
 
 	public LogoPanel() {
@@ -50,8 +50,8 @@ public class LogoPanel extends JPanel {
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 				opacity));
 		g2d.drawImage(icon1.getImage(), -20, 210, null);
-//		g2d.drawImage(icon2.getImage(), 130, 100, null);
-		g2d.drawImage(icon2.getImage(), 160, 100, null);
+		g2d.drawImage(icon2.getImage(), 130, 100, null);
+//		g2d.drawImage(icon2.getImage(), 160, 100, null);
 	}
 
 }
