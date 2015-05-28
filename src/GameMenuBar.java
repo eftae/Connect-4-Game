@@ -6,10 +6,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
- * Class create the top game menu for game windows
- * 
- * @author Jiangkan Pan
- *
+ * A menu bar at the top of the game board panel for extra buttons 
+ * to control the game, including return to home page, restart 
+ * the game, mute the sound effect, and quit the program.
  */
 
 public class GameMenuBar extends JMenuBar {
@@ -22,11 +21,11 @@ public class GameMenuBar extends JMenuBar {
 	private String title;
 
 	/**
-	 * 
-	 * @param mainGame
-	 * @param psw
+	 * Construct a game menu bar by setting up 
+	 * the buttons in the menu.
+	 * @param mainGame the main game frame
+	 * @param psw the game window when user enter the game
 	 */
-
 	public GameMenuBar(Connect4 mg, GameWindow psw) {
 
 		mainGame = mg;
@@ -119,6 +118,5 @@ public class GameMenuBar extends JMenuBar {
 		first.add(menuItem3);
 		first.addSeparator();
 		first.add(menuItem4);
-
 	}
 }
