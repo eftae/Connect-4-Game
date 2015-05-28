@@ -229,7 +229,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 		// setup the AI Icon and the description at the statistics panel
 		if (gameWindow != null && gameWindow.getStatisticsPanel() != null) {
-			gameWindow.getStatisticsPanel().setAvatorIcon();
+			gameWindow.getStatisticsPanel().setAvatarIcon();
 		}
 
 		// initialize buttons

@@ -10,6 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Game Statistics Panel is a panel that will display the current player, 
+ * current AI in single player mode and contain a restart button for 
+ * user to restart the game.
+ */
 public class GameStatisticsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -43,6 +48,12 @@ public class GameStatisticsPanel extends JPanel {
 	private ImageIcon yellowWinIcn = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/yellowWin.png"), 50, 50);
 
+	/**
+	 * Construct a new game statistics panel with the given game window and 
+	 * the main frame Connect4
+	 * @param gw the game windows frome 
+	 * @param mg the Connect 4 main frmae
+	 */
 	public GameStatisticsPanel(GameWindow gw, Connect4 mg) {
 
 		mainGame = mg;
@@ -96,7 +107,6 @@ public class GameStatisticsPanel extends JPanel {
 		restartGameButton.setIcon(restartIcn);
 		restartGameButton.setPressedIcon(restartClick);
 		restartGameButton.setRolloverIcon(restartRO);
-		// restartGameButton.setPreferredSize(new Dimension(220, 100));
 		restartGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -108,6 +118,12 @@ public class GameStatisticsPanel extends JPanel {
 
 	}
 
+	/**
+	 * Setter function to set the player name for 
+	 * player 1 and player 2.
+	 * @param p1 player 1's name
+	 * @param p2 player 2's name
+	 */
 	public void setPlayerNames(Player p1, Player p2) {
 		player1.setText(p1.getName());
 		player2.setText(p2.getName());
@@ -115,7 +131,11 @@ public class GameStatisticsPanel extends JPanel {
 		msg.setForeground(Color.BLUE);
 	}
 
-	public void setAvatorIcon() {
+	/**
+	 * Set the Avatar icon and the message for the player 
+	 * in single player mode.
+	 */
+	public void setAvatarIcon() {
 		if (gameEngine.getGameMode() == 1) {
 			if (gameEngine.getAIMode() == 0) {
 				modeLabel.setIcon(icon5);
@@ -133,6 +153,9 @@ public class GameStatisticsPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Set the icon for the player to a win icon
+	 */
 	public void setWhosTurn() {
 		if (gameEngine.getCurrPlayerIndex() == 0) {
 			player1.setIcon(icn0s);
@@ -150,6 +173,10 @@ public class GameStatisticsPanel extends JPanel {
 
 	}
 
+	/**
+	 * Display the end game message
+	 * @param winner the winner player
+	 */
 	public void displayEndGame(Player winner) {
 		if (winner == null) {
 			msg.setText("Board Full. Drew.");
@@ -167,7 +194,6 @@ public class GameStatisticsPanel extends JPanel {
 				msg.setForeground(Color.RED);
 			}
 		}
-
 		repaint();
 	}
 
