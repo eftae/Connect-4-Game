@@ -10,7 +10,7 @@ public interface AlphaBetaHeuristic {
 	 * 
 	 * @param state
 	 *            GameState to be evaluate
-	 * @return heuristic value
+	 * @return heuristic value of current state
 	 */
 	public int h(GameState state);
 }

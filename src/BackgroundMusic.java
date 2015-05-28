@@ -1,7 +1,5 @@
 /**
- * This Class Plays/stops background Music in loop.
- * 
- * @author Jiangkan Pan
+ * This Class Plays/stops background Music continuously.
  *
  */
 
@@ -23,16 +21,13 @@ public class BackgroundMusic {
 	 *            sound file
 	 */
 	public static void music(String songName) {
-
 		try {
 			url = new File(songName).toURI().toURL();
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
-
 		clip = Applet.newAudioClip(url);
 		clip.loop();
-
 	}
 
 	/**
@@ -41,5 +36,4 @@ public class BackgroundMusic {
 	public static void stopMusic() {
 		clip.stop();
 	}
-
 }

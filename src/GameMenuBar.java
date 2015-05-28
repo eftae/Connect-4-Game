@@ -78,7 +78,7 @@ public class GameMenuBar extends JMenuBar {
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
-				mainGame.setVisity(true);
+				mainGame.setVisibility(true);
 				mainGame.changeGlassPane(0);
 				gameWindow.setVisible(false);
 				gameWindow.dispose();

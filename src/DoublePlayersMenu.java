@@ -20,7 +20,8 @@ public class DoublePlayersMenu extends JPanel {
 
 	/**
 	 * 
-	 * @param mainGame
+	 * @param mg
+	 *            main game
 	 */
 	public DoublePlayersMenu(Connect4 mg) {
 		mainGame = mg;
@@ -63,7 +64,7 @@ public class DoublePlayersMenu extends JPanel {
 						player1NameField.getText(), player2NameField.getText());
 				mainGame.changeGlassPane(-1);
 				doublePlayersWindow.setVisible(true);
-				mainGame.setVisity(false);
+				mainGame.setVisibility(false);
 				MenuPanel.closeJOptionPanel();
 
 				if (!mainGame.isMuted()) {

@@ -1,8 +1,5 @@
 /**
  * This class plays sound clip when Button is pressed
- * 
- * @author Jiangkan Pan
- *
  */
 
 import java.applet.Applet;
@@ -23,16 +20,12 @@ public class ButtonSound {
 	 *            sound file
 	 */
 	public static void music(String songName) {
-
 		try {
 			url = new File(songName).toURI().toURL();
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
-
 		clip = Applet.newAudioClip(url);
 		clip.play();
-
 	}
-
 }

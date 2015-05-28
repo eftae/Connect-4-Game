@@ -1,11 +1,6 @@
 /**
  * Class for the ALPHA BETA AI.
- * v0.2 many bugs fixed
- * v0.21 fixed the bug of turn number
- * v0.22 set game modes
- * v0.3 refined alpha-beta and modes
  * 
- * @version 0.3
  */
 
 import java.util.ArrayList;
@@ -80,7 +75,9 @@ public class AI implements Player {
 	 * Alpha Beta Algorithm
 	 * 
 	 * @param state
+	 *            GameState
 	 * @param depth
+	 *            depth limit
 	 * @param alpha
 	 * @param beta
 	 * @return
@@ -108,7 +105,6 @@ public class AI implements Player {
 				if (!state.isValidMove(move)) {
 					continue;
 				}
-
 				GameState cloneState = state.clone();
 				doNextMove(cloneState, move);
 
@@ -134,7 +130,6 @@ public class AI implements Player {
 				if (!state.isValidMove(move)) {
 					continue;
 				}
-
 				GameState cloneState = state.clone();
 				doNextMove(cloneState, move);
 
@@ -188,12 +183,19 @@ public class AI implements Player {
 	}
 
 	/**
-	 * Getter: name
+	 * Getter for name.
+	 * 
+	 * @return AI name
 	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Getter for ai mode.
+	 * 
+	 * @return ai mode
+	 */
 	public int getMode() {
 		return mode;
 	}
