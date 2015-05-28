@@ -35,7 +35,7 @@ public class GameStatisticsPanel extends JPanel {
 	private ImageIcon icn0s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/whiteDot.png"), 50, 50);
 	private ImageIcon icon5 = ResizeImage.changeImage(new ImageIcon(
-			"src/pics/Baby2.png"), 100, 100);
+			"src/pics/1432707696_Woody.png"), 100, 100);
 	private ImageIcon icon6 = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/Ironman.png"), 100, 100);
 	private ImageIcon icon7 = ResizeImage.changeImage(new ImageIcon(
@@ -57,8 +57,9 @@ public class GameStatisticsPanel extends JPanel {
 
 		Font defaultFont = new Font("Arial", Font.BOLD, 20);
 
-		setBorder(new TitledBorder("Welcome"));
-		setBackground(Color.LIGHT_GRAY);
+		//setBorder(new TitledBorder("Welcome"));
+//		setBackground(Color.LIGHT_GRAY);
+		setBackground(Color.WHITE);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -88,15 +89,15 @@ public class GameStatisticsPanel extends JPanel {
 		if (SinglePlayerMenu.AIMode == 0
 				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon5);
-			modeName = "Challenge Baby Boy!";
+			modeName = "Challenge with Woddy";
 		} else if (SinglePlayerMenu.AIMode == 1
 				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon6);
-			modeName = "Challenge Tony Stark!";
+			modeName = "Challenge with Tony Stark!";
 		} else if (SinglePlayerMenu.AIMode == 2
 				&& DoublePlayersMenu.AIModeDouble == false) {
 			modeLabel.setIcon(icon7);
-			modeName = "Challenge Thunder God!";
+			modeName = "Challenge with Thunder God!";
 		} else {
 			modeLabel.setIcon(icon8);
 			modeName = "Fight to death !";
@@ -108,12 +109,18 @@ public class GameStatisticsPanel extends JPanel {
 		JLabel modeDescription = new JLabel(modeName);
 		gc.gridy = 5;
 		add(modeDescription, gc);
-
-		JButton restartGameButton = new JButton("Restart Game");
-		restartGameButton.setFont(defaultFont);
-		restartGameButton.setIcon(icon4);
-		// restartGameButton.setBackground(Color.PINK);
-		restartGameButton.setPreferredSize(new Dimension(220, 100));
+		
+		ImageIcon restartIcn = ResizeImage.changeImage(new ImageIcon("src/pics/restartIcn.png"),245,114);
+		ImageIcon restartRO = ResizeImage.changeImage(new ImageIcon("src/pics/restartRO.png"),245,114);
+		ImageIcon restartClick = ResizeImage.changeImage(new ImageIcon("src/pics/restartIcnC.png"),245,114);
+		JButton restartGameButton = new JButton();
+		restartGameButton.setContentAreaFilled(false);
+		restartGameButton.setFocusPainted(false);
+		restartGameButton.setBorderPainted(false);
+		restartGameButton.setIcon(restartIcn);
+		restartGameButton.setPressedIcon(restartClick);
+		restartGameButton.setRolloverIcon(restartRO);
+//		restartGameButton.setPreferredSize(new Dimension(220, 100));
 		restartGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {

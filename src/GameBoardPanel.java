@@ -269,7 +269,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		String nameAI = null;
 		switch (AIMode) {
 		case 0:
-			nameAI = "Baby Boy";
+			nameAI = "Woody";
 			break;
 		case 1:
 			nameAI = "Tony Stark";
