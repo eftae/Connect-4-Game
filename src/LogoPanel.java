@@ -13,8 +13,8 @@ import javax.swing.Timer;
 
 public class LogoPanel extends JPanel {
 
-	Timer timer;
-	float opacity = 0;
+	private Timer timer;
+	private float opacity = 0;
 
 	
 	public LogoPanel() {
