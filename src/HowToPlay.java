@@ -9,12 +9,8 @@ import javax.swing.Timer;
 
 
 public class HowToPlay extends JPanel {
-	Timer timer;
-	float opacity = 0;
-
-	// images
-	ImageIcon icn = ResizeImage.changeImage(
-			new ImageIcon("src/pics/htp.png"), 770, 815);
+	private Timer timer;
+	private float opacity = 0;
 
 	public HowToPlay() {
 		timer = new Timer(15, new ActionListener() {
@@ -33,6 +29,9 @@ public class HowToPlay extends JPanel {
 	}
 
 	public void paint(Graphics g) {
+		ImageIcon icn = ResizeImage.changeImage(
+				new ImageIcon("src/pics/htp.png"), 770, 815);
+		
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(icn.getImage(), -20, -80, null);

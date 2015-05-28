@@ -13,12 +13,8 @@ import javax.swing.Timer;
 
 public class Credits extends JPanel {
 
-	Timer timer;
-	float opacity = 0;
-
-	// images
-	ImageIcon icn = ResizeImage.changeImage(
-			new ImageIcon("src/pics/credit.png"), 800, 753);
+	private Timer timer;
+	private float opacity = 0;
 
 	public Credits() {
 		timer = new Timer(15, new ActionListener() {
@@ -37,6 +33,9 @@ public class Credits extends JPanel {
 	}
 
 	public void paint(Graphics g) {
+		ImageIcon icn = ResizeImage.changeImage(
+				new ImageIcon("src/pics/credit.png"), 800, 753);
+		
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(icn.getImage(), -20, -40, null);
