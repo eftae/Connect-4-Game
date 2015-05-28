@@ -1,17 +1,17 @@
 /**
- * Interface for Player. Player includes User, AI
+ * Interface for Player. Player includes User, AI.
  */
 
 public interface Player {
 	/**
-	 * Get user name.
+	 * Get teh player's name.
 	 * 
 	 * @return user name
 	 */
 	public String getName();
 
 	/**
-	 * Get next move.
+	 * Get next move from the player.
 	 * 
 	 * @param currState
 	 * @return column number of next move

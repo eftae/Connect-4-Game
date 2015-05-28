@@ -1,5 +1,5 @@
 /**
- * Zero Heuristic giving a random order.
+ * Heuristic for AI resulting as a random order.
  * 
  */
 

@@ -1,5 +1,5 @@
 /**
- * Class has a public method to resize the image to desirable size
+ * Class has a public method to resize a ImageIcon to desirable size.
  */
 
 import java.awt.Image;
@@ -10,15 +10,18 @@ public class ResizeImage {
 	/**
 	 * 
 	 * @param oldImageIcon
-	 * @param widith
+	 *            ImageIcon to resize
+	 * @param width
+	 *            desired width
 	 * @param height
+	 *            desired height
 	 * @return
 	 */
-	public static ImageIcon changeImage(ImageIcon oldImageIcon, int widith,
+	public static ImageIcon changeImage(ImageIcon oldImageIcon, int width,
 			int height) {
 
 		Image oldImage = oldImageIcon.getImage();
-		Image newImg = oldImage.getScaledInstance(widith, height,
+		Image newImg = oldImage.getScaledInstance(width, height,
 				java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imgIcon = new ImageIcon(newImg);
 

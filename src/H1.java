@@ -1,8 +1,8 @@
 /**
  * Defensive Heuristic Algorithm for alpha-beta search. Considering number of
- * empty slots connects to 3 consecutive discs.
+ * empty slots connects to 3 consecutive discs, which means have more chance to
+ * place the last disc to connect 4.
  * 
- * @version v0.1
  */
 
 public class H1 implements AlphaBetaHeuristic {
@@ -55,7 +55,8 @@ public class H1 implements AlphaBetaHeuristic {
 
 	/**
 	 * Gives score only if there is a chance to connect 4 if placing one more
-	 * disc in the given empty slot.
+	 * disc in the given empty slot. Giving larger scale for opponent to make
+	 * the AI becomes more defensive.
 	 * 
 	 * @param state
 	 * @param c
@@ -71,7 +72,7 @@ public class H1 implements AlphaBetaHeuristic {
 	private int evalEmptySlot(GameState state, int c, int r, int dc, int dr) {
 
 		Player oppo = state.getOtherPlayer();
-		// opponent
+		// opponent, lower is better
 		if (state.getLocation(c + dc, r + dr) == oppo
 				&& state.getLocation(c + dc * 2, r + dr * 2) == oppo
 				&& state.getLocation(c + dc * 3, r + dr * 3) == oppo) {
@@ -79,7 +80,7 @@ public class H1 implements AlphaBetaHeuristic {
 		}
 
 		Player curr = state.getCurrPlayer();
-		// current player
+		// current player, higher is better
 		if (state.getLocation(c + dc, r + dr) == curr
 				&& state.getLocation(c + dc * 2, r + dr * 2) == curr
 				&& state.getLocation(c + dc * 3, r + dr * 3) == curr) {

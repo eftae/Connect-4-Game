@@ -24,6 +24,12 @@ public class MenuPanel extends JPanel {
 	private JButton muteButton;
 	private ActionListener muteActionListener;
 
+	/**
+	 * Construct menu panel on home window.
+	 * 
+	 * @param mg
+	 *            main game system
+	 */
 	public MenuPanel(Connect4 mg) {
 		mainGame = mg;
 

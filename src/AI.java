@@ -1,5 +1,6 @@
 /**
- * Class for the ALPHA BETA AI.
+ * Class for the ALPHA BETA AI. Includes 4 modes of easy(0), medium(1), hard(2) and simulation(otherwise).
+ * 
  * 
  */
 
@@ -15,8 +16,11 @@ public class AI implements Player {
 
 	/**
 	 * 
-	 * @param name AI name
-	 * @param mode AI mode, three levels from 0 to 2 in increasing difficulty.
+	 * @param name
+	 *            AI name
+	 * @param mode
+	 *            AI mode, three levels from 0 to 2 in increasing difficulty,
+	 *            otherwise for simulation specifically
 	 */
 	public AI(String name, int mode) {
 		this.name = name;
@@ -53,7 +57,7 @@ public class AI implements Player {
 
 		alphabeta(currState, depth, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
-		// delay for simulation moves
+		// delay for simulation moves, avoiding rapid changing of animation
 		if (mode == -1) {
 			long endTime = System.currentTimeMillis();
 			long delay = 500 - (endTime - startTime);
@@ -70,7 +74,7 @@ public class AI implements Player {
 	}
 
 	/**
-	 * Alpha Beta Algorithm
+	 * Alpha Beta Algorithm. Including the basic heuristic of winning/losing.
 	 * 
 	 * @param state
 	 *            GameState
@@ -86,6 +90,9 @@ public class AI implements Player {
 			return state.getTurn() - 42;
 		}
 		if (state.getWinner() == this) {
+			// depth return a higher score for closer state, which make sure
+			// always take the blocking or winning move for next turn once it is
+			// available.
 			return 1000 << depth;
 		}
 		if (state.getWinner() == state.getOtherPlayer()) {
@@ -148,7 +155,7 @@ public class AI implements Player {
 	}
 
 	/**
-	 * Execute a move to a state.
+	 * Execute a move to a state like a real game for simulation.
 	 * 
 	 * @param state
 	 *            game state to be execute
@@ -190,9 +197,9 @@ public class AI implements Player {
 	}
 
 	/**
-	 * Getter for ai mode.
+	 * Getter for AI mode.
 	 * 
-	 * @return ai mode
+	 * @return AI mode
 	 */
 	public int getMode() {
 		return mode;

@@ -1,11 +1,11 @@
+/**
+ * Class of Game Window. It contains the main game board and a console panel to show the current game information.
+ *
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-
-/**
- * Class creates Game Window for each game modes
- *
- */
 
 public class GameWindow extends JFrame {
 
@@ -39,18 +39,44 @@ public class GameWindow extends JFrame {
 		pack();
 	}
 
+	/**
+	 * Getter for statistic panel.
+	 * 
+	 * @return gameStatisticsPanel
+	 */
 	public GameStatisticsPanel getStatisticsPanel() {
 		return gameStatisticsPanel;
 	}
 
+	/**
+	 * Getter for gameBoardPanel.
+	 * 
+	 * @return gameBoardPanel
+	 */
 	public GameBoardPanel getGameBoardPanel() {
 		return gameBoardPanel;
 	}
 
+	/**
+	 * Call the function of initializing single player game.
+	 * 
+	 * @param playerName
+	 *            user name
+	 * @param modeAI
+	 *            difficulty of the AI
+	 */
 	public void startSinglePlayerGame(String playerName, int modeAI) {
 		gameBoardPanel.initSinglePlayerGame(playerName, modeAI);
 	}
 
+	/**
+	 * Call the function of initializing double players game.
+	 * 
+	 * @param playerName
+	 *            first user name
+	 * @param playerName2
+	 *            second user name
+	 */
 	public void startDoublePlayersGame(String playerName, String playerName2) {
 		gameBoardPanel.initDoublePlayersGame(playerName, playerName2);
 	}

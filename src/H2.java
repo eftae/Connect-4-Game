@@ -1,6 +1,7 @@
 /**
  * Aggressive heuristic algorithm for alpha-beta search. Considering minimum
- * number of steps to win.
+ * number of steps to win. Checking for every dropped disc and see if how soon
+ * it can be connected to 4 consecutively.
  * 
  */
 

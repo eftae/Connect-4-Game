@@ -1,6 +1,5 @@
 /**
- * Handle user input v0.1: allows for command line input only. v0.11: minor bug
- * fixed, problem with Scanner.close
+ * Handle user input from GUI, also contains user information.
  * 
  */
 
@@ -12,7 +11,7 @@ public class User implements Player {
 	/**
 	 * 
 	 * @param name
-	 *            username
+	 *            user name
 	 */
 	public User(String name) {
 		this.name = name;
@@ -27,6 +26,7 @@ public class User implements Player {
 	}
 
 	/**
+	 * Getter for isReady.
 	 * 
 	 * @return if input is ready
 	 */
@@ -35,14 +35,14 @@ public class User implements Player {
 	}
 
 	/**
-	 * reset user status.
+	 * reset user status. Prevent reading next move.
 	 */
 	public void resetPlayer() {
 		isReady = false;
 	}
 
 	/**
-	 * assign next move value.
+	 * Assign next move value.
 	 * 
 	 * @param nextMove
 	 */
@@ -53,14 +53,14 @@ public class User implements Player {
 
 	@Override
 	public int decideMove(GameState currState) {
-		isReady = false;// get ready to recieve input
+		isReady = false;// get ready to receive input
 		return modeGUI();
 	}
 
 	/**
-	 * Loop to listen the user input.
+	 * A loop listening to the user input.
 	 * 
-	 * @return next move or -1 if interruptedf
+	 * @return next move or -1 if interrupted
 	 */
 	private int modeGUI() {
 		// wait isReady to be set

@@ -1,3 +1,7 @@
+/**
+ * A panel for displaying the game instruction. With fading effects.
+ */
+
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,10 +37,18 @@ public class HowToPlay extends JPanel {
 		timer.start();
 	}
 
+	/**
+	 * repaint the panel for the fade in effect.
+	 * 
+	 * @param g
+	 *            Grahpics of the panel
+	 */
+	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,opacity));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				opacity));
 		g2d.drawImage(image.getImage(), -20, -80, null);
 	}
 

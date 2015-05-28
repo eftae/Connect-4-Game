@@ -1,5 +1,5 @@
 /**
- * A glass panel for displaying single player mode menu.
+ * A panel for displaying single player mode menu.
  */
 
 import java.awt.GridBagConstraints;
@@ -27,11 +27,11 @@ public class SinglePlayerMenu extends JPanel {
 	private JRadioButton AIButton2;
 
 	/**
-	 * create a pop up jPanel for the user to enter their name, choose the
-	 * difficulties of the game and enter the game with the current setting.
+	 * create a jPanel for the user to enter their name, choose the difficulties
+	 * of the game and enter the game with the current setting.
 	 * 
 	 * @param mainGame
-	 *            the game system
+	 *            the main game system
 	 */
 	public SinglePlayerMenu(Connect4 mg) {
 		mainGame = mg;
