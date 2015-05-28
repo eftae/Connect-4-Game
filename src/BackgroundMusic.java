@@ -1,14 +1,12 @@
-/**
- * This Class Plays/stops background Music continuously.
- *
- */
-
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * This Class Plays/stops background Music continuously.
+ */
 public class BackgroundMusic {
 
 	static AudioClip clip;

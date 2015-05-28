@@ -1,14 +1,12 @@
-
-/**
- * This class plays the sound effect when the button is clicked
- */
-
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * This class plays the sound effect when the button is clicked
+ */
 public class ButtonSound {
 
 	static AudioClip clip;

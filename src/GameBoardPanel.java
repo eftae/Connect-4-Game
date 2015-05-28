@@ -9,6 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * The game board panel contains the whole board including the 42 disc.
+ */
 public class GameBoardPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -36,7 +39,8 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			"src/pics/yellowarrow.png"), 100, 100);
 
 	/**
-	 * 
+	 * Construct the game board by setting up the background color 
+	 * and the 42 buttons for the board.
 	 * @param gameWindow
 	 * @param mainGame
 	 */
@@ -68,12 +72,14 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * actions to do when discs clicked
+	 * Register the button click on the board to the game engine 
+	 * when the any one of the 42 buttons is clicked.
+	 * @param e The action event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getModifiers() != 16)
-			return;
+		// disable any click by the space bar
+		if (e.getModifiers() != 16) return;
 		JButton pressed = (JButton) e.getSource();
 		Player currPlayer = gameEngine.getCurrPlayer();
 
@@ -91,12 +97,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * display a clicked disc.
-	 * 
-	 * @param col
-	 * @param row
-	 * @param colorId
-	 *            player index
+	 * Display the recently dropped disc on the board.
+	 * @param col the column number on the board
+	 * @param row the row number on the board
+	 * @param colorId the player index from the game engine
 	 */
 	public void displayDisc(int col, int row, int colorId) {
 		int btnID = (5 - row) * 7 + col;
@@ -136,15 +140,14 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 * Update the turn information in the statistic panel.
 	 */
 	public void updateStatisticsPanel() {
-		if (gameWindow != null && gameWindow.getStatisticsPanel() != null) {
+		if (gameWindow != null && gameWindow.getStatisticsPanel() != null)
 			gameWindow.getStatisticsPanel().setWhosTurn();
-		}
 	}
 
 	/**
-	 * Display after game ended.
-	 * 
-	 * @param winner
+	 * Decorate the game board when end game.
+	 * @param winner the winner of the game
+	 * @param winDiscs the 4 consecutive disc that cause the game to end
 	 */
 	public void displayEndGame(Player winner, ArrayList<Integer> winDiscs) {
 		if (gameMode == 0)
@@ -190,7 +193,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 				}
 			}
 		}
-
 		gameWindow.getStatisticsPanel().displayEndGame(winner);
 	}
 
@@ -247,7 +249,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * initialize simulation between 2 AI
+	 * initialize the two AI for simulation on the main page
 	 */
 	public void startSimulationGame() {
 		player1 = new AI("BOT A", -1);
@@ -257,17 +259,16 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * initialize single player mode game
+	 * initialize a single player mode game by setting the AI's 
+	 * name and the user's name, also start up the game in the game engine 
+	 * and update the statistics panel.
 	 * 
-	 * @param playerName
-	 *            user name
-	 * @param AIMode
-	 *            AI difficulty
+	 * @param playerName user's name
+	 * @param AIMode AI's difficulty
 	 */
 	public void initSinglePlayerGame(String playerName, int AIMode) {
-		if (playerName == null || playerName.equals("")) {
+		if (playerName == null || playerName.equals(""))
 			playerName = "YOU";
-		}
 
 		String nameAI = "AI";
 		switch (AIMode) {
@@ -295,7 +296,9 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * initialize double players mode game.
+	 * initialize a double players mode game by setting up 
+	 * the player's name for two players, starting the game engine, 
+	 * and update the statistics panel.
 	 * 
 	 * @param name1
 	 *            first player name
@@ -305,10 +308,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	public void initDoublePlayersGame(String name1, String name2) {
 		// set default name if input is empty
 		if (name1 == null || name1.equals("")) {
-			name1 = "P1";
+			name1 = "Player 1";
 		}
 		if (name2 == null || name2.equals("")) {
-			name2 = "P2";
+			name2 = "Player 2";
 		}
 
 		// randomize user play order
@@ -326,10 +329,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 		updateStatisticsPanel();
 	}
 
-	/**
-	 * 
-	 * @return random return 0 or 1 with same probability
-	 */
 	private int randPlayer() {
 		Random rand = new Random();
 		return rand.nextInt(2);

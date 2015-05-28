@@ -1,18 +1,16 @@
-/**
- * A glass panel for displaying credits, with fading effect.
- * The panel contain a image that shows all of the creaters of this game
- */
-
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * A glass panel for displaying credits, with fading effect.
+ * The panel contain a image that shows all of the creaters of this game
+ */
 public class Credits extends JPanel {
 
 	private static final long serialVersionUID = 1L;

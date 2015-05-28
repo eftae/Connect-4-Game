@@ -1,19 +1,17 @@
-/**
- * A glass panel for displaying double players mode menu.
- * The panel contains two text area for the user to 
- * enter their name and a button to start the game.
- */
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A glass panel for displaying double players mode menu.
+ * The panel contains two text area for the user to 
+ * enter their name and a button to start the game.
+ */
 public class DoublePlayersMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -14,7 +14,6 @@ import javax.swing.JPanel;
  * The layout of GUI is setup and control by Connect 4 and the game engine will 
  * be initialized once the program starts.
  */
-
 public class Connect4 implements Runnable {
 
 	private JFrame mainFrame;
