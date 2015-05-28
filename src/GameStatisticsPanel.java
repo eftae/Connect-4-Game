@@ -58,8 +58,8 @@ public class GameStatisticsPanel extends JPanel {
 		Font defaultFont = new Font("Arial", Font.BOLD, 20);
 
 		//setBorder(new TitledBorder("Welcome"));
-//		setBackground(Color.LIGHT_GRAY);
-		setBackground(Color.WHITE);
+		setBackground(Color.LIGHT_GRAY);
+		//setBackground(Color.WHITE);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
