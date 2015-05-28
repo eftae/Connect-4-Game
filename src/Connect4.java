@@ -186,7 +186,6 @@ public class Connect4 implements Runnable {
 			// blank
 			homeGlassPane = new JPanel();
 		}
-
 		display();
 	}
 

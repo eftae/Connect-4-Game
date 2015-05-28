@@ -1,12 +1,5 @@
-import java.awt.Font;
-
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,28 +7,30 @@ import javax.swing.JMenuItem;
 
 /**
  * Class create the top game menu for game windows
+ * 
  * @author Jiangkan Pan
  *
  */
+
 public class GameMenuBar extends JMenuBar {
 
+	private static final long serialVersionUID = 1L;
+
 	private Connect4 mainGame;
-	private GameWindow psw;
+	private GameWindow gameWindow;
 	private ImageIcon muteIcon;
 	private String title;
 
-	// private static int counter = 0;
-	
 	/**
 	 * 
 	 * @param mainGame
 	 * @param psw
 	 */
 
-	public GameMenuBar(final Connect4 mainGame, final GameWindow psw) {
+	public GameMenuBar(Connect4 mg, GameWindow psw) {
 
-		this.mainGame = mainGame;
-		this.psw = psw;
+		mainGame = mg;
+		gameWindow = psw;
 
 		JMenu first = new JMenu("Menu");
 		add(first);
@@ -69,7 +64,7 @@ public class GameMenuBar extends JMenuBar {
 		menuItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				psw.getGameBoardPanel().restartNewGame();
+				gameWindow.getGameBoardPanel().restartNewGame();
 			}
 		});
 
@@ -85,8 +80,8 @@ public class GameMenuBar extends JMenuBar {
 				}
 				mainGame.setVisity(true);
 				mainGame.changeGlassPane(0);
-				psw.setVisible(false);
-				psw.dispose();
+				gameWindow.setVisible(false);
+				gameWindow.dispose();
 			}
 		});
 

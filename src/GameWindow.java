@@ -1,16 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.Random;
-
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+
+
 /**
  * Class creates Game Window for each game modes
  *
  */
 
 public class GameWindow extends JFrame {
+
+	private static final long serialVersionUID = 1L;
 
 	private GameBoardPanel gameBoardPanel;
 	private GameStatisticsPanel gameStatisticsPanel;
@@ -19,9 +19,10 @@ public class GameWindow extends JFrame {
 	Player player1;
 	Player player2;
 
-	public GameWindow(Connect4 mainGame, String title) {
+	public GameWindow(Connect4 mg, String title) {
 		super(title);
-		this.mainGame = mainGame;
+		mainGame = mg;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 700);
 		setLocationRelativeTo(null);

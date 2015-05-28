@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,16 +7,15 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 public class GameBoardPanel extends JPanel implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
 
 	private GameWindow gameWindow;
 	private Connect4 mainGame;
 	private GameEngine gameEngine;
-	private JPanel finishPanel;
 
 	// game data
 	private Player player1;
@@ -221,7 +219,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	 */
 	public void startNewGame() {
 
-		gameEngine.startNewGame(player1, player2, this);
+		gameEngine.startNewGame(gameMode, player1, player2, this);
 
 		// initialize buttons
 		for (JButton b : buttons) {
@@ -305,10 +303,10 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 	public void initDoublePlayersGame(String name1, String name2) {
 		// set default name if input is empty
 		if (name1 == null || name1.equals("")) {
-			name1 = "Player Name A";
+			name1 = "P1";
 		}
 		if (name2 == null || name2.equals("")) {
-			name2 = "Player Name B";
+			name2 = "P2";
 		}
 
 		// randomize user play order

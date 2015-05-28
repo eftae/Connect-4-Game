@@ -3,7 +3,6 @@
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,9 +13,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 public class MenuPanel extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 
 	private Connect4 mainGame;
 
@@ -24,17 +24,17 @@ public class MenuPanel extends JPanel {
 	private JButton muteButton;
 	private ActionListener muteActionListener;
 
-	public MenuPanel(final Connect4 mainGame) {
-		this.mainGame = mainGame;
+	public MenuPanel(Connect4 mg) {
+		mainGame = mg;
 
 		Font defaultFont = new Font("Arial", Font.PLAIN, 20);
 
 		setLayout(new GridBagLayout());
-		
+
 		setOpaque(true);
 		setBackground(new Color(27, 120, 236));
-        //setBackground(Color.BLACK);
-		
+		// setBackground(Color.BLACK);
+
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.weightx = 1;
 		gc.weighty = 10;
@@ -44,14 +44,18 @@ public class MenuPanel extends JPanel {
 		gc.gridx = 0;
 		gc.gridy = 0;
 
-        ImageIcon singlePlayerButtonIcon = ResizeImage.changeImage(new ImageIcon("src/pics/singleIcn.png"),245,114);
-        ImageIcon singlePlayerButtonIconClick = ResizeImage.changeImage(new ImageIcon("src/pics/singleIcnC.png"),245,114);
-        ImageIcon singlePlayerButtonIconRO = ResizeImage.changeImage(new ImageIcon("src/pics/singleRO.png"),245,114);
-//		ImageIcon singlePlayerButtonIcon = new ImageIcon("src/pics/singleIcn.png");
+		ImageIcon singlePlayerButtonIcon = ResizeImage.changeImage(
+				new ImageIcon("src/pics/singleIcn.png"), 245, 114);
+		ImageIcon singlePlayerButtonIconClick = ResizeImage.changeImage(
+				new ImageIcon("src/pics/singleIcnC.png"), 245, 114);
+		ImageIcon singlePlayerButtonIconRO = ResizeImage.changeImage(
+				new ImageIcon("src/pics/singleRO.png"), 245, 114);
+		// ImageIcon singlePlayerButtonIcon = new
+		// ImageIcon("src/pics/singleIcn.png");
 		JButton singlePlayerButton = new JButton();
 		singlePlayerButton.setToolTipText("Start a game against with BOT");
 		singlePlayerButton.setFont(defaultFont);
-		
+
 		singlePlayerButton.setOpaque(false);
 		singlePlayerButton.setContentAreaFilled(false);
 		singlePlayerButton.setFocusPainted(false);
@@ -59,7 +63,7 @@ public class MenuPanel extends JPanel {
 		singlePlayerButton.setIcon(singlePlayerButtonIcon);
 		singlePlayerButton.setPressedIcon(singlePlayerButtonIconClick);
 		singlePlayerButton.setRolloverIcon(singlePlayerButtonIconRO);
-		
+
 		add(singlePlayerButton, gc);
 		singlePlayerButton.addActionListener(new ActionListener() {
 			@Override
@@ -78,10 +82,14 @@ public class MenuPanel extends JPanel {
 
 		// Button for Two Player
 		gc.gridy = 1;
-	    ImageIcon doublePlayerButtonIcon = ResizeImage.changeImage(new ImageIcon("src/pics/doubleIcn.png"),245,114);
-	    ImageIcon doublePlayerButtonIconClick = ResizeImage.changeImage(new ImageIcon("src/pics/doubleIcnC.png"),245,114);
-	    ImageIcon doublePlayerButtonIconRO = ResizeImage.changeImage(new ImageIcon("src/pics/doubleRO.png"),245,114);
-		//ImageIcon twoPlayersButtonIcon = new ImageIcon("src/pics/Group-50.png");
+		ImageIcon doublePlayerButtonIcon = ResizeImage.changeImage(
+				new ImageIcon("src/pics/doubleIcn.png"), 245, 114);
+		ImageIcon doublePlayerButtonIconClick = ResizeImage.changeImage(
+				new ImageIcon("src/pics/doubleIcnC.png"), 245, 114);
+		ImageIcon doublePlayerButtonIconRO = ResizeImage.changeImage(
+				new ImageIcon("src/pics/doubleRO.png"), 245, 114);
+		// ImageIcon twoPlayersButtonIcon = new
+		// ImageIcon("src/pics/Group-50.png");
 		JButton twoPlayersButton = new JButton();
 		twoPlayersButton.setToolTipText("Enter a mutiplayer VS Your Friend");
 		twoPlayersButton.setFont(defaultFont);
@@ -107,13 +115,16 @@ public class MenuPanel extends JPanel {
 			}
 
 		});
-		
+
 		// how to play button
 		gc.gridy = 2;
-		ImageIcon htpIcn = ResizeImage.changeImage(new ImageIcon("src/pics/htpIcn.png"),245,114);
-	    ImageIcon htpIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/htpIcnC.png"),245,114);
-	    ImageIcon htpIcnRO = ResizeImage.changeImage(new ImageIcon("src/pics/htpRO.png"),245,114);
-		//ImageIcon htpIcn = new ImageIcon("src/pics/Rules-50.png");
+		ImageIcon htpIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/htpIcn.png"), 245, 114);
+		ImageIcon htpIcnClick = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/htpIcnC.png"), 245, 114);
+		ImageIcon htpIcnRO = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/htpRO.png"), 245, 114);
+		// ImageIcon htpIcn = new ImageIcon("src/pics/Rules-50.png");
 		JButton htpButton = new JButton();
 		htpButton.setToolTipText("User Manual");
 		htpButton.setFont(defaultFont);
@@ -136,10 +147,14 @@ public class MenuPanel extends JPanel {
 
 		// Button for Credits
 		gc.gridy = 3;
-		ImageIcon creditsIcn = ResizeImage.changeImage(new ImageIcon("src/pics/creditIcn.png"),245,114);
-	    ImageIcon creditsIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/creditIcnC.png"),245,114);
-	    ImageIcon creditsIcnRO = ResizeImage.changeImage(new ImageIcon("src/pics/creditRO.png"),245,114);
-//		ImageIcon creditsButtonIcon = new ImageIcon("src/pics/Gorilla-50.png");
+		ImageIcon creditsIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/creditIcn.png"), 245, 114);
+		ImageIcon creditsIcnClick = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/creditIcnC.png"), 245, 114);
+		ImageIcon creditsIcnRO = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/creditRO.png"), 245, 114);
+		// ImageIcon creditsButtonIcon = new
+		// ImageIcon("src/pics/Gorilla-50.png");
 		JButton creditsButton = new JButton();
 		creditsButton.setToolTipText("View the Development Team");
 		creditsButton.setFont(defaultFont);
@@ -160,18 +175,17 @@ public class MenuPanel extends JPanel {
 			}
 		});
 
-		
-		
-
-		
 		// button for mute/play music
 		gc.gridy = 4;
 		muteButton = new JButton();
 		muteButton.setToolTipText("Mute/Unmute Music");
 		muteButton.setFont(defaultFont);
-		ImageIcon muteIcn = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcn.png"),245,114);
-		ImageIcon muteIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcnC.png"),245,114);
-		ImageIcon muteIcnRO = ResizeImage.changeImage(new ImageIcon("src/pics/muteRO.png"),245,114);
+		ImageIcon muteIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/muteIcn.png"), 245, 114);
+		ImageIcon muteIcnClick = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/muteIcnC.png"), 245, 114);
+		ImageIcon muteIcnRO = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/muteRO.png"), 245, 114);
 		muteButton.setIcon(muteIcn);
 		muteButton.setPressedIcon(muteIcnClick);
 		muteButton.setOpaque(false);
@@ -187,7 +201,8 @@ public class MenuPanel extends JPanel {
 					mainGame.setisMuted(true);
 				} else {
 					mainGame.setisMuted(false);
-					BackgroundMusic.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
+					BackgroundMusic
+							.music("src/sound/2-06_Awash_in_Ale_but_Nary_a_Mug.wav");
 				}
 			}
 		};
@@ -195,10 +210,13 @@ public class MenuPanel extends JPanel {
 
 		// Button for Quit
 		gc.gridy = 5;
-		ImageIcon quitIcn = ResizeImage.changeImage(new ImageIcon("src/pics/quitIcn.png"),245,114);
-	    ImageIcon quitIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/quitIcnC.png"),245,114);
-	    ImageIcon quitIcnRO = ResizeImage.changeImage(new ImageIcon("src/pics/quitRO.png"),245,114);
-		//ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
+		ImageIcon quitIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/quitIcn.png"), 245, 114);
+		ImageIcon quitIcnClick = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/quitIcnC.png"), 245, 114);
+		ImageIcon quitIcnRO = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/quitRO.png"), 245, 114);
+		// ImageIcon quitButtonIcon = new ImageIcon("src/pics/Exit-50.png");
 		JButton quitButton = new JButton();
 		quitButton.setToolTipText("Exit the Game");
 		quitButton.setFont(defaultFont);
@@ -226,9 +244,12 @@ public class MenuPanel extends JPanel {
 	}
 
 	public void mute() {
-		ImageIcon unmuteIcn = ResizeImage.changeImage(new ImageIcon("src/pics/unmuteIcn.png"),245,114);
-		ImageIcon unmuteIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/unmuteIcnC.png"),245,114);
-		ImageIcon unmuteIcnRO = ResizeImage.changeImage(new ImageIcon("src/pics/unmuteRO.png"),245,114);
+		ImageIcon unmuteIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/unmuteIcn.png"), 245, 114);
+		ImageIcon unmuteIcnClick = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/unmuteIcnC.png"), 245, 114);
+		ImageIcon unmuteIcnRO = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/unmuteRO.png"), 245, 114);
 		muteButton.setIcon(unmuteIcn);
 		muteButton.setPressedIcon(unmuteIcnClick);
 		muteButton.setRolloverIcon(unmuteIcnRO);
@@ -236,9 +257,12 @@ public class MenuPanel extends JPanel {
 	}
 
 	public void unmute() {
-		ImageIcon muteIcn = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcn.png"),245,114);
-		ImageIcon muteIcnClick = ResizeImage.changeImage(new ImageIcon("src/pics/muteIcnC.png"),245,114);
-		ImageIcon muteIcnRO = ResizeImage.changeImage(new ImageIcon("src/pics/muteRO.png"),245,114);
+		ImageIcon muteIcn = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/muteIcn.png"), 245, 114);
+		ImageIcon muteIcnClick = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/muteIcnC.png"), 245, 114);
+		ImageIcon muteIcnRO = ResizeImage.changeImage(new ImageIcon(
+				"src/pics/muteRO.png"), 245, 114);
 		muteButton.setIcon(muteIcn);
 		muteButton.setPressedIcon(muteIcnClick);
 		muteButton.setRolloverIcon(muteIcnRO);

@@ -2,9 +2,6 @@
  * A glass panel for displaying single player mode menu.
  */
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
@@ -19,8 +16,9 @@ import javax.swing.JTextField;
 
 public class SinglePlayerMenu extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+
 	private Connect4 mainGame;
-	private final float opacity = 0;
 	public static int AIMode;
 	private JRadioButton AIButton0;
 	private JRadioButton AIButton1;
@@ -28,11 +26,14 @@ public class SinglePlayerMenu extends JPanel {
 	ButtonGroup group;
 
 	/**
-	 * create a pop up jPanel for the user to enter their name, choose the difficulties 
-	 * of the game and enter the game with the current setting.
-	 * @param mainGame the game system
+	 * create a pop up jPanel for the user to enter their name, choose the
+	 * difficulties of the game and enter the game with the current setting.
+	 * 
+	 * @param mainGame
+	 *            the game system
 	 */
-	public SinglePlayerMenu(final Connect4 mainGame) {
+	public SinglePlayerMenu(Connect4 mg) {
+		mainGame = mg;
 
 		// set the format of the buttons
 		setLayout(new GridBagLayout());
@@ -124,11 +125,5 @@ public class SinglePlayerMenu extends JPanel {
 		});
 		add(startGame, gc);
 	}
-
-//	public void paint(Graphics g) {
-//		super.paint(g);
-//		Graphics2D g2d = (Graphics2D) g;
-//		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,opacity));
-//	}
 
 }

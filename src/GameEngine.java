@@ -7,11 +7,13 @@ public class GameEngine implements Runnable {
 
 	private GameState currState;
 	private GameBoardPanel gameBoardPanel;
+	private int gameMode;
 	private boolean isInGame; // game is in run
 	private int totalGame; // number of game started
 
-	public void startNewGame(Player player1, Player player2,
+	public void startNewGame(int gameMode, Player player1, Player player2,
 			GameBoardPanel gameBoardPanel) {
+		this.gameMode = gameMode;
 		this.gameBoardPanel = gameBoardPanel;
 
 		// reset users
@@ -104,6 +106,10 @@ public class GameEngine implements Runnable {
 
 	public int getCurrPlayerIndex() {
 		return currState.getTurn() % 2;
+	}
+
+	public int getGameMode() {
+		return gameMode;
 	}
 
 }
