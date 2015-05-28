@@ -15,9 +15,6 @@ public class GameWindow extends JFrame {
 	private GameStatisticsPanel gameStatisticsPanel;
 	private Connect4 mainGame;
 
-	Player player1;
-	Player player2;
-
 	public GameWindow(Connect4 mg, String title) {
 		super(title);
 		mainGame = mg;

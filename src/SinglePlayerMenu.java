@@ -20,10 +20,11 @@ public class SinglePlayerMenu extends JPanel {
 
 	private Connect4 mainGame;
 	private int AIMode;
+	private ButtonGroup group;
+
 	private JRadioButton AIButton0;
 	private JRadioButton AIButton1;
 	private JRadioButton AIButton2;
-	private ButtonGroup group;
 
 	/**
 	 * create a pop up jPanel for the user to enter their name, choose the
