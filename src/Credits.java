@@ -23,7 +23,6 @@ public class Credits extends JPanel {
 			"src/pics/credit.png"), 800, 753);
 
 	public Credits() {
-
 		timer = new Timer(15, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

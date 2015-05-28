@@ -120,7 +120,7 @@ public class SinglePlayerMenu extends JPanel {
 						playerNameField.getText(), AIMode);
 
 				singlePlayerWindow.setVisible(true);
-				mainGame.setVisity(false);
+				mainGame.setVisibility(false);
 				MenuPanel.closeJOptionPanel();
 			}
 		});

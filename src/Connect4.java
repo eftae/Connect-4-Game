@@ -17,11 +17,10 @@ public class Connect4 implements Runnable {
 	private static Thread threadGUI;
 	private boolean isMuted;
 
-	// public BackgroundMusic backMusic = new BackgroundMusic();
-
 	/**
 	 * 
 	 * @param gameEngine
+	 *            main game engine for threadGUI
 	 */
 	public Connect4(GameEngine gameEngine) {
 		this.gameEngine = gameEngine;
@@ -61,7 +60,7 @@ public class Connect4 implements Runnable {
 	}
 
 	/**
-	 * Method to display the main window
+	 * Method to display the main game window
 	 */
 	private void display() {
 		if (homeGlassPane != null) {
@@ -79,10 +78,10 @@ public class Connect4 implements Runnable {
 	/**
 	 * Set visibility of the mainframe.
 	 * 
-	 * @param b
+	 * @param visible
 	 */
-	public void setVisity(boolean b) {
-		mainFrame.setVisible(b);
+	public void setVisibility(boolean visible) {
+		mainFrame.setVisible(visible);
 	}
 
 	/**

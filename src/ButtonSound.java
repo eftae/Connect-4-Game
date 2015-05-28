@@ -20,16 +20,12 @@ public class ButtonSound {
 	 * @param songName sound file
 	 */
 	public static void music(String songName) {
-
 		try {
 			url = new File(songName).toURI().toURL();
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
-
 		clip = Applet.newAudioClip(url);
 		clip.play();
-
 	}
-
 }
