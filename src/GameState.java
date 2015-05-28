@@ -65,7 +65,7 @@ public class GameState {
 	}
 
 	/**
-	 * Check any 4 discs connected.
+	 * Check any 4 discs connected
 	 * 
 	 * @return the player connects 4 discs, winner
 	 */
