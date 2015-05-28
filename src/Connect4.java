@@ -4,7 +4,16 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-//import com.sun.prism.paint.Color;
+/**
+ * The Connect 4 class is the main program that consists of the game engine and 
+ * the frame of the graphic user interface.
+ * <p>
+ * Connect 4 will run two thread when the program starts, one for the game 
+ * engine and one for the GUI.
+ * <p>
+ * The layout of GUI is setup and control by Connect 4 and the game engine will 
+ * be initialized once the program starts.
+ */
 
 public class Connect4 implements Runnable {
 
@@ -44,6 +53,11 @@ public class Connect4 implements Runnable {
 		homeGlassPane.setPreferredSize(new Dimension(750, 700));
 	}
 
+	/**
+	 * Main method of the whole connect 4 system. Create threads for 
+	 * GUI and game engine, at the same time, initialize the game engine
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// game engine thread
 		Runnable mainGameEngine = new GameEngine();
@@ -60,7 +74,7 @@ public class Connect4 implements Runnable {
 	}
 
 	/**
-	 * Method to display the main game window
+	 * Set up the main window of the game
 	 */
 	private void display() {
 		if (homeGlassPane != null) {
@@ -77,34 +91,30 @@ public class Connect4 implements Runnable {
 
 	/**
 	 * Set visibility of the mainframe.
-	 * 
-	 * @param visible
+	 * @param visible true to set it visible or false to set it not visible
 	 */
 	public void setVisibility(boolean visible) {
 		mainFrame.setVisible(visible);
 	}
 
 	/**
-	 * Getter for game engine.
-	 * 
-	 * @return gameEngine
+	 * Getter function for game engine.
+	 * @return gameEngine the game engine
 	 */
 	public GameEngine getGameEngine() {
 		return gameEngine;
 	}
 
 	/**
-	 * Getter for menu panel.
-	 * 
-	 * @return menuPanel
+	 * Getter function for menu panel.
+	 * @return menuPanel the menu panel (side bar)
 	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
 	/**
-	 * Getter for main frame.
-	 * 
+	 * Getter function for main frame.
 	 * @return mainFrame
 	 */
 	public JFrame getMainFrame() {
@@ -112,16 +122,17 @@ public class Connect4 implements Runnable {
 	}
 
 	/**
-	 * suspend current game.
+	 * Suspend current game.
 	 */
 	public void suspendGame() {
+		// stop the game engine
 		gameEngine.suspendGame();
 		// interrupt user input
 		threadGE.interrupt();
 	}
 
 	/**
-	 * 
+	 * Check if the system is muted
 	 * @return if sound is muted
 	 */
 	public boolean isMuted() {
@@ -130,8 +141,7 @@ public class Connect4 implements Runnable {
 
 	/**
 	 * set mute or unmute
-	 * 
-	 * @param isMuted
+	 * @param isMuted true to mute the game or false to unmute
 	 */
 	public void setisMuted(boolean isMuted) {
 		this.isMuted = isMuted;
@@ -144,8 +154,9 @@ public class Connect4 implements Runnable {
 
 	/**
 	 * Change the glass panel on home screen.
-	 * 
-	 * @param mode
+	 * @param mode 0 for logo panel, 1 for single player menu
+	 * 2 for double player menu, 3 for credit page, 
+	 * 4 for how to play page
 	 */
 	public void changeGlassPane(int mode) {
 		switch (mode) {
@@ -175,7 +186,7 @@ public class Connect4 implements Runnable {
 				homeGlassPane = new Credits();
 			break;
 		case 4:
-			// credits page
+			// how to play page
 			if (homeGlassPane instanceof HowToPlay)
 				homeGlassPane = new LogoPanel();
 			else

@@ -28,13 +28,11 @@ public class LogoPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				opacity += 0.1f;
-
 				if (opacity > 1f) {
 					opacity = 1f;
 					timer.stop();
-				} else {
-					repaint();
 				}
+				repaint();
 			}
 		});
 		timer.start();
@@ -47,8 +45,7 @@ public class LogoPanel extends JPanel {
 
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-				opacity));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,opacity));
 		g2d.drawImage(logo1.getImage(), -20, 210, null);
 		g2d.drawImage(logo2.getImage(), 130, 100, null);
 	}

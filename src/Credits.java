@@ -30,9 +30,8 @@ public class Credits extends JPanel {
 				if (opacity > 1f) {
 					opacity = 1f;
 					timer.stop();
-				} else {
-					repaint();
 				}
+				repaint();
 			}
 		});
 		timer.start();
@@ -41,8 +40,7 @@ public class Credits extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-				opacity));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,opacity));
 		g2d.drawImage(image.getImage(), -20, -40, null);
 	}
 
