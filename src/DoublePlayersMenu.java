@@ -1,5 +1,7 @@
 /**
  * A glass panel for displaying double players mode menu.
+ * The panel contains two text area for the user to 
+ * enter their name and a button to start the game.
  */
 
 import java.awt.GridBagConstraints;
@@ -18,11 +20,11 @@ public class DoublePlayersMenu extends JPanel {
 
 	private Connect4 mainGame;
 
-	/**
-	 * 
-	 * @param mg
-	 *            main game
-	 */
+    /**
+     * Construct a double player menu for the player to 
+     * enter their name and start the game.
+     * @param mg the main frame
+     */
 	public DoublePlayersMenu(Connect4 mg) {
 		mainGame = mg;
 
@@ -36,7 +38,7 @@ public class DoublePlayersMenu extends JPanel {
 		// user name input
 		gc.gridx = 0;
 		gc.gridy = 0;
-		JLabel username = new JLabel("Player Name A:  ");
+		JLabel username = new JLabel("Player 1's name:  ");
 		add(username, gc);
 		gc.gridx = 1;
 		gc.gridy = 0;
@@ -45,7 +47,7 @@ public class DoublePlayersMenu extends JPanel {
 
 		gc.gridx = 0;
 		gc.gridy = 1;
-		JLabel username2 = new JLabel("Player Name B:  ");
+		JLabel username2 = new JLabel("Player 2's name:  ");
 		add(username2, gc);
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -70,8 +72,7 @@ public class DoublePlayersMenu extends JPanel {
 				if (!mainGame.isMuted()) {
 					BackgroundMusic.stopMusic();
 					ButtonSound.music("src/sound/button.wav");
-					BackgroundMusic
-							.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
+					BackgroundMusic.music("src/sound/2-03_Two_Rogues_One_Mark.wav");
 				}
 			}
 		});

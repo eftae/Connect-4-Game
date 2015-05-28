@@ -1,6 +1,6 @@
 
 /**
- * This class plays sound clip when Button is pressed
+ * This class plays the sound effect when the button is clicked
  */
 
 import java.applet.Applet;
@@ -16,7 +16,6 @@ public class ButtonSound {
 
 	/**
 	 * The constructor takes in the path of the audio file
-	 * 
 	 * @param songName sound file
 	 */
 	public static void music(String songName) {
