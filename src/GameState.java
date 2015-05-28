@@ -1,22 +1,23 @@
 import java.util.ArrayList;
 
-/**
- * Handle the state of a game v0.11 added clone() v0.12 modified
- * 
- * @version v0.12
- */
-
 // our board representation
 //
-// 7 columns
-// 0 1 2 3 4 5 6
-// 5 | | | | | | | |
-// 4 | | | | | | | |
+//           7 columns
+//           0 1 2 3 4 5 6
+//        5 | | | | | | | |
+//        4 | | | | | | | |
 // 6 rows 3 | | | | | | | |
-// 2 | | | | | | | |
-// 1 | | | | | | | |
-// 0 | | | | | | | |
+//        2 | | | | | | | |
+//        1 | | | | | | | |
+//        0 | | | | | | | |
 
+
+/**
+ * Game State will store all the information of the game, 
+ * including the board, current player, next player, 
+ * winner if there is one, number of turn, 
+ * and the wining disc for the game if the game end.
+ */
 public class GameState {
 	private final int MAX_TURN = 42;
 	private final int COL_MAX = 7;
@@ -29,6 +30,12 @@ public class GameState {
 	private int turn;
 	private ArrayList<Integer> winDiscs;
 
+	/**
+	 * Construct a game state with the given players by 
+	 * initializing the board, the turn number, and the winDise array.
+	 * @param firstPlayer the first player
+	 * @param secondPlayer the second player
+	 */
 	public GameState(Player firstPlayer, Player secondPlayer) {
 		board = new Player[COL_MAX][ROW_MAX];
 		currPlayer = firstPlayer;
@@ -38,7 +45,10 @@ public class GameState {
 	}
 
 	/**
-	 * Constructor for cloning.
+	 * Constructor for cloning the game state with 
+	 * the given board other specific of a game information 
+	 * including different players and the number of turn.
+	 * Use by the AI.
 	 */
 	public GameState(Player[][] board, Player currPlayer, Player nextPlayer,
 			Player winner, int turn) {
@@ -51,9 +61,10 @@ public class GameState {
 	}
 
 	/**
-	 * Drop the disc to the column
-	 * 
-	 * @param col
+     * Given a column number, and will place a disc 
+     * at the next available row of the given column 
+     * in the board. Use by game engine.
+	 * @param col the column number (0-6)
 	 */
 	public int runNextMove(int col) {
 		if (col >= 0 & col < COL_MAX) {
@@ -64,11 +75,13 @@ public class GameState {
 		return -1;
 	}
 
-	/**
-	 * Check any 4 discs connected
-	 * 
-	 * @return the player connects 4 discs, winner
-	 */
+    /**
+     * Check if the game is finish by any 4 consecutive discs.
+     * Set the winDisc array with the 4 discs that cause the 
+     * game to finish.
+     * Set the winner to the player if the player wins the game
+     * @return true if the game is finish or false if the game is not finish.
+     */
 	public boolean checkGameEnd() {
 		boolean gameEnd = false;
 		winDiscs.clear();
@@ -182,19 +195,16 @@ public class GameState {
 				}
 			}
 		}
-
 		// check turn number
 		// check only if no winner on 42
-		if (turn == MAX_TURN + 1) {
-			gameEnd = true;
-		}
-
-		if (gameEnd) {
-			return true;
-		}
+		if (turn == MAX_TURN + 1) gameEnd = true;
+		if (gameEnd) return true;
 		return false;
 	}
 
+	/**
+	 * Getter function of the winDise arrayList
+	 */
 	public ArrayList<Integer> getWinDiscs() {
 		if (winDiscs == null) {
 			return null;
@@ -203,11 +213,10 @@ public class GameState {
 	}
 
 	/**
-	 * Return the affiliation of a slot.
-	 * 
-	 * @param col
-	 * @param row
-	 * @return player of affiliation
+	 * Return the affiliation of a slot for the given location on the board.
+	 * @param col the column number
+	 * @param row the row number
+	 * @return player of affiliation of the given slot
 	 */
 	public Player getLocation(int col, int row) {
 		if (col >= 0 && col < COL_MAX && row >= 0 && row < ROW_MAX)
@@ -215,6 +224,10 @@ public class GameState {
 		return null;
 	}
 
+	/**
+	 * Getter function or the game board
+	 * @return the game board represented by a 2D array
+	 */
 	public Player[][] getBoard() {
 		Player[][] cloneBoard = new Player[COL_MAX][];
 		for (int i = 0; i < COL_MAX; i++)
@@ -222,10 +235,20 @@ public class GameState {
 		return cloneBoard;
 	}
 
+	/**
+	 * Getter function of the opposite player (not the current player)
+	 * @return the opposite player of the current game turn
+	 */
 	public Player getOtherPlayer() {
 		return nextPlayer;
 	}
 
+	/**
+	 * Given a column number of the board, return the next available 
+	 * row number of that column.
+	 * @param col the column number
+	 * @return a row number or -1 if the column is full
+	 */
 	public int getAvailableRow(int col) {
 		if (col >= 0 && col < COL_MAX)
 			for (int r = 0; r < ROW_MAX; r++)
@@ -234,32 +257,50 @@ public class GameState {
 		return -1;
 	}
 
+	/**
+	 * Getter function of the winner player
+	 * @return the player who win the game
+	 */
 	public Player getWinner() {
 		return winner;
 	}
 
+	/**
+	 * Setter function for the current player
+	 * @param p
+	 */
 	public void setCurrPlayer(Player p) {
 		Player temp = currPlayer;
 		currPlayer = p;
 		nextPlayer = temp;
 	}
 
+	/**
+	 * Getter function of the current player
+	 * @return the current player
+	 */
 	public Player getCurrPlayer() {
 		return currPlayer;
 	}
 
+	/**
+	 * Getter function of the current turn number
+	 * @return the current turn number
+	 */
 	public int getTurn() {
 		return turn;
 	}
 
+	/**
+	 * Increment the turn number by one
+	 */
 	public void incTurn() {
 		turn++;
 	}
 
 	/**
-	 * Check if the input column is a valid move.
-	 * 
-	 * @param col
+	 * Check if the input column is a valid move for the current board state
+	 * @param col the column number 
 	 * @return true if valid to use with runNextMove(), false otherwise
 	 */
 	public boolean isValidMove(int col) {
@@ -269,6 +310,10 @@ public class GameState {
 	}
 
 	@Override
+	/**
+	 * clone the current game state
+	 * @return the copy of the current game state.
+	 */
 	public GameState clone() {
 		GameState cloneState = new GameState(getBoard(), currPlayer,
 				nextPlayer, winner, turn);
