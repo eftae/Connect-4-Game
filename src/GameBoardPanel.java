@@ -221,6 +221,11 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 
 		gameEngine.startNewGame(gameMode, player1, player2, this);
 
+		// setup the AI Icon and the description at the statistics panel
+		if (gameWindow != null && gameWindow.getStatisticsPanel() != null) {
+			gameWindow.getStatisticsPanel().setAvatorIcon();
+		}
+
 		// initialize buttons
 		for (JButton b : buttons) {
 			b.setIcon(whiteDisc);
@@ -264,7 +269,7 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			playerName = "YOU";
 		}
 
-		String nameAI = null;
+		String nameAI = "AI";
 		switch (AIMode) {
 		case 0:
 			nameAI = "Woody";
@@ -274,9 +279,6 @@ public class GameBoardPanel extends JPanel implements ActionListener {
 			break;
 		case 2:
 			nameAI = "Thunder God";
-			break;
-		default:
-			nameAI = "BOT";
 		}
 
 		if (randPlayer() == 0) {

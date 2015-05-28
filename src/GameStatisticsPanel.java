@@ -22,7 +22,7 @@ public class GameStatisticsPanel extends JPanel {
 	private JLabel player2;
 	private JLabel msg;
 	private JLabel modeLabel;
-	String modeName;
+	private JLabel modeDescription;
 
 	private ImageIcon icn1s = ResizeImage.changeImage(new ImageIcon(
 			"src/pics/redDot.png"), 50, 50);
@@ -51,9 +51,7 @@ public class GameStatisticsPanel extends JPanel {
 
 		Font defaultFont = new Font("Arial", Font.BOLD, 20);
 
-		// setBorder(new TitledBorder("Welcome"));
-		setBackground(Color.LIGHT_GRAY);
-		// setBackground(Color.WHITE);
+		setBackground(Color.WHITE);
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -76,11 +74,12 @@ public class GameStatisticsPanel extends JPanel {
 		msg.setFont(defaultFont);
 		gc.gridy = 3;
 		add(msg, gc);
-		modeLabel = new JLabel();
 
+		modeLabel = new JLabel();
 		gc.gridy = 4;
 		add(modeLabel, gc);
-		JLabel modeDescription = new JLabel(modeName);
+
+		modeDescription = new JLabel();
 		gc.gridy = 5;
 		add(modeDescription, gc);
 
@@ -114,21 +113,23 @@ public class GameStatisticsPanel extends JPanel {
 		player2.setText(p2.getName());
 		msg.setText("Game Started.");
 		msg.setForeground(Color.BLUE);
+	}
 
+	public void setAvatorIcon() {
 		if (gameEngine.getGameMode() == 1) {
 			if (gameEngine.getAIMode() == 0) {
 				modeLabel.setIcon(icon5);
-				modeName = "Challenge with Woddy";
+				modeDescription.setText("Challenge to Woddy");
 			} else if (gameEngine.getAIMode() == 1) {
 				modeLabel.setIcon(icon6);
-				modeName = "Challenge with Tony Stark!";
+				modeDescription.setText("Challenge to Tony Stark!");
 			} else if (gameEngine.getAIMode() == 2) {
 				modeLabel.setIcon(icon7);
-				modeName = "Challenge with Thunder God!";
+				modeDescription.setText("Challenge to Thunder God!");
 			}
 		} else if (gameEngine.getGameMode() == 2) {
 			modeLabel.setIcon(icon8);
-			modeName = "Fight to death !";
+			modeDescription.setText("Fight to death!");
 		}
 	}
 
@@ -146,6 +147,7 @@ public class GameStatisticsPanel extends JPanel {
 		} catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
+
 	}
 
 	public void displayEndGame(Player winner) {
@@ -158,7 +160,7 @@ public class GameStatisticsPanel extends JPanel {
 			if (gameEngine.getCurrPlayerIndex() == 0) {
 				player1.setIcon(yellowWinIcn);
 				player2.setIcon(icn0s);
-				msg.setForeground(Color.YELLOW);
+				msg.setForeground(new Color(255, 211, 2));
 			} else {
 				player1.setIcon(icn0s);
 				player2.setIcon(redWinIcn);
