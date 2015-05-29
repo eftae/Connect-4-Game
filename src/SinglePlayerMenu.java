@@ -1,6 +1,3 @@
-/**
- * A panel for displaying single player mode menu.
- */
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+
+/**
+ * A panel for displaying single player mode menu. 
+ * The menu allow the user to enter their name, 
+ * select from various of difficulties and start 
+ * a single player game.
+ */
 public class SinglePlayerMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -30,8 +34,7 @@ public class SinglePlayerMenu extends JPanel {
 	 * create a jPanel for the user to enter their name, choose the difficulties
 	 * of the game and enter the game with the current setting.
 	 * 
-	 * @param mainGame
-	 *            the main game system
+	 * @param mainGame the main game system
 	 */
 	public SinglePlayerMenu(Connect4 mg) {
 		mainGame = mg;

@@ -1,7 +1,6 @@
 /**
- * Class for the ALPHA BETA AI. Includes 4 modes of easy(0), medium(1), hard(2) and simulation(otherwise).
- * 
- * 
+ * Class for the ALPHA BETA AI. 
+ * Includes 4 modes of easy(0), medium(1), hard(2) and simulation(otherwise).
  */
 
 import java.util.ArrayList;
@@ -15,11 +14,9 @@ public class AI implements Player {
 	private int nextMove;
 
 	/**
-	 * 
-	 * @param name
-	 *            AI name
-	 * @param mode
-	 *            AI mode, three levels from 0 to 2 in increasing difficulty,
+	 * Construct a Alpha Beta AI with the given name and mode of the AI
+	 * @param name AI name
+	 * @param mode AI mode, three levels from 0 to 2 in increasing difficulty,
 	 *            otherwise for simulation specifically
 	 */
 	public AI(String name, int mode) {

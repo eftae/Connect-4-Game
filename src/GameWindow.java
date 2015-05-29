@@ -1,12 +1,12 @@
-/**
- * Class of Game Window. It contains the main game board and a console panel to show the current game information.
- *
- */
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+
+/**
+ * Game Window contains the main game board and a console panel to show 
+ * the current game information.
+ */
 public class GameWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;

@@ -2,9 +2,7 @@
  * Defensive Heuristic Algorithm for alpha-beta search. Considering number of
  * empty slots connects to 3 consecutive discs, which means have more chance to
  * place the last disc to connect 4.
- * 
  */
-
 public class H1 implements AlphaBetaHeuristic {
 
 	public int h(GameState state) {

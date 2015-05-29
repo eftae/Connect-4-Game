@@ -1,7 +1,3 @@
-/**
- * Class for menu. Calling corresponding function in the main.
- */
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -14,6 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * Menu Panel is the side menu on the main page. 
+ * It allow the user to enter a single/double game, 
+ * open the "how to play" or "credit" windows, 
+ * mute or unmute the sound effect, 
+ * and quit the game.
+ */
 public class MenuPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -26,9 +29,7 @@ public class MenuPanel extends JPanel {
 
 	/**
 	 * Construct menu panel on home window.
-	 * 
-	 * @param mg
-	 *            main game system
+	 * @param mg main game system
 	 */
 	public MenuPanel(Connect4 mg) {
 		mainGame = mg;

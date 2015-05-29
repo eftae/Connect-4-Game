@@ -1,7 +1,3 @@
-/**
- * A panel for displaying game logo and welcome. With fading effect.
- */
-
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,6 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * A panel for displaying game logo and welcome. With fading effect.
+ */
 public class LogoPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,7 @@
 /**
- * Handle user input from GUI, also contains user information.
- * 
+ * Handle user input from GUI, also contains user information 
+ * such as user name, the user input of next move, and 
+ * the input is ready flag.
  */
 
 public class User implements Player {
@@ -9,9 +10,9 @@ public class User implements Player {
 	boolean isReady; // is user input set
 
 	/**
-	 * 
-	 * @param name
-	 *            user name
+	 * Construct a human plyaer with the given name, 
+	 * and set the user input ready flag to false.
+	 * @param name user name
 	 */
 	public User(String name) {
 		this.name = name;

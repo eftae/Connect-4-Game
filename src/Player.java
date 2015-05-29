@@ -4,15 +4,13 @@
 
 public interface Player {
 	/**
-	 * Get teh player's name.
-	 * 
+	 * Get the player's name.
 	 * @return user name
 	 */
 	public String getName();
 
 	/**
 	 * Get next move from the player.
-	 * 
 	 * @param currState
 	 * @return column number of next move
 	 */

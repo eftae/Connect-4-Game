@@ -8,13 +8,11 @@ import javax.swing.ImageIcon;
 
 public class ResizeImage {
 	/**
-	 * 
-	 * @param oldImageIcon
-	 *            ImageIcon to resize
-	 * @param width
-	 *            desired width
-	 * @param height
-	 *            desired height
+	 * a resize image function that will take in an imageicon, target width and 
+	 * height, and product an resized imageicon with the given size.
+	 * @param oldImageIcon ImageIcon to resize
+	 * @param width desired width
+	 * @param height desired height
 	 * @return
 	 */
 	public static ImageIcon changeImage(ImageIcon oldImageIcon, int width,
